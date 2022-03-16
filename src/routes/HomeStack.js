@@ -16,7 +16,7 @@ export default function HomeStack() {
             />
             <Screen
                 name="Home"
-                component={LoginScreen}
+                component={HomeScreen}
             />
         </Navigator>
     )
