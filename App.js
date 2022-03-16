@@ -3,7 +3,7 @@ import { StyleSheet, Text, View } from 'react-native';
 import { Provider as PaperProvider } from 'react-native-paper';
 import { NavigationContainer } from '@react-navigation/native';
 
-import HomeStack from './src/routes/homeStack';
+import HomeStack from './src/routes/HomeStack';
 
 export default function App() {
   return (
