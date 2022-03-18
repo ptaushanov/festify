@@ -4,6 +4,8 @@ import React, { useState, useEffect } from 'react'
 import { auth } from '../../../firebase.v8'
 import { useNavigation } from '@react-navigation/core'
 
+import { palette } from '../../themes/palette'
+
 const LoginScreen = () => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
@@ -13,7 +15,7 @@ const LoginScreen = () => {
     useEffect(() => {
         const unsubscribe = auth.onAuthStateChanged(user => {
             if (user) {
-                navigation.replace("Home")
+                navigation.replace("HomeStack")
             }
         })
 
@@ -101,7 +103,7 @@ const styles = StyleSheet.create({
         marginTop: 40
     },
     button: {
-        backgroundColor: "deepskyblue",
+        backgroundColor: palette.primary,
         width: "100%",
         padding: 15,
         borderRadius: 10,
@@ -115,11 +117,11 @@ const styles = StyleSheet.create({
     buttonOutline: {
         backgroundColor: "white",
         marginTop: 5,
-        borderColor: "deepskyblue",
+        borderColor: palette.primary,
         borderWidth: 2
     },
     buttonOutlineText: {
-        color: "deepskyblue",
+        color: palette.primary,
         fontWeight: "700",
         fontSize: 16
     }

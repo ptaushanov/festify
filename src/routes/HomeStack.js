@@ -1,6 +1,6 @@
 import { createStackNavigator } from '@react-navigation/stack';
 import LoginScreen from "../screens/Login/LoginScreen"
-import HomeScreen from "../screens/Home/HomeScreen"
+import HomeBottomNav from './HomeBottomNav';
 
 const { Navigator, Screen } = createStackNavigator()
 
@@ -15,8 +15,11 @@ export default function HomeStack() {
                 }}
             />
             <Screen
-                name="Home"
-                component={HomeScreen}
+                name="HomeStack"
+                component={HomeBottomNav}
+                options={{
+                    headerShown: false,
+                }}
             />
         </Navigator>
     )
