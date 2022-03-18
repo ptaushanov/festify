@@ -26,7 +26,7 @@ export default function HomeBottomNav() {
                 name="Lessons"
                 component={LessonsScreen}
                 options={{
-                    tabBarIcon: "book-open"
+                    tabBarIcon: "book"
                 }}
             />
 

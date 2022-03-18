@@ -4,6 +4,7 @@ import HomeBottomNav from './HomeBottomNav';
 
 const { Navigator, Screen } = createStackNavigator()
 
+// TODO: change to LoginStack
 export default function HomeStack() {
     return (
         <Navigator>
