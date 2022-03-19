@@ -4,8 +4,6 @@ import React from 'react'
 import { auth } from '../../../firebase.v8'
 import { useNavigation } from '@react-navigation/core'
 
-import { palette } from '../../themes/palette'
-
 const HomeScreen = () => {
 
     const navigation = useNavigation()
@@ -37,7 +35,7 @@ const styles = StyleSheet.create({
         alignItems: "center"
     },
     button: {
-        backgroundColor: palette.primary,
+        backgroundColor: "deepskyblue",
         width: "60%",
         padding: 15,
         borderRadius: 10,

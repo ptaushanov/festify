@@ -4,8 +4,6 @@ import React, { useState, useEffect } from 'react'
 import { auth } from '../../../firebase.v8'
 import { useNavigation } from '@react-navigation/core'
 
-import { palette } from '../../themes/palette'
-
 const LoginScreen = () => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
@@ -103,7 +101,7 @@ const styles = StyleSheet.create({
         marginTop: 40
     },
     button: {
-        backgroundColor: palette.primary,
+        backgroundColor: "deepskyblue",
         width: "100%",
         padding: 15,
         borderRadius: 10,
@@ -117,11 +115,11 @@ const styles = StyleSheet.create({
     buttonOutline: {
         backgroundColor: "white",
         marginTop: 5,
-        borderColor: palette.primary,
+        borderColor: "deepskyblue",
         borderWidth: 2
     },
     buttonOutlineText: {
-        color: palette.primary,
+        color: "deepskyblue",
         fontWeight: "700",
         fontSize: 16
     }
