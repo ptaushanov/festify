@@ -1,7 +1,11 @@
-const { useContext, useState, useEffect } = require("react");
+const { createContext, useState, useEffect, useContext } = require("react");
 import { DefaultTheme, DarkTheme } from "../themes/theme";
 
-const ThemeContext = useContext()
+const ThemeContext = createContext()
+
+export function useTheme() {
+    return useContext(ThemeContext)
+}
 
 export function ThemeProvider({ children }) {
     const [darkMode, setDarkMode] = useState(false)
@@ -22,7 +26,7 @@ export function ThemeProvider({ children }) {
 
     const toggleTheme = () => { setDarkMode(!darkMode) }
 
-    const providerData = {
+    const themeProviderData = {
         darkMode,
         currentTheme,
         changeTheme,
@@ -30,10 +34,8 @@ export function ThemeProvider({ children }) {
     }
 
     return (
-        <ThemeContext.Provider value={providerData}>
+        <ThemeContext.Provider value={themeProviderData}>
             {children}
         </ThemeContext.Provider>
     )
 }
-
-export default ThemeContext;

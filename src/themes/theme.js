@@ -24,12 +24,12 @@ export const DefaultTheme = {
 };
 
 export const DarkTheme = {
-    ...NavigationDarkTheme,
     ...PaperDarkTheme,
+    ...NavigationDarkTheme,
     roundness: 2,
     colors: {
-        ...NavigationDarkTheme.colors,
         ...PaperDarkTheme.colors,
+        ...NavigationDarkTheme.colors,
         primary: palette.primary,
         accent: palette.accent
     },
