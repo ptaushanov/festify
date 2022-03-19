@@ -5,7 +5,7 @@ import LessonsScreen from "../screens/Lessons/LessonsScreen"
 const { Navigator, Screen } = createMaterialBottomTabNavigator()
 import i18n from 'i18n-js';
 
-export default function HomeBottomNav() {
+export default function BottomNavigation() {
     return (
         <Navigator
             initialRouteName="Home"

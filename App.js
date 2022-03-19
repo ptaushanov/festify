@@ -1,4 +1,4 @@
-import HomeStack from './src/routes/HomeStack';
+import LoginStack from './src/routes/LoginStack';
 import ThemeWrapper from './src/shared/ThemeWrapper/ThemeWrapper';
 import { ThemeProvider } from './src/contexts/ThemeContext';
 import * as languages from "./src/languages"
@@ -16,7 +16,7 @@ export default function App() {
   return (
     <ThemeProvider>
       <ThemeWrapper>
-        <HomeStack />
+        <LoginStack />
       </ThemeWrapper>
     </ThemeProvider >
 

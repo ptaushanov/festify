@@ -13,7 +13,7 @@ const LoginScreen = () => {
     useEffect(() => {
         const unsubscribe = auth.onAuthStateChanged(user => {
             if (user) {
-                navigation.replace("HomeStack")
+                navigation.replace("BottomNavigation")
             }
         })
 

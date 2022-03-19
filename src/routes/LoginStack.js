@@ -1,11 +1,10 @@
 import { createStackNavigator } from '@react-navigation/stack';
 import LoginScreen from "../screens/Login/LoginScreen"
-import HomeBottomNav from './HomeBottomNav';
+import BottomNavigation from './BottomNavigation';
 
 const { Navigator, Screen } = createStackNavigator()
 
-// TODO: change to LoginStack
-export default function HomeStack() {
+export default function LoginStack() {
     return (
         <Navigator>
             <Screen
@@ -16,8 +15,8 @@ export default function HomeStack() {
                 }}
             />
             <Screen
-                name="HomeStack"
-                component={HomeBottomNav}
+                name="BottomNavigation"
+                component={BottomNavigation}
                 options={{
                     headerShown: false,
                 }}
