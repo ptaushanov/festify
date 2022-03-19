@@ -1,6 +1,5 @@
 import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs"
-import HomeScreen from "../screens/Home/HomeScreen"
-import LessonsScreen from "../screens/Lessons/LessonsScreen"
+import { HomeScreen, LessonsScreen, LeaderboardScreen, ProfileScreen } from "../screens"
 
 const { Navigator, Screen } = createMaterialBottomTabNavigator()
 import i18n from 'i18n-js';
@@ -33,7 +32,7 @@ export default function BottomNavigation() {
 
             <Screen
                 name="Leaderboard"
-                component={LessonsScreen}
+                component={LeaderboardScreen}
                 options={{
                     tabBarIcon: "trophy",
                     title: i18n.t("Leaderboard")
@@ -42,7 +41,7 @@ export default function BottomNavigation() {
 
             <Screen
                 name="Profile"
-                component={LessonsScreen}
+                component={ProfileScreen}
                 options={{
                     tabBarIcon: "account",
                     title: i18n.t("Profile")

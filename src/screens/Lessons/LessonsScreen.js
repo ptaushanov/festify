@@ -1,4 +1,4 @@
-import { Text, View } from 'react-native'
+import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 
 import globalStyles from '../../styles/global'
@@ -21,3 +21,5 @@ const LessonsScreen = () => {
 }
 
 export default LessonsScreen
+
+const styles = StyleSheet.create({})

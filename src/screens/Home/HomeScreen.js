@@ -5,7 +5,6 @@ import { auth } from '../../../firebase.v8'
 import { useNavigation } from '@react-navigation/core'
 
 const HomeScreen = () => {
-
     const navigation = useNavigation()
 
     const handleSignOut = () => {
