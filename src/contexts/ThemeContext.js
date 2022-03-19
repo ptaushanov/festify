@@ -1,4 +1,4 @@
-const { createContext, useState, useEffect, useContext } = require("react");
+import { createContext, useState, useEffect, useContext } from "react"
 import { DefaultTheme, DarkTheme } from "../themes/theme";
 
 const ThemeContext = createContext()

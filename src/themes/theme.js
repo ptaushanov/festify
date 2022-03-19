@@ -8,7 +8,6 @@ import {
     DarkTheme as PaperDarkTheme
 } from '@react-navigation/native';
 
-
 import { palette } from "./palette"
 
 export const DefaultTheme = {

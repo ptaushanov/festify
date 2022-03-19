@@ -3,6 +3,7 @@ import HomeScreen from "../screens/Home/HomeScreen"
 import LessonsScreen from "../screens/Lessons/LessonsScreen"
 
 const { Navigator, Screen } = createMaterialBottomTabNavigator()
+import i18n from 'i18n-js';
 
 export default function HomeBottomNav() {
     return (
@@ -16,7 +17,8 @@ export default function HomeBottomNav() {
                 name="Home"
                 component={HomeScreen}
                 options={{
-                    tabBarIcon: "home"
+                    tabBarIcon: "home",
+                    title: i18n.t("Home")
                 }}
             />
 
@@ -24,7 +26,26 @@ export default function HomeBottomNav() {
                 name="Lessons"
                 component={LessonsScreen}
                 options={{
-                    tabBarIcon: "book"
+                    tabBarIcon: "book",
+                    title: i18n.t("Lessons")
+                }}
+            />
+
+            <Screen
+                name="Leaderboard"
+                component={LessonsScreen}
+                options={{
+                    tabBarIcon: "trophy",
+                    title: i18n.t("Leaderboard")
+                }}
+            />
+
+            <Screen
+                name="Profile"
+                component={LessonsScreen}
+                options={{
+                    tabBarIcon: "account",
+                    title: i18n.t("Profile")
                 }}
             />
 
