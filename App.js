@@ -4,6 +4,9 @@ import { ThemeProvider } from './src/contexts/ThemeContext';
 import * as languages from "./src/languages"
 import * as Localization from 'expo-localization';
 import i18n from 'i18n-js';
+import { useFonts } from 'expo-font';
+
+import AppLoading from 'expo-app-loading';
 
 // Setting the key-value pairs for the different languages we want to support
 i18n.translations = languages
@@ -13,12 +16,19 @@ i18n.locale = Localization.locale;
 i18n.fallbacks = true;
 
 export default function App() {
+  const [fontsLoaded] = useFonts({
+    "PacificoRegular": require("./src/assets/fonts/PacificoRegular.ttf")
+  })
+
+  if (!fontsLoaded) {
+    return <AppLoading />;
+  }
+
   return (
     <ThemeProvider>
       <ThemeWrapper>
         <LoginStack />
       </ThemeWrapper>
     </ThemeProvider >
-
   );
 }

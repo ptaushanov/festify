@@ -1,6 +1,10 @@
 import colors from "./colors.json"
 
 export const palette = {
-    primary: colors.green["800"],
-    accent: colors.red["a700"],
+    primary: colors.teal["600"],
+    accent: colors.amber["600"],
+    danger: colors.red["a700"],
+    success: colors.green["600"],
+    info: colors.lightblue["400"],
+    logo: colors.red["a700"],
 }

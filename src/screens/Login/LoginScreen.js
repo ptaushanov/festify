@@ -1,5 +1,9 @@
-import { StyleSheet, Text, Keyboard, View, TouchableWithoutFeedback, TextInput, TouchableOpacity } from 'react-native'
+import { StyleSheet, Keyboard, View, TouchableWithoutFeedback, TextInput, TouchableOpacity, Image } from 'react-native'
 import React, { useState, useEffect } from 'react'
+import globalStyles from '../../styles/global'
+import { palette } from '../../themes/palette'
+import logo from "../../assets/images/logo.png"
+import { Text } from "react-native-paper"
 
 import { auth } from '../../../firebase.v8'
 import { useNavigation } from '@react-navigation/core'
@@ -40,8 +44,10 @@ const LoginScreen = () => {
 
     return (
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-            <View style={styles.container}>
+            <View style={globalStyles.container}>
                 <View style={styles.inputContainer}>
+                    <Image source={logo} style={styles.logo} />
+                    <Text style={styles.logoText}>Festify</Text>
                     <TextInput
                         placeholder="Email"
                         value={email}
@@ -79,11 +85,6 @@ const LoginScreen = () => {
 export default LoginScreen
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center"
-    },
     inputContainer: {
         width: "80%"
     },
@@ -122,6 +123,18 @@ const styles = StyleSheet.create({
         color: "deepskyblue",
         fontWeight: "700",
         fontSize: 16
+    },
+    logo: {
+        alignSelf: "center",
+        width: 90,
+        height: 90,
+    },
+    logoText: {
+        fontSize: 40,
+        fontFamily: "PacificoRegular",
+        color: palette.logo,
+        alignSelf: "center",
+        marginBottom: 30
     }
 
 })

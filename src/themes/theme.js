@@ -1,4 +1,5 @@
 import {
+    configureFonts,
     DefaultTheme as NavigationDefaultTheme,
     DarkTheme as NavigationDarkTheme
 } from 'react-native-paper';
@@ -10,10 +11,50 @@ import {
 
 import { palette } from "./palette"
 
+const fontConfig = {
+    ios: {
+        regular: {
+            fontFamily: 'sans-serif',
+            fontWeight: 'normal',
+        },
+        medium: {
+            fontFamily: 'sans-serif-medium',
+            fontWeight: 'normal',
+        },
+        light: {
+            fontFamily: 'sans-serif-light',
+            fontWeight: 'normal',
+        },
+        thin: {
+            fontFamily: 'sans-serif-thin',
+            fontWeight: 'normal',
+        },
+    },
+    android: {
+        regular: {
+            fontFamily: 'sans-serif',
+            fontWeight: 'normal',
+        },
+        medium: {
+            fontFamily: 'sans-serif-medium',
+            fontWeight: 'normal',
+        },
+        light: {
+            fontFamily: 'sans-serif-light',
+            fontWeight: 'normal',
+        },
+        thin: {
+            fontFamily: 'sans-serif-thin',
+            fontWeight: 'normal',
+        },
+    }
+}
+
 export const DefaultTheme = {
     ...NavigationDefaultTheme,
     ...PaperDefaultTheme,
-    roundness: 2,
+    fonts: configureFonts(fontConfig),
+    roundness: 6,
     colors: {
         ...NavigationDefaultTheme.colors,
         ...PaperDefaultTheme.colors,
@@ -25,7 +66,8 @@ export const DefaultTheme = {
 export const DarkTheme = {
     ...PaperDarkTheme,
     ...NavigationDarkTheme,
-    roundness: 2,
+    fonts: configureFonts(fontConfig),
+    roundness: 6,
     colors: {
         ...PaperDarkTheme.colors,
         ...NavigationDarkTheme.colors,
