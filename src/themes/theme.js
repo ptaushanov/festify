@@ -58,8 +58,7 @@ export const DefaultTheme = {
     colors: {
         ...NavigationDefaultTheme.colors,
         ...PaperDefaultTheme.colors,
-        primary: palette.primary,
-        accent: palette.accent
+        ...palette
     },
 };
 
@@ -71,7 +70,6 @@ export const DarkTheme = {
     colors: {
         ...PaperDarkTheme.colors,
         ...NavigationDarkTheme.colors,
-        primary: palette.primary,
-        accent: palette.accent
+        ...palette
     },
 };

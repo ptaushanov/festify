@@ -3,16 +3,18 @@ import React, { useState, useEffect } from 'react'
 import globalStyles from '../../styles/global'
 import { palette } from '../../themes/palette'
 import logo from "../../assets/images/logo.png"
-import { Text } from "react-native-paper"
+import { Text, Surface } from "react-native-paper"
 
 import { auth } from '../../../firebase.v8'
 import { useNavigation } from '@react-navigation/core'
+import { useTheme } from 'react-native-paper';
 
 const LoginScreen = () => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
 
     const navigation = useNavigation()
+    const { colors } = useTheme()
 
     useEffect(() => {
         const unsubscribe = auth.onAuthStateChanged(user => {
@@ -44,39 +46,43 @@ const LoginScreen = () => {
 
     return (
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-            <View style={globalStyles.container}>
-                <View style={styles.inputContainer}>
+            <View style={[globalStyles.container, styles.container]}>
+                <View>
                     <Image source={logo} style={styles.logo} />
                     <Text style={styles.logoText}>Festify</Text>
-                    <TextInput
-                        placeholder="Email"
-                        value={email}
-                        onChangeText={text => setEmail(text)}
-                        style={styles.input}
-                    />
-                    <TextInput
-                        placeholder="Password"
-                        value={password}
-                        onChangeText={text => setPassword(text)}
-                        style={styles.input}
-                        secureTextEntry
-                    />
                 </View>
-                <View style={styles.buttonContainer}>
-                    <TouchableOpacity
-                        onPress={handleLogin}
-                        style={styles.button}
-                    >
-                        <Text style={styles.buttonText}>Login</Text>
-                    </TouchableOpacity>
+                <Surface style={styles.surface}>
+                    <View style={styles.inputContainer}>
+                        <TextInput
+                            placeholder="Email"
+                            value={email}
+                            onChangeText={text => setEmail(text)}
+                            style={styles.input}
+                        />
+                        <TextInput
+                            placeholder="Password"
+                            value={password}
+                            onChangeText={text => setPassword(text)}
+                            style={styles.input}
+                            secureTextEntry
+                        />
+                    </View>
+                    <View style={styles.buttonContainer}>
+                        <TouchableOpacity
+                            onPress={handleLogin}
+                            style={styles.button}
+                        >
+                            <Text style={styles.buttonText}>Login</Text>
+                        </TouchableOpacity>
 
-                    <TouchableOpacity
-                        onPress={handleSignUp}
-                        style={[styles.button, styles.buttonOutline]}
-                    >
-                        <Text style={styles.buttonOutlineText}>Register</Text>
-                    </TouchableOpacity>
-                </View>
+                        <TouchableOpacity
+                            onPress={handleSignUp}
+                            style={[styles.button, styles.buttonOutline]}
+                        >
+                            <Text style={styles.buttonOutlineText}>Register</Text>
+                        </TouchableOpacity>
+                    </View>
+                </Surface>
             </View>
         </TouchableWithoutFeedback>
     )
@@ -85,11 +91,14 @@ const LoginScreen = () => {
 export default LoginScreen
 
 const styles = StyleSheet.create({
+    container: {
+        justifyContent: "flex-end",
+    },
     inputContainer: {
-        width: "80%"
+        width: "80%",
     },
     input: {
-        backgroundColor: "white",
+        backgroundColor: "whitesmoke",
         paddingHorizontal: 15,
         paddingVertical: 10,
         borderRadius: 10,
@@ -135,6 +144,16 @@ const styles = StyleSheet.create({
         color: palette.logo,
         alignSelf: "center",
         marginBottom: 30
+    },
+    surface: {
+        justifyContent: "center",
+        alignItems: "center",
+        width: "100%",
+        paddingHorizontal: 20,
+        paddingTop: 40,
+        paddingBottom: 60,
+        borderTopLeftRadius: 30,
+        borderTopRightRadius: 30
     }
 
 })
