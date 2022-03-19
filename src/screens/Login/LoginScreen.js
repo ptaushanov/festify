@@ -7,7 +7,7 @@ import { Text, Surface } from "react-native-paper"
 
 import { auth } from '../../../firebase.v8'
 import { useNavigation } from '@react-navigation/core'
-import { useTheme } from 'react-native-paper';
+import { useTheme, Button } from 'react-native-paper';
 
 const LoginScreen = () => {
     const [email, setEmail] = useState('')
@@ -46,7 +46,11 @@ const LoginScreen = () => {
 
     return (
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-            <View style={[globalStyles.container, styles.container]}>
+            <View style={[
+                globalStyles.container,
+                styles.container,
+                { backgroundColor: colors.auth }
+            ]}>
                 <View>
                     <Image source={logo} style={styles.logo} />
                     <Text style={styles.logoText}>Festify</Text>
@@ -68,19 +72,26 @@ const LoginScreen = () => {
                         />
                     </View>
                     <View style={styles.buttonContainer}>
-                        <TouchableOpacity
+                        <Button
+                            mode="contained"
                             onPress={handleLogin}
                             style={styles.button}
+                            contentStyle={styles.buttonContent}
+                            color={colors.accent}
                         >
-                            <Text style={styles.buttonText}>Login</Text>
-                        </TouchableOpacity>
+                            Login
+                        </Button>
 
-                        <TouchableOpacity
+                        <Button
+                            mode="text"
                             onPress={handleSignUp}
-                            style={[styles.button, styles.buttonOutline]}
+                            style={styles.button}
+                            contentStyle={styles.buttonContent}
+                            color={colors.accent}
                         >
-                            <Text style={styles.buttonOutlineText}>Register</Text>
-                        </TouchableOpacity>
+                            Sign up
+                        </Button>
+
                     </View>
                 </Surface>
             </View>
@@ -111,49 +122,35 @@ const styles = StyleSheet.create({
         marginTop: 40
     },
     button: {
-        backgroundColor: "deepskyblue",
         width: "100%",
-        padding: 15,
-        borderRadius: 10,
+        marginVertical: 2
+    },
+    buttonContent: {
+        width: "100%",
+        padding: 5,
         alignItems: "center"
-    },
-    buttonText: {
-        color: "white",
-        fontWeight: "700",
-        fontSize: 16
-    },
-    buttonOutline: {
-        backgroundColor: "white",
-        marginTop: 5,
-        borderColor: "deepskyblue",
-        borderWidth: 2
-    },
-    buttonOutlineText: {
-        color: "deepskyblue",
-        fontWeight: "700",
-        fontSize: 16
     },
     logo: {
         alignSelf: "center",
-        width: 90,
-        height: 90,
+        width: 100,
+        height: 100,
     },
     logoText: {
-        fontSize: 40,
+        fontSize: 45,
         fontFamily: "PacificoRegular",
         color: palette.logo,
         alignSelf: "center",
-        marginBottom: 30
+        marginBottom: 60
     },
     surface: {
         justifyContent: "center",
         alignItems: "center",
         width: "100%",
         paddingHorizontal: 20,
-        paddingTop: 40,
-        paddingBottom: 60,
+        paddingVertical: 40,
         borderTopLeftRadius: 30,
-        borderTopRightRadius: 30
+        borderTopRightRadius: 30,
+        elevation: 4
     }
 
 })
