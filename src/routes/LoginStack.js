@@ -6,20 +6,20 @@ const { Navigator, Screen } = createStackNavigator()
 
 export default function LoginStack() {
     return (
-        <Navigator>
+        <Navigator
+            initialRouteName="Login"
+            screenOptions={{
+                header: () => null
+            }}
+        >
             <Screen
                 name="Login"
                 component={LoginScreen}
-                options={{
-                    headerShown: false
-                }}
+
             />
             <Screen
                 name="BottomNavigation"
                 component={BottomNavigation}
-                options={{
-                    headerShown: false,
-                }}
             />
         </Navigator>
     )

@@ -1,5 +1,5 @@
 import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs"
-import { HomeScreen, LessonsScreen, LeaderboardScreen, ProfileScreen } from "../screens"
+import { HomeStack, LessonsStack, LeaderboardStack, ProfileStack } from "../routes"
 
 const { Navigator, Screen } = createMaterialBottomTabNavigator()
 import i18n from 'i18n-js';
@@ -7,14 +7,14 @@ import i18n from 'i18n-js';
 export default function BottomNavigation() {
     return (
         <Navigator
-            initialRouteName="Home"
+            initialRouteName="HomeStack"
             shifting={true}
             sceneAnimationEnabled={false}
             backBehavior="firstRoute"
         >
             <Screen
-                name="Home"
-                component={HomeScreen}
+                name="HomeStack"
+                component={HomeStack}
                 options={{
                     tabBarIcon: "home",
                     title: i18n.t("Home")
@@ -22,8 +22,8 @@ export default function BottomNavigation() {
             />
 
             <Screen
-                name="Lessons"
-                component={LessonsScreen}
+                name="LessonsStack"
+                component={LessonsStack}
                 options={{
                     tabBarIcon: "book",
                     title: i18n.t("Lessons")
@@ -31,8 +31,8 @@ export default function BottomNavigation() {
             />
 
             <Screen
-                name="Leaderboard"
-                component={LeaderboardScreen}
+                name="LeaderboardStack"
+                component={LeaderboardStack}
                 options={{
                     tabBarIcon: "trophy",
                     title: i18n.t("Leaderboard")
@@ -40,8 +40,8 @@ export default function BottomNavigation() {
             />
 
             <Screen
-                name="Profile"
-                component={ProfileScreen}
+                name="ProfileStack"
+                component={ProfileStack}
                 options={{
                     tabBarIcon: "account",
                     title: i18n.t("Profile")
