@@ -1,13 +1,12 @@
-import { StyleSheet, Keyboard, View, TouchableWithoutFeedback, TextInput, TouchableOpacity, Image } from 'react-native'
+import { StyleSheet, Keyboard, View, TouchableWithoutFeedback, TextInput, Image } from 'react-native'
 import React, { useState, useEffect } from 'react'
 import globalStyles from '../../styles/global'
 import { palette } from '../../themes/palette'
 import logo from "../../assets/images/logo.png"
-import { Text, Surface } from "react-native-paper"
 
 import { auth } from '../../../firebase.v8'
 import { useNavigation } from '@react-navigation/core'
-import { useTheme, Button } from 'react-native-paper';
+import { useTheme, Button, Text, Surface } from 'react-native-paper';
 
 const LoginScreen = () => {
     const [email, setEmail] = useState('')

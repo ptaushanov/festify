@@ -1,21 +1,14 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, View } from 'react-native'
+import { Text } from 'react-native-paper'
 import React from 'react'
 
 import globalStyles from '../../styles/global'
-import { useTheme } from '../../contexts/ThemeContext'
-
-import { Button } from 'react-native-paper'
 
 const LessonsScreen = () => {
-    const { toggleTheme } = useTheme()
 
     return (
         <View style={globalStyles.container}>
             <Text>LessonsScreen</Text>
-            <Button onPress={toggleTheme} mode="contained">
-                Change theme
-            </Button>
-
         </View>
     )
 }
