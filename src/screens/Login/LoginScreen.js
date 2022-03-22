@@ -3,44 +3,41 @@ import React, { useState, useEffect } from 'react'
 import globalStyles from '../../styles/global'
 import { palette } from '../../themes/palette'
 import logo from "../../assets/images/logo.png"
-
-import { auth } from '../../../firebase.v8'
 import { useNavigation } from '@react-navigation/core'
 import { useTheme, Button, Text, Surface } from 'react-native-paper';
+import useAuth from '../../services/hooks/useAuth'
+import { signUpUser, logInUser } from '../../services/authenticate'
+import User, { UserBuilder } from '../../models/User'
 
 const LoginScreen = () => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
+    const [username, setUsername] = useState('test')
 
     const navigation = useNavigation()
     const { colors } = useTheme()
 
-    useEffect(() => {
-        const unsubscribe = auth.onAuthStateChanged(user => {
-            if (user) {
-                navigation.replace("BottomNavigation")
-            }
-        })
+    const hasLoggedIn = useAuth()
 
-        return unsubscribe
-    }, [])
+    useEffect(() => {
+        if (hasLoggedIn) {
+            navigation.replace("BottomNavigation")
+        }
+    }, [hasLoggedIn])
 
     const handleSignUp = () => {
-        auth.createUserWithEmailAndPassword(email, password)
-            .then(userCredentials => {
-                const user = userCredentials.user
-                console.log("Registered with: ", user.email)
-            })
-            .catch(error => alert(error.message))
+        const newUser = new User(username, email, password)
+        signUpUser(newUser).catch(error => alert(error.message))
     }
 
     const handleLogin = () => {
-        auth.signInWithEmailAndPassword(email, password)
-            .then(userCredentials => {
-                const user = userCredentials.user
-                console.log("Logged in with: ", user.email)
-            })
-            .catch(error => alert(error.message))
+        const user =
+            new UserBuilder()
+                .email(email)
+                .password(password)
+                .build()
+
+        logInUser(user).catch(error => alert(error.message))
     }
 
     return (
