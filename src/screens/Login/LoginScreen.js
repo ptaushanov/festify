@@ -1,5 +1,5 @@
 import { StyleSheet, Keyboard, View, TouchableWithoutFeedback, TextInput, Image } from 'react-native'
-import React, { useEffect } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import globalStyles from '../../styles/global'
 import { palette } from '../../themes/palette'
 import logo from "../../assets/images/logo.png"
@@ -20,6 +20,13 @@ const LoginScreen = () => {
     const { colors } = useTheme()
 
     const hasLoggedIn = useAuth()
+    const [generalError, setGeneralError] = useState(null)
+
+    const handleInputFocus = () => {
+        if (generalError) {
+            setGeneralError(null)
+        }
+    }
 
     useEffect(() => {
         if (hasLoggedIn) {
@@ -74,7 +81,9 @@ const LoginScreen = () => {
                         logInUser(user)
                             .catch(error => {
                                 setSubmitting(false)
-                                alert(error.message)
+                                if (error.name = "FirebaseAuthInvalidCredentialsException") {
+                                    setGeneralError(i18n.t("auth:invalid-credentials"))
+                                }
                             })
                     }}
                 >{
@@ -86,6 +95,7 @@ const LoginScreen = () => {
                                         value={values.email}
                                         onChangeText={handleChange("email")}
                                         onBlur={handleBlur("email")}
+                                        onFocus={handleInputFocus}
                                         style={styles.input}
                                         error={touched.email && Boolean(errors.email)}
                                         helperText={touched.email && errors.email}
@@ -95,11 +105,21 @@ const LoginScreen = () => {
                                         value={values.password}
                                         onChangeText={handleChange("password")}
                                         onBlur={handleBlur("password")}
+                                        onFocus={handleInputFocus}
                                         style={styles.input}
                                         error={touched.password && Boolean(errors.password)}
                                         helperText={touched.password && errors.password}
                                         secureTextEntry
                                     />
+                                    <Text
+                                        style={{
+                                            display: generalError ? "flex" : "none",
+                                            color: colors.danger,
+                                            textAlign: "center"
+                                        }}
+                                    >
+                                        {generalError}
+                                    </Text>
                                 </View>
                                 <View style={styles.buttonContainer}>
                                     <Button

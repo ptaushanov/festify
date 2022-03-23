@@ -26,5 +26,6 @@
     "auth:password-max": "The password cannot exceed {0} characters",
     "auth:password-required": "The password is required",
 
-    "auth:password-confirm":  "Passwords do not match"
+    "auth:password-confirm":  "Passwords do not match",
+    "auth:invalid-credentials": "Invalid username or password"
 }

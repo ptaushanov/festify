@@ -27,5 +27,6 @@
     "auth:password-max": "Паролата не трябва да превишава {0} символа",
     "auth:password-required": "Паролата е задължителна",
 
-    "auth:password-confirm":  "Паролите не съвпадат"
+    "auth:password-confirm":  "Паролите не съвпадат",
+    "auth:invalid-credentials": "Невалидно потребителско име или парола"
 }
