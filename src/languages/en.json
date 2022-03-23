@@ -4,5 +4,22 @@
     "Leaderboard": "Leaderboard",
     "Profile": "Profile",
     "auth:Sign Up": "Sign up",
-    "auth:Login": "Login"
+    "auth:SignUp": "Sign up",
+    "auth:Login": "Login",
+
+    "auth:username-trim": "The username cannot include leading and trailing spaces",
+    "auth:username-min": "The username needs to be at least {0} characters",
+    "auth:username-max": "The username cannot exceed {0} characters",
+    "auth:username-required": "The username is required",
+
+    "auth:email-trim": "The email cannot include leading and trailing spaces",
+    "auth:email-email": "The email is invalid",
+    "auth:email-required": "The email is required",
+
+    "auth:password-trim": "The password cannot include leading and trailing spaces",
+    "auth:password-min": "The password needs to be at least {0} characters",
+    "auth:password-max": "The password cannot exceed {0} characters",
+    "auth:password-required": "The password is required",
+
+    "auth:password-confirm":  "Passwords do not match"
 }
