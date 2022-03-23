@@ -29,7 +29,7 @@ const SignUp = () => {
                 ]}>
 
                 <Surface style={styles.surface}>
-                    <Text style={styles.title}>Sign Up</Text>
+                    <Text style={styles.title}>{i18n.t("auth:Sign Up")}</Text>
                     <Formik
                         initialValues={{
                             username: '',
@@ -185,4 +185,7 @@ const styles = StyleSheet.create({
         flex: 1,
         marginHorizontal: 5
     },
+    buttonRight: {
+        flex: 4
+    }
 })

@@ -1,13 +1,13 @@
 import { StyleSheet, Keyboard, View, TouchableWithoutFeedback, TextInput, Image } from 'react-native'
-import React, { useState, useEffect, useCallback } from 'react'
+import React, { useState, useEffect } from 'react'
 import globalStyles from '../../styles/global'
 import { palette } from '../../themes/palette'
 import logo from "../../assets/images/logo.png"
 import { useNavigation } from '@react-navigation/core'
 import { useTheme, Button, Text, Surface } from 'react-native-paper';
 import useAuth from '../../services/hooks/useAuth'
-import { signUpUser, logInUser } from '../../services/authenticate'
-import User, { UserBuilder } from '../../models/User'
+import { logInUser } from '../../services/authenticate'
+import { UserBuilder } from '../../models/User'
 
 const LoginScreen = () => {
     const [email, setEmail] = useState('')
@@ -18,16 +18,11 @@ const LoginScreen = () => {
 
     const hasLoggedIn = useAuth()
 
-    const changeScreen = useCallback(() => {
+    useEffect(() => {
         if (hasLoggedIn) {
             console.log("Logged in")
             navigation.replace("BottomNavigation")
         }
-    }, [hasLoggedIn])
-
-
-    useEffect(() => {
-        changeScreen()
     }, [hasLoggedIn])
 
     const handleSignUpPressed = () => {
