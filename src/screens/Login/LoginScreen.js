@@ -1,5 +1,5 @@
 import { StyleSheet, Keyboard, View, TouchableWithoutFeedback, TextInput, Image } from 'react-native'
-import React, { useState, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import globalStyles from '../../styles/global'
 import { palette } from '../../themes/palette'
 import logo from "../../assets/images/logo.png"
@@ -9,10 +9,13 @@ import useAuth from '../../services/hooks/useAuth'
 import { logInUser } from '../../services/authenticate'
 import { UserBuilder } from '../../models/User'
 
-const LoginScreen = () => {
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
+import i18n from 'i18n-js'
+import { Formik } from 'formik'
+import * as Yup from "yup"
 
+import StyledTextInput from '../../shared/TextInput/StyledTextInput'
+
+const LoginScreen = () => {
     const navigation = useNavigation()
     const { colors } = useTheme()
 
@@ -29,16 +32,6 @@ const LoginScreen = () => {
         navigation.navigate("SignUp")
     }
 
-    const handleLogin = () => {
-        const user =
-            new UserBuilder()
-                .email(email)
-                .password(password)
-                .build()
-
-        logInUser(user).catch(error => alert(error.message))
-    }
-
     return (
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
             <View style={[
@@ -50,47 +43,91 @@ const LoginScreen = () => {
                     <Image source={logo} style={styles.logo} />
                     <Text style={styles.logoText}>Festify</Text>
                 </View>
-                <Surface style={styles.surface}>
-                    <View style={styles.inputContainer}>
-                        <TextInput
-                            placeholder="Email"
-                            value={email}
-                            onChangeText={text => setEmail(text)}
-                            style={styles.input}
-                        />
-                        <TextInput
-                            placeholder="Password"
-                            value={password}
-                            onChangeText={text => setPassword(text)}
-                            style={styles.input}
-                            secureTextEntry
-                        />
-                    </View>
-                    <View style={styles.buttonContainer}>
-                        <Button
-                            mode="contained"
-                            onPress={handleLogin}
-                            style={styles.button}
-                            contentStyle={styles.buttonContent}
-                            color={colors.accent}
-                        >
-                            Login
-                        </Button>
+                <Formik
+                    initialValues={{
+                        email: '',
+                        password: '',
+                    }}
 
-                        <Button
-                            mode="text"
-                            onPress={handleSignUpPressed}
-                            style={styles.button}
-                            contentStyle={styles.buttonContent}
-                            color={colors.accent}
-                        >
-                            Sign up
-                        </Button>
+                    validationSchema={Yup.object({
+                        email: Yup.string()
+                            .trim(i18n.t("auth:email-trim"))
+                            .strict(true)
+                            .email(i18n.t("auth:email-email"))
+                            .required(i18n.t("auth:email-required")),
 
-                    </View>
-                </Surface>
+                        password: Yup.string()
+                            .trim(i18n.t("auth:password-trim"))
+                            .strict(true)
+                            .required(i18n.t("auth:password-required")),
+                    })}
+
+                    onSubmit={(values, { setSubmitting }) => {
+                        const { email, password } = values
+
+                        const user =
+                            new UserBuilder()
+                                .email(email)
+                                .password(password)
+                                .build()
+
+                        logInUser(user)
+                            .catch(error => {
+                                setSubmitting(false)
+                                alert(error.message)
+                            })
+                    }}
+                >{
+                        ({ values, touched, errors, handleBlur, handleChange, handleSubmit, isSubmitting, isValidating }) => (
+                            <Surface style={styles.surface}>
+                                <View style={styles.inputContainer}>
+                                    <StyledTextInput
+                                        placeholder={i18n.t("auth:Email")}
+                                        value={values.email}
+                                        onChangeText={handleChange("email")}
+                                        onBlur={handleBlur("email")}
+                                        style={styles.input}
+                                        error={touched.email && Boolean(errors.email)}
+                                        helperText={touched.email && errors.email}
+                                    />
+                                    <StyledTextInput
+                                        placeholder={i18n.t("auth:Password")}
+                                        value={values.password}
+                                        onChangeText={handleChange("password")}
+                                        onBlur={handleBlur("password")}
+                                        style={styles.input}
+                                        error={touched.password && Boolean(errors.password)}
+                                        helperText={touched.password && errors.password}
+                                        secureTextEntry
+                                    />
+                                </View>
+                                <View style={styles.buttonContainer}>
+                                    <Button
+                                        mode="contained"
+                                        onPress={handleSubmit}
+                                        style={styles.button}
+                                        contentStyle={styles.buttonContent}
+                                        color={colors.accent}
+                                    >
+                                        {i18n.t("auth:Login")}
+                                    </Button>
+
+                                    <Button
+                                        mode="text"
+                                        onPress={handleSignUpPressed}
+                                        style={styles.button}
+                                        contentStyle={styles.buttonContent}
+                                        color={colors.accent}
+                                        disabled={isSubmitting || isValidating}
+                                    >
+                                        {i18n.t("auth:Sign Up")}
+                                    </Button>
+                                </View>
+                            </Surface>
+                        )}
+                </Formik>
             </View>
-        </TouchableWithoutFeedback>
+        </TouchableWithoutFeedback >
     )
 }
 
@@ -104,11 +141,7 @@ const styles = StyleSheet.create({
         width: "80%",
     },
     input: {
-        backgroundColor: "whitesmoke",
-        paddingHorizontal: 15,
-        paddingVertical: 10,
-        borderRadius: 10,
-        marginTop: 5
+        marginVertical: 5,
     },
     buttonContainer: {
         width: "60%",

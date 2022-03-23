@@ -82,7 +82,7 @@ const SignUp = () => {
                                 .catch(error => alert(error.message))
                         }}
                     >{
-                            ({ values, touched, errors, handleBlur, handleChange, handleSubmit }) => (
+                            ({ values, touched, errors, handleBlur, handleChange, handleSubmit, isSubmitting, isValidating }) => (
                                 <View>
                                     <View style={styles.inputContainer}>
                                         <StyledTextInput
@@ -140,6 +140,7 @@ const SignUp = () => {
                                             style={[styles.button, styles.buttonRight]}
                                             contentStyle={styles.buttonContent}
                                             color={colors.accent}
+                                            disabled={isSubmitting || isValidating}
                                         >
                                             {i18n.t("auth:Sign Up")}
                                         </Button>
@@ -158,11 +159,12 @@ export default SignUp
 
 const styles = StyleSheet.create({
     container: {
-        padding: 40
+        padding: 30
     },
     surface: {
         width: "100%",
-        padding: 20,
+        padding: 30,
+        paddingHorizontal: 40,
         borderRadius: 15,
         elevation: 3
     },
