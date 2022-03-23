@@ -25,9 +25,10 @@ const LoginScreen = () => {
         }
     }, [hasLoggedIn])
 
-    const handleSignUp = () => {
-        const newUser = new User(username, email, password)
-        signUpUser(newUser).catch(error => alert(error.message))
+    const handleSignUpPressed = () => {
+        navigation.navigate("SignUp")
+        // const newUser = new User(username, email, password)
+        // signUpUser(newUser).catch(error => alert(error.message))
     }
 
     const handleLogin = () => {
@@ -80,7 +81,7 @@ const LoginScreen = () => {
 
                         <Button
                             mode="text"
-                            onPress={handleSignUp}
+                            onPress={handleSignUpPressed}
                             style={styles.button}
                             contentStyle={styles.buttonContent}
                             color={colors.accent}

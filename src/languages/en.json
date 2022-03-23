@@ -2,5 +2,7 @@
     "Home": "Home",
     "Lessons": "Lessons",
     "Leaderboard": "Leaderboard",
-    "Profile": "Profile"
+    "Profile": "Profile",
+    "auth:Sign Up": "Sign up",
+    "auth:Login": "Login"
 }

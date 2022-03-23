@@ -2,5 +2,7 @@
     "Home": "Начало",
     "Lessons": "Уроци",
     "Leaderboard": "Класиране",
-    "Profile": "Профил"
+    "Profile": "Профил",
+    "auth:Sign Up": "Регистрация",
+    "auth:Login": "Вход"
 }

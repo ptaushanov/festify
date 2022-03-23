@@ -1,16 +1,23 @@
 import React from 'react';
-import { Appbar, Avatar } from 'react-native-paper';
-import profile from "../../assets/images/avatar.png"
+import { Appbar } from 'react-native-paper';
+import { StyleSheet } from 'react-native';
 import i18n from 'i18n-js';
 
 const AppbarMain = ({ route }) => {
     return (
         <Appbar.Header>
-            <Appbar.Content title={i18n.t(route.name)} />
-            {/* <Appbar.Action icon="account" /> */}
-            <Avatar.Image source={profile} size={35} style={{ marginRight: 10 }} />
+            <Appbar.Content
+                title={i18n.t(route.name)}
+                style={styles.content}
+            />
         </Appbar.Header>
     );
 };
+
+const styles = StyleSheet.create({
+    content: {
+        alignItems: "center",
+    }
+})
 
 export default AppbarMain
