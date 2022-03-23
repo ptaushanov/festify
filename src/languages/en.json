@@ -6,11 +6,16 @@
     "auth:Sign Up": "Sign up",
     "auth:SignUp": "Sign up",
     "auth:Login": "Login",
+    "auth:Username": "Username",
+    "auth:Email": "Email",
+    "auth:Password": "Password", 
+    "auth:Confirm Password": "Confirm Password",
 
     "auth:username-trim": "The username cannot include leading and trailing spaces",
     "auth:username-min": "The username needs to be at least {0} characters",
     "auth:username-max": "The username cannot exceed {0} characters",
     "auth:username-required": "The username is required",
+    "auth:username-exists": "Username is taken",
 
     "auth:email-trim": "The email cannot include leading and trailing spaces",
     "auth:email-email": "The email is invalid",

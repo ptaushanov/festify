@@ -5,6 +5,8 @@ import globalStyles from '../../styles/global'
 import StyledTextInput from '../../shared/TextInput/StyledTextInput'
 import { useNavigation } from '@react-navigation/native'
 import i18n from 'i18n-js'
+import User from '../../models/User'
+import { signUpUser, checkDuplicateUsername } from '../../services/authenticate'
 
 import { Formik } from 'formik'
 import * as Yup from "yup"
@@ -12,11 +14,6 @@ import * as Yup from "yup"
 const SignUp = () => {
     const { colors } = useTheme();
     const navigation = useNavigation()
-
-    const handleSignUp = () => {
-        // const newUser = new User(username, email, password)
-        // signUpUser(newUser).catch(error => alert(error.message))
-    }
 
     const handleLoginPressed = () => { navigation.navigate("Login") }
 
@@ -65,45 +62,66 @@ const SignUp = () => {
                             confirmPassword: Yup.string()
                                 .oneOf([Yup.ref('password'), null], i18n.t("auth:password-confirm"))
                         })}
+
+                        onSubmit={(values, { setErrors, setSubmitting }) => {
+                            const { username, email, password } = values
+
+                            checkDuplicateUsername(username)
+                                .then(isDuplicate => {
+                                    if (isDuplicate) {
+                                        setErrors({
+                                            username: i18n.t("auth:username-exists")
+                                        })
+                                        setSubmitting(false)
+                                        return
+                                    }
+
+                                    const newUser = new User(username, email, password)
+                                    signUpUser(newUser)
+                                })
+                                .catch(error => alert(error.message))
+                        }}
                     >{
                             ({ values, touched, errors, handleBlur, handleChange, handleSubmit }) => (
                                 <View>
                                     <View style={styles.inputContainer}>
                                         <StyledTextInput
-                                            placeholder="Username"
+                                            placeholder={i18n.t("auth:Username")}
                                             value={values.username}
                                             onChangeText={handleChange("username")}
                                             onBlur={handleBlur("username")}
                                             style={styles.input}
-                                            error={touched.username && errors.username}
+                                            error={touched.username && Boolean(errors.username)}
                                             helperText={touched.username && errors.username}
                                         />
                                         <StyledTextInput
-                                            placeholder="Email"
+                                            placeholder={i18n.t("auth:Email")}
                                             value={values.email}
                                             onChangeText={handleChange("email")}
                                             onBlur={handleBlur("email")}
                                             style={styles.input}
-                                            error={touched.email && errors.email}
-                                            helperText={errors.email && errors.email}
+                                            error={touched.email && Boolean(errors.email)}
+                                            helperText={touched.email && errors.email}
                                         />
                                         <StyledTextInput
-                                            placeholder="Password"
+                                            placeholder={i18n.t("auth:Password")}
                                             value={values.password}
                                             onChangeText={handleChange("password")}
                                             onBlur={handleBlur("password")}
                                             style={styles.input}
-                                            error={touched.password && errors.password}
-                                            helperText={errors.password && errors.password}
+                                            error={touched.password && Boolean(errors.password)}
+                                            helperText={touched.password && errors.password}
+                                            secureTextEntry
                                         />
                                         <StyledTextInput
-                                            placeholder="Confirm Password"
+                                            placeholder={i18n.t("auth:Confirm Password")}
                                             value={values.confirmPassword}
                                             onChangeText={handleChange("confirmPassword")}
                                             onBlur={handleBlur("confirmPassword")}
                                             style={styles.input}
-                                            error={touched.confirmPassword && errors.confirmPassword}
-                                            helperText={errors.confirmPassword && errors.confirmPassword}
+                                            error={touched.confirmPassword && Boolean(errors.confirmPassword)}
+                                            helperText={touched.confirmPassword && errors.confirmPassword}
+                                            secureTextEntry
                                         />
                                     </View>
                                     <View style={styles.buttonContainer}>
@@ -114,7 +132,7 @@ const SignUp = () => {
                                             contentStyle={styles.buttonContent}
                                             color={colors.accent}
                                         >
-                                            Login
+                                            {i18n.t("auth:Login")}
                                         </Button>
                                         <Button
                                             mode="contained"
@@ -123,7 +141,7 @@ const SignUp = () => {
                                             contentStyle={styles.buttonContent}
                                             color={colors.accent}
                                         >
-                                            Sign Up
+                                            {i18n.t("auth:Sign Up")}
                                         </Button>
                                     </View>
                                 </View>)}

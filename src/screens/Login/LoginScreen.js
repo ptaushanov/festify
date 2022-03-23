@@ -1,5 +1,5 @@
 import { StyleSheet, Keyboard, View, TouchableWithoutFeedback, TextInput, Image } from 'react-native'
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 import globalStyles from '../../styles/global'
 import { palette } from '../../themes/palette'
 import logo from "../../assets/images/logo.png"
@@ -12,23 +12,26 @@ import User, { UserBuilder } from '../../models/User'
 const LoginScreen = () => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-    const [username, setUsername] = useState('test')
 
     const navigation = useNavigation()
     const { colors } = useTheme()
 
     const hasLoggedIn = useAuth()
 
-    useEffect(() => {
+    const changeScreen = useCallback(() => {
         if (hasLoggedIn) {
+            console.log("Logged in")
             navigation.replace("BottomNavigation")
         }
     }, [hasLoggedIn])
 
+
+    useEffect(() => {
+        changeScreen()
+    }, [hasLoggedIn])
+
     const handleSignUpPressed = () => {
         navigation.navigate("SignUp")
-        // const newUser = new User(username, email, password)
-        // signUpUser(newUser).catch(error => alert(error.message))
     }
 
     const handleLogin = () => {

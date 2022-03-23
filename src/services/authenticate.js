@@ -23,3 +23,13 @@ export const logInUser = (newUser) => {
             console.log("Logged in with: ", user.email)
         })
 }
+
+export const checkDuplicateUsername = (username) => {
+    return firestore
+        .collection("users")
+        .where("username", "==", username)
+        .get()
+        .then(querySnapshot => {
+            return !querySnapshot.empty
+        })
+}
