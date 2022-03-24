@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
         paddingHorizontal: 15,
         paddingVertical: 20,
         borderRadius: 10,
-        elevation: 1,
+        elevation: 2,
     },
     avatar: {
         marginTop: -40,
