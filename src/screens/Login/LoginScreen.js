@@ -1,5 +1,5 @@
 import { StyleSheet, Keyboard, View, TouchableWithoutFeedback, TextInput, Image } from 'react-native'
-import React, { useCallback, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import globalStyles from '../../styles/global'
 import { palette } from '../../themes/palette'
 import logo from "../../assets/images/logo.png"

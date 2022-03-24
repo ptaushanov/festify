@@ -3,8 +3,8 @@ import React from 'react'
 
 import { auth } from '../../../firebase.v8'
 import { useNavigation } from '@react-navigation/core'
-import globalStyles from '../../styles/global'
 import { Button, Text } from 'react-native-paper'
+import ProfileCard from './components/ProfileCard'
 
 import { useTheme } from '../../contexts/ThemeContext'
 
@@ -12,7 +12,6 @@ const ProfileScreen = () => {
 
     const navigation = useNavigation()
     const { toggleTheme } = useTheme()
-
 
     const handleSignOut = () => {
         auth.signOut()
@@ -23,8 +22,13 @@ const ProfileScreen = () => {
     }
 
     return (
-        <View style={globalStyles.container}>
-            <Text>Email: {auth.currentUser?.email}</Text>
+        <View style={styles.container}>
+            <ProfileCard
+                username="Jake"
+                email={auth.currentUser?.email}
+                onInfoEdit={() => { alert("Hello") }}
+            />
+
             <Button
                 style={styles.button}
                 contentStyle={styles.buttonContent}
@@ -49,6 +53,9 @@ const ProfileScreen = () => {
 export default ProfileScreen
 
 const styles = StyleSheet.create({
+    container: {
+        padding: 40
+    },
     button: {
         width: "50%",
         borderRadius: 10,
