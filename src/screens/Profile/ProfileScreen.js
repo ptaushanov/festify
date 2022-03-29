@@ -10,11 +10,7 @@ const ProfileScreen = () => {
     return (
         <View>
             <View style={styles.container}>
-                <ProfileCard
-                    username="Jake"
-                    email={auth.currentUser?.email}
-                    onInfoEdit={() => { alert("Hello") }}
-                />
+                <ProfileCard />
             </View>
             <ProfileList />
         </View>

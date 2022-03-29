@@ -26,3 +26,6 @@ export const auth = firebase.auth();
 
 // FireStore
 export const firestore = firebase.firestore();
+
+// Storage
+export const storage = firebase.storage();
