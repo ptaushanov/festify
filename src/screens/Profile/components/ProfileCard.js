@@ -2,9 +2,15 @@ import { StyleSheet, View } from 'react-native'
 import React from 'react'
 import { Surface, Avatar, useTheme, Text, IconButton } from 'react-native-paper'
 import { MaterialIcons } from "@expo/vector-icons"
+import { useNavigation } from '@react-navigation/native'
 
-const ProfileCard = ({ username = "", email = "", image, onInfoEdit }) => {
+const ProfileCard = ({ username = "", email = "", image }) => {
     const { colors } = useTheme()
+    const navigation = useNavigation()
+
+    const handleInfoEdit = () => {
+        navigation.navigate("Edit Profile")
+    }
 
     return (
         <Surface style={styles.surface}>
@@ -23,7 +29,7 @@ const ProfileCard = ({ username = "", email = "", image, onInfoEdit }) => {
                 // icon={(props) => (<MaterialIcons icon="edit" {...props} />)}
                 icon="circle-edit-outline"
                 size={20}
-                onPress={onInfoEdit}
+                onPress={handleInfoEdit}
                 style={styles.edit}
             />
             <View style={styles.infoContainer}>

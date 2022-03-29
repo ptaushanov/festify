@@ -25,7 +25,8 @@ export default ProfileScreen
 
 const styles = StyleSheet.create({
     container: {
-        padding: 40
+        padding: 40,
+        marginTop: 20
     },
     button: {
         width: "50%",
