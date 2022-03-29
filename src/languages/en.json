@@ -27,5 +27,10 @@
     "auth:password-required": "The password is required",
 
     "auth:password-confirm":  "Passwords do not match",
-    "auth:invalid-credentials": "Invalid username or password"
+    "auth:invalid-credentials": "Invalid username or password",
+
+    "profile:General": "General",
+    "profile:Dark Mode": "Dark Mode",
+    "profile:My Awards": "My Awards",
+    "profile:Logout": "Logout"
 }

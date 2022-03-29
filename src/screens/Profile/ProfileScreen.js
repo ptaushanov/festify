@@ -2,50 +2,21 @@ import { StyleSheet, View } from 'react-native'
 import React from 'react'
 
 import { auth } from '../../../firebase.v8'
-import { useNavigation } from '@react-navigation/core'
-import { Button, Text } from 'react-native-paper'
-import ProfileCard from './components/ProfileCard'
 
-import { useTheme } from '../../contexts/ThemeContext'
+import ProfileCard from './components/ProfileCard'
+import ProfileList from './components/ProfileList'
 
 const ProfileScreen = () => {
-
-    const navigation = useNavigation()
-    const { toggleTheme } = useTheme()
-
-    const handleSignOut = () => {
-        auth.signOut()
-            .then(() => {
-                navigation.replace("Login")
-            })
-            .catch(error => alert(error.message))
-    }
-
     return (
-        <View style={styles.container}>
-            <ProfileCard
-                username="Jake"
-                email={auth.currentUser?.email}
-                onInfoEdit={() => { alert("Hello") }}
-            />
-
-            <Button
-                style={styles.button}
-                contentStyle={styles.buttonContent}
-                onPress={handleSignOut}
-                mode="contained"
-            >
-                Sign out
-            </Button>
-
-            <Button
-                onPress={toggleTheme}
-                mode="contained"
-                style={styles.button}
-                contentStyle={styles.buttonContent}
-            >
-                Change theme
-            </Button>
+        <View>
+            <View style={styles.container}>
+                <ProfileCard
+                    username="Jake"
+                    email={auth.currentUser?.email}
+                    onInfoEdit={() => { alert("Hello") }}
+                />
+            </View>
+            <ProfileList />
         </View>
     )
 }

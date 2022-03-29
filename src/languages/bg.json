@@ -28,5 +28,10 @@
     "auth:password-required": "Паролата е задължителна",
 
     "auth:password-confirm":  "Паролите не съвпадат",
-    "auth:invalid-credentials": "Невалидно потребителско име или парола"
+    "auth:invalid-credentials": "Невалидно потребителско име или парола",
+
+    "profile:General": "Общи",
+    "profile:Dark Mode": "Тъмен режим",
+    "profile:My Awards": "Моите награди",
+    "profile:Logout": "Излез от профила"
 }
