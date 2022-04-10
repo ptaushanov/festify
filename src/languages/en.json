@@ -34,5 +34,8 @@
     "profile:General": "General",
     "profile:Dark Mode": "Dark Mode",
     "profile:My Awards": "My Awards",
-    "profile:Logout": "Logout"
+    "profile:Logout": "Logout",
+    "change-profile:Change picture": "Change picture",
+    "change-profile:Username": "Username",
+    "change-profile:Email": "Email"
 }

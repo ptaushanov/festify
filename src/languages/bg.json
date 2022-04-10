@@ -34,5 +34,9 @@
     "profile:General": "Общи",
     "profile:Dark Mode": "Тъмен режим",
     "profile:My Awards": "Моите награди",
-    "profile:Logout": "Излез от профила"
+    "profile:Logout": "Излез от профила",
+
+    "change-profile:Change picture": "Сменете снимката",
+    "change-profile:Username": "Потребителско име",
+    "change-profile:Email": "Имейл"
 }

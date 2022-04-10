@@ -2,14 +2,14 @@ import { StyleSheet, View } from 'react-native'
 import React from 'react'
 import { Button as PaperButton, useTheme } from 'react-native-paper'
 
-const Button = ({ children, style, fullWidth = false, ...otherProps }) => {
+const Button = ({ children, style, size = 5, fullWidth = false, ...otherProps }) => {
     const { colors } = useTheme()
 
     return (
         <View style={styles.buttonContainer}>
             <PaperButton
                 style={[style, styles.button, { width: fullWidth ? "100%" : "auto" }]}
-                contentStyle={styles.buttonContent}
+                contentStyle={[styles.buttonContent, { padding: size }]}
                 color={colors.primary}
                 {...otherProps}
             >
@@ -34,7 +34,6 @@ const styles = StyleSheet.create({
     },
     buttonContent: {
         width: "100%",
-        padding: 5,
         alignItems: "center",
         justifyContent: "center",
     }

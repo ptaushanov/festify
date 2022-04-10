@@ -2,16 +2,18 @@ import { StyleSheet, TextInput, View } from 'react-native'
 import React from 'react'
 import { Text, useTheme } from 'react-native-paper'
 
-const StyledTextInput = ({ error = false, helperText = '', helperTextStyles = {}, ...otherProps }) => {
+const StyledTextInput = ({ error = false, helperText = '', helperTextStyles = {}, style, disabled = false, ...otherProps }) => {
     const { colors } = useTheme();
     return (
         <View>
             <TextInput
-                {...otherProps}
                 style={[
                     styles.input,
-                    otherProps.style,
+                    style,
                 ]}
+                {...otherProps}
+                editable={!disabled}
+                selectTextOnFocus={!disabled}
             />
             <Text style={[
                 styles.helperText,
