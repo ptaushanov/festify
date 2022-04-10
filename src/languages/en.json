@@ -37,5 +37,8 @@
     "profile:Logout": "Logout",
     "change-profile:Change picture": "Change picture",
     "change-profile:Username": "Username",
-    "change-profile:Email": "Email"
+    "change-profile:Email": "Email",
+    "change-profile:Save": "Save",
+    "change-profile:username-min": "The username needs to be at least {0} characters",
+    "change-profile:username-max": "The username cannot exceed {0} characters"
 }

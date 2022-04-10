@@ -12,5 +12,10 @@ export default StyleSheet.create({
     },
     slimContainer: {
         padding: 20,
+        flex: 1
     },
+    borderTrace: {
+        borderColor: "red",
+        borderWidth: 2,
+    }
 })

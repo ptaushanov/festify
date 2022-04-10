@@ -4,12 +4,19 @@ import { Text, useTheme } from 'react-native-paper'
 
 const StyledTextInput = ({ error = false, helperText = '', helperTextStyles = {}, style, disabled = false, ...otherProps }) => {
     const { colors } = useTheme();
+
+    const inputThemeStyle = {
+        backgroundColor: colors.surface,
+        color: colors.text
+    }
+
     return (
         <View>
             <TextInput
                 style={[
                     styles.input,
                     style,
+                    inputThemeStyle
                 ]}
                 {...otherProps}
                 editable={!disabled}
@@ -33,11 +40,10 @@ export default StyledTextInput
 
 const styles = StyleSheet.create({
     input: {
-        backgroundColor: "whitesmoke",
         paddingHorizontal: 15,
         paddingVertical: 10,
         borderRadius: 10,
-        marginTop: 5
+        marginTop: 5,
     },
     helperText: {
         fontSize: 14

@@ -23,8 +23,6 @@ export default Button
 
 const styles = StyleSheet.create({
     buttonContainer: {
-        flex: 1,
-        width: "100%",
         alignItems: "center",
         justifyContent: "center",
     },

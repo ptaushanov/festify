@@ -38,5 +38,9 @@
 
     "change-profile:Change picture": "Сменете снимката",
     "change-profile:Username": "Потребителско име",
-    "change-profile:Email": "Имейл"
+    "change-profile:Email": "Имейл",
+    "change-profile:Save": "Запази",
+    "change-profile:username-min": "Потребителското име трябва да е поне {0} символа",
+    "change-profile:username-max": "Потребителското име не трябва да превишава {0} символа"
+
 }
