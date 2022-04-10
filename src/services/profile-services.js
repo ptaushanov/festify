@@ -19,3 +19,10 @@ export const getUsername = (userId) => {
             return querySnapshot.data()?.username;
         })
 }
+
+export const updateUserInformation = (userId, { username, avatar }) => {
+    return firestore
+        .collection("users")
+        .doc(userId)
+        .set({ username, avatar })
+}

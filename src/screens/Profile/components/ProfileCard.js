@@ -1,38 +1,25 @@
 import { StyleSheet, View } from 'react-native'
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import { Surface, Text, IconButton } from 'react-native-paper'
 import { useNavigation } from '@react-navigation/native'
-import { auth } from '../../../../firebase.v8'
 
-import { getProfilePictureURL, getUsername } from '../../../services/profile-services'
 import StyledAvatar from './StyledAvatar'
+import { useProfileInfo } from '../../../contexts/ProfileContext'
 
 const ProfileCard = () => {
     const navigation = useNavigation()
-
-    const [image, setImage] = useState(null);
-    const [username, setUsername] = useState("");
+    const { username, email, avatar } = useProfileInfo();
 
     const handleInfoEdit = () => {
         navigation.navigate("Edit Profile")
     }
-
-    useEffect(() => {
-        if (auth.currentUser) {
-            getUsername(auth.currentUser.uid)
-                .then(uname => setUsername(uname))
-        }
-
-        getProfilePictureURL(auth.currentUser.uid)
-            .then((url) => setImage(url))
-    }, [])
 
     return (
         <Surface style={styles.surface}>
             <StyledAvatar
                 style={styles.avatar}
                 size={70}
-                image={image}
+                image={avatar}
                 username={username}
             />
             <IconButton
@@ -43,7 +30,7 @@ const ProfileCard = () => {
             />
             <View style={styles.infoContainer}>
                 <Text style={styles.username}>{username}</Text>
-                <Text style={styles.email}>{auth.currentUser?.email}</Text>
+                <Text style={styles.email}>{email}</Text>
             </View>
 
         </Surface>

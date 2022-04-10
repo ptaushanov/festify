@@ -7,7 +7,7 @@ const StyledTextInput = ({ error = false, helperText = '', helperTextStyles = {}
 
     const inputThemeStyle = {
         backgroundColor: colors.surfaceInput,
-        color: colors.text
+        color: disabled ? colors.textDisabled : colors.text
     }
 
     return (

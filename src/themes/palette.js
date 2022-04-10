@@ -7,12 +7,13 @@ export const palette = {
     success: colors.green["600"],
     info: colors.lightblue["400"],
     logo: colors.red["a700"],
-    auth: colors.teal["400"]
+    auth: colors.teal["400"],
+    textDisabled: colors.grey["500"]
 }
 
 export const surfaceMaterials = {
     input: {
-        light: colors.grey[100],
-        dark: colors.grey[900]
+        light: colors.grey["100"],
+        dark: colors.grey["900"]
     }
 }

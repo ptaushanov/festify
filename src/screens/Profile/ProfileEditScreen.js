@@ -4,36 +4,24 @@ import { auth } from "../../../firebase.v8"
 
 import StyledAvatar from './components/StyledAvatar'
 import StyledTextInput from '../../shared/TextInput/StyledTextInput'
-import { getProfilePictureURL, getUsername } from '../../services/profile-services'
+import { getProfilePictureURL, getUsername, updateUserInformation } from '../../services/profile-services'
 import globalStyles from '../../styles/global'
 import Button from '../../shared/Button/Button'
 import { useTheme, Text } from 'react-native-paper'
+import { useProfileInfo } from '../../contexts/ProfileContext'
 
 import i18n from 'i18n-js'
 
 const ProfileEditScreen = () => {
-    const [image, setImage] = useState(null);
-    const [username, setUsername] = useState("")
     const [newUsername, setNewUsername] = useState("")
-
     const [usernameError, setUsernameError] = useState(null)
     const { colors } = useTheme()
 
     useEffect(() => {
-        if (auth.currentUser) {
-            getUsername(auth.currentUser.uid)
-                .then(uname => {
-                    setUsername(uname)
-                    setNewUsername(uname)
-                })
-                .catch(error => console.error(error))
-        }
+        setNewUsername(username)
+    }, [username])
 
-        getProfilePictureURL(auth.currentUser.uid)
-            .then(url => setImage(url))
-            .catch(error => console.error(error))
-    }, [])
-
+    const { username, email, avatar, updateProfile } = useProfileInfo()
     const handleUsernameChanged = (uname) => { setNewUsername(uname) }
 
     const handleUsernameValidation = () => {
@@ -47,6 +35,8 @@ const ProfileEditScreen = () => {
         }
     }
 
+    const handleSaveChanges = () => { updateProfile({ newUsername }) }
+
     return (
         <TouchableWithoutFeedback
             onPress={Keyboard.dismiss}
@@ -58,7 +48,7 @@ const ProfileEditScreen = () => {
                 <View style={styles.profilePictureContainer}>
                     <StyledAvatar
                         username={username}
-                        image={image}
+                        image={avatar}
                         size={70}
                         style={styles.avatar}
                     />
@@ -87,13 +77,14 @@ const ProfileEditScreen = () => {
                     <StyledTextInput
                         disabled
                         style={[styles.input, { borderColor: colors.primary }]}
-                        value={auth.currentUser.email}
+                        value={email}
                     />
                 </View>
                 <View style={styles.saveContainer}>
                     <Button
                         mode="contained"
                         disabled={Boolean(usernameError)}
+                        onPress={handleSaveChanges}
                     >
                         {i18n.t("change-profile:Save")}
                     </Button>

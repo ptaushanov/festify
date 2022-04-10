@@ -59,7 +59,7 @@ export const DefaultTheme = {
         ...NavigationDefaultTheme.colors,
         ...PaperDefaultTheme.colors,
         ...palette,
-        surfaceInput: surfaceMaterials.input.light
+        surfaceInput: surfaceMaterials.input.light,
     },
 };
 
