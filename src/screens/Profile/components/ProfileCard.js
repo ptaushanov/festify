@@ -1,14 +1,13 @@
 import { StyleSheet, View } from 'react-native'
 import React, { useState, useEffect } from 'react'
-import { Surface, Avatar, useTheme, Text, IconButton } from 'react-native-paper'
-import { MaterialIcons } from "@expo/vector-icons"
+import { Surface, Text, IconButton } from 'react-native-paper'
 import { useNavigation } from '@react-navigation/native'
 import { auth } from '../../../../firebase.v8'
 
 import { getProfilePictureURL, getUsername } from '../../../services/profile-services'
+import StyledAvatar from './StyledAvatar'
 
 const ProfileCard = () => {
-    const { colors } = useTheme()
     const navigation = useNavigation()
 
     const [image, setImage] = useState(null);
@@ -30,21 +29,13 @@ const ProfileCard = () => {
 
     return (
         <Surface style={styles.surface}>
-            {image ?
-                (<Avatar.Image size={70} source={{ uri: image }}
-                    style={styles.avatar} />) :
-
-                (<Avatar.Text
-                    size={70}
-                    label={username.substring(0, 2).toUpperCase()}
-                    style={[styles.avatar, {
-                        borderColor: colors.surface,
-                        borderWidth: 4
-                    }]}
-                />)
-            }
+            <StyledAvatar
+                style={styles.avatar}
+                size={70}
+                image={image}
+                username={username}
+            />
             <IconButton
-                // icon={(props) => (<MaterialIcons icon="edit" {...props} />)}
                 icon="circle-edit-outline"
                 size={20}
                 onPress={handleInfoEdit}
