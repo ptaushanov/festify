@@ -1,15 +1,15 @@
 import { StyleSheet, View } from 'react-native'
 import React from 'react'
 
-import { auth } from '../../../firebase.v8'
-
 import ProfileCard from './components/ProfileCard'
 import ProfileList from './components/ProfileList'
+
+import globalStyles from '../../styles/global'
 
 const ProfileScreen = () => {
     return (
         <View>
-            <View style={styles.container}>
+            <View style={globalStyles.paddedContainer}>
                 <ProfileCard />
             </View>
             <ProfileList />

@@ -5,5 +5,12 @@ export default StyleSheet.create({
         flex: 1,
         justifyContent: "center",
         alignItems: "center"
-    }
+    },
+    paddedContainer: {
+        padding: 40,
+        marginTop: 20
+    },
+    slimContainer: {
+        padding: 20,
+    },
 })

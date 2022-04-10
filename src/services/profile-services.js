@@ -20,7 +20,6 @@ export const getProfilePictureURL = (userId) => {
         .doc(userId)
         .get()
         .then(querySnapshot => {
-            console.log(querySnapshot.data()?.avatar)
             return querySnapshot.data()?.avatar;
         })
 }
