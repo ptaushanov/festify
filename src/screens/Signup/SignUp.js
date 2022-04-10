@@ -1,6 +1,6 @@
-import { StyleSheet, Text, View, TouchableWithoutFeedback, Keyboard } from 'react-native'
+import { StyleSheet, View, TouchableWithoutFeedback, Keyboard } from 'react-native'
 import React from 'react'
-import { useTheme, Surface, Button } from 'react-native-paper'
+import { useTheme, Surface, Button, Text } from 'react-native-paper'
 import globalStyles from '../../styles/global'
 import StyledTextInput from '../../shared/TextInput/StyledTextInput'
 import { useNavigation } from '@react-navigation/native'
@@ -29,7 +29,9 @@ const SignUp = () => {
                 ]}>
 
                 <Surface style={styles.surface}>
-                    <Text style={styles.title}>{i18n.t("auth:Sign Up")}</Text>
+                    <Text style={styles.title}>
+                        {i18n.t("auth:Sign Up")}
+                    </Text>
                     <Formik
                         initialValues={{
                             username: '',

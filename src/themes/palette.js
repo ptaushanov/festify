@@ -9,3 +9,10 @@ export const palette = {
     logo: colors.red["a700"],
     auth: colors.teal["400"]
 }
+
+export const surfaceMaterials = {
+    input: {
+        light: colors.grey[100],
+        dark: colors.grey[900]
+    }
+}

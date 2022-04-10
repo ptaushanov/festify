@@ -6,7 +6,7 @@ const StyledTextInput = ({ error = false, helperText = '', helperTextStyles = {}
     const { colors } = useTheme();
 
     const inputThemeStyle = {
-        backgroundColor: colors.surface,
+        backgroundColor: colors.surfaceInput,
         color: colors.text
     }
 

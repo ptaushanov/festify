@@ -9,7 +9,7 @@ import {
     DarkTheme as PaperDarkTheme
 } from '@react-navigation/native';
 
-import { palette } from "./palette"
+import { palette, surfaceMaterials } from "./palette"
 
 const fontConfig = {
     ios: {
@@ -58,7 +58,8 @@ export const DefaultTheme = {
     colors: {
         ...NavigationDefaultTheme.colors,
         ...PaperDefaultTheme.colors,
-        ...palette
+        ...palette,
+        surfaceInput: surfaceMaterials.input.light
     },
 };
 
@@ -70,6 +71,7 @@ export const DarkTheme = {
     colors: {
         ...PaperDarkTheme.colors,
         ...NavigationDarkTheme.colors,
-        ...palette
+        ...palette,
+        surfaceInput: surfaceMaterials.input.dark
     },
 };
