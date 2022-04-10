@@ -24,7 +24,7 @@ const ProfileCard = () => {
                 .then(uname => setUsername(uname))
         }
 
-        getProfilePictureURL("Screenshot 2022-03-28 212317.png")
+        getProfilePictureURL(auth.currentUser.uid)
             .then((url) => setImage(url))
     }, [])
 
