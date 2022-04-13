@@ -1,14 +1,13 @@
 import { StyleSheet, View, KeyboardAvoidingView, Keyboard, TouchableWithoutFeedback } from 'react-native'
 import React, { useState, useEffect } from 'react'
-import { auth } from "../../../firebase.v8"
 
 import StyledAvatar from './components/StyledAvatar'
 import StyledTextInput from '../../shared/TextInput/StyledTextInput'
-import { getProfilePictureURL, getUsername, updateUserInformation } from '../../services/profile-services'
 import globalStyles from '../../styles/global'
 import Button from '../../shared/Button/Button'
 import { useTheme, Text } from 'react-native-paper'
 import { useProfileInfo } from '../../contexts/ProfileContext'
+import ImagePicker from './components/ImagePicker'
 
 import i18n from 'i18n-js'
 
@@ -88,6 +87,7 @@ const ProfileEditScreen = () => {
                     >
                         {i18n.t("change-profile:Save")}
                     </Button>
+                    <ImagePicker />
                 </View>
             </KeyboardAvoidingView>
         </TouchableWithoutFeedback>
