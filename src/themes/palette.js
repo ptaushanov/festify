@@ -18,6 +18,6 @@ export const surfaceMaterials = {
     },
     surfacePicker: {
         light: colors.grey["50"],
-        dark: colors.grey["300"]
+        dark: colors.grey["850"]
     }
 }

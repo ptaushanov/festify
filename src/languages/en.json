@@ -40,5 +40,9 @@
     "change-profile:Email": "Email",
     "change-profile:Save": "Save",
     "change-profile:username-min": "The username needs to be at least {0} characters",
-    "change-profile:username-max": "The username cannot exceed {0} characters"
+    "change-profile:username-max": "The username cannot exceed {0} characters",
+    "change-profile:Choose from": "Choose from",
+    "change-profile:Camera": "Camera",
+    "change-profile:Gallery": "Gallery",
+    "change-profile:Saved": "Saved"
 }

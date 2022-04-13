@@ -13,6 +13,16 @@
     "updates": {
       "fallbackToCacheTimeout": 0
     },
+    "plugins": [
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "This app need permission to access your photos",
+          "cameraPermission": "This app need permission to access your camera",
+          "microphonePermission": "This app needs permission to access your microphone"
+        }
+      ]
+    ],
     "assetBundlePatterns": [
       "**/*"
     ],

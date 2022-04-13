@@ -1,21 +1,83 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, View } from 'react-native'
 import React, { useEffect } from 'react'
 import BottomSheet from 'reanimated-bottom-sheet';
-import { useTheme } from 'react-native-paper';
+import { useTheme, Text, TouchableRipple, Divider } from 'react-native-paper';
+import { MaterialIcons } from "@expo/vector-icons"
+import i18n from 'i18n-js';
+import * as ExpoImagePicker from "expo-image-picker"
 
-const ImagePicker = ({ isOpen, setOpen }) => {
+const ImagePicker = ({ isOpen, setOpen, setImage }) => {
     const { colors } = useTheme()
+    const sheetRef = React.useRef(null);
+
+    const handlePickFromCamera = async () => {
+        let image = await ExpoImagePicker.launchCameraAsync({
+            allowsEditing: true,
+            aspect: [1, 1],
+            quality: 1,
+        });
+
+        if (!image.cancelled) {
+            setImage(image.uri);
+        }
+
+        sheetRef.current.snapTo(2)
+    }
+
+    const handlePickFromGallery = async () => {
+        let image = await ExpoImagePicker.launchImageLibraryAsync({
+            mediaTypes: ExpoImagePicker.MediaTypeOptions.Images,
+            allowsEditing: true,
+            aspect: [1, 1],
+            quality: 1,
+        });
+
+        if (!image.cancelled) {
+            setImage(image.uri);
+        }
+
+        sheetRef.current.snapTo(2)
+    }
 
     const renderContent = () => (
         <View style={[
             styles.content,
             { backgroundColor: colors.surfacePicker }
         ]}>
-            <Text>Swipe down to close</Text>
+            <View style={[
+                styles.bar,
+                { backgroundColor: colors.onSurface }
+            ]} />
+            <View>
+                <Text style={styles.title}>
+                    {i18n.t("change-profile:Choose from")}
+                </Text>
+                <View style={styles.optionsContainer}>
+                    <TouchableRipple onPress={handlePickFromCamera} style={styles.rippleContainer}>
+                        <View style={styles.option}>
+                            <MaterialIcons
+                                name="camera-alt"
+                                size={26}
+                                color={colors.onSurface}
+                            />
+                            <Text style={styles.optionText}>{i18n.t("change-profile:Camera")}</Text>
+                        </View>
+                    </TouchableRipple>
+                    <Divider style={styles.divider} />
+                    <TouchableRipple onPress={handlePickFromGallery} style={styles.rippleContainer}>
+                        <View style={styles.option}>
+                            <MaterialIcons
+                                name="photo"
+                                size={26}
+                                color={colors.onSurface}
+                            />
+                            <Text style={styles.optionText}>{i18n.t("change-profile:Gallery")}</Text>
+                        </View>
+                    </TouchableRipple>
+                </View>
+            </View>
         </View>
     );
-
-    const sheetRef = React.useRef(null);
 
     useEffect(() => {
         isOpen && sheetRef.current.snapTo(0)
@@ -28,7 +90,7 @@ const ImagePicker = ({ isOpen, setOpen }) => {
             ref={sheetRef}
             snapPoints={[220, 0, 0]}
             initialSnap={2}
-            borderRadius={20}
+            borderRadius={30}
             renderContent={renderContent}
             onCloseEnd={handleImagePickerClose}
         />
@@ -41,5 +103,36 @@ const styles = StyleSheet.create({
     content: {
         padding: 10,
         height: 220,
+    },
+    bar: {
+        height: 6,
+        width: "20%",
+        marginHorizontal: "40%",
+        borderRadius: 4
+    },
+    title: {
+        fontSize: 18,
+        textAlign: "center",
+        marginTop: 15
+    },
+    optionsContainer: {
+        marginHorizontal: 25,
+        marginTop: 20
+    },
+    option: {
+        flexDirection: "row",
+        alignItems: "center"
+    },
+    optionText: {
+        fontSize: 18,
+        marginLeft: 10
+    },
+    rippleContainer: {
+        paddingHorizontal: 10,
+        paddingVertical: 8,
+        borderRadius: 10
+    },
+    divider: {
+        marginVertical: 5,
     }
 })

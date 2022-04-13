@@ -25,18 +25,22 @@ export function ProfileProvider({ children }) {
             .catch(error => console.error(error))
     }
 
-    const updateProfile = ({ newUsername, newAvatar }) => {
+    const updateProfile = async ({ newUsername, newAvatar }) => {
         const profileData = {
             username: newUsername ?? username,
             avatar: newAvatar ?? avatar
         }
 
-        updateUserInformation(auth.currentUser.uid, profileData)
-            .then(() => {
-                setUsername(profileData.username)
-                setAvatar(profileData.avatar)
-            })
-            .catch(error => console.error(error))
+        try {
+            await updateUserInformation(auth.currentUser.uid, profileData)
+            setUsername(profileData.username)
+            setAvatar(profileData.avatar)
+            return true
+        }
+        catch (error) {
+            console.error(error)
+            return false
+        }
     }
 
     useEffect(() => {

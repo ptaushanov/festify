@@ -5,16 +5,21 @@ import StyledAvatar from './components/StyledAvatar'
 import StyledTextInput from '../../shared/TextInput/StyledTextInput'
 import globalStyles from '../../styles/global'
 import Button from '../../shared/Button/Button'
-import { useTheme, Text } from 'react-native-paper'
+import { useTheme, Text, Snackbar } from 'react-native-paper'
 import { useProfileInfo } from '../../contexts/ProfileContext'
 import ImagePicker from './components/ImagePicker'
+import PillNotification from '../../shared/Notifications/PillNotification'
 
 import i18n from 'i18n-js'
 
 const ProfileEditScreen = () => {
     const [newUsername, setNewUsername] = useState("")
+    const [newAvatar, setNewAvatar] = useState(null)
+
     const [usernameError, setUsernameError] = useState(null)
     const [pickImageOpen, setPickImageOpen] = useState(false)
+    const [notificationVisible, setNotificationVisible] = useState(false)
+
     const { colors } = useTheme()
 
     useEffect(() => {
@@ -35,7 +40,10 @@ const ProfileEditScreen = () => {
         }
     }
 
-    const handleSaveChanges = () => { updateProfile({ newUsername }) }
+    const handleSaveChanges = async () => {
+        const updated = await updateProfile({ newUsername, newAvatar })
+        updated && setNotificationVisible(true)
+    }
     const handleOpenImagePicker = () => { setPickImageOpen(true) }
 
     return (
@@ -50,7 +58,7 @@ const ProfileEditScreen = () => {
                     <View style={styles.profilePictureContainer}>
                         <StyledAvatar
                             username={username}
-                            image={avatar}
+                            image={newAvatar || avatar}
                             size={70}
                             style={styles.avatar}
                         />
@@ -83,6 +91,13 @@ const ProfileEditScreen = () => {
                         />
                     </View>
                     <View style={styles.saveContainer}>
+                        <View>
+                            <PillNotification
+                                text={i18n.t("change-profile:Saved")}
+                                visible={notificationVisible}
+                                onAnimationEnd={() => setNotificationVisible(false)}
+                            />
+                        </View>
                         <Button
                             mode="contained"
                             disabled={Boolean(usernameError)}
@@ -95,6 +110,7 @@ const ProfileEditScreen = () => {
                 <ImagePicker
                     isOpen={pickImageOpen}
                     setOpen={setPickImageOpen}
+                    setImage={setNewAvatar}
                 />
             </>
         </TouchableWithoutFeedback>
@@ -128,6 +144,7 @@ const styles = StyleSheet.create({
     saveContainer: {
         flex: 1,
         justifyContent: 'flex-end',
-        marginTop: 100
-    }
+        marginTop: 100,
+    },
+
 })
