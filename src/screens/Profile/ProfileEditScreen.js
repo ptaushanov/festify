@@ -14,6 +14,7 @@ import i18n from 'i18n-js'
 const ProfileEditScreen = () => {
     const [newUsername, setNewUsername] = useState("")
     const [usernameError, setUsernameError] = useState(null)
+    const [pickImageOpen, setPickImageOpen] = useState(false)
     const { colors } = useTheme()
 
     useEffect(() => {
@@ -35,61 +36,67 @@ const ProfileEditScreen = () => {
     }
 
     const handleSaveChanges = () => { updateProfile({ newUsername }) }
+    const handleOpenImagePicker = () => { setPickImageOpen(true) }
 
     return (
         <TouchableWithoutFeedback
             onPress={Keyboard.dismiss}
         >
-            <KeyboardAvoidingView
-                style={globalStyles.slimContainer}
-                behavior='height'
-            >
-                <View style={styles.profilePictureContainer}>
-                    <StyledAvatar
-                        username={username}
-                        image={avatar}
-                        size={70}
-                        style={styles.avatar}
-                    />
-                    <Button
-                        mode="contained"
-                        size={3}
-                        onPress={() => { }}
-                    >{i18n.t("change-profile:Change picture")}</Button>
-                </View>
-                <View style={styles.inputContainer}>
-                    <Text style={styles.label}>
-                        {i18n.t("change-profile:Username")}
-                    </Text>
-                    <StyledTextInput
-                        style={[styles.input, { borderColor: colors.primary }]}
-                        value={newUsername}
-                        onChangeText={handleUsernameChanged}
-                        onBlur={handleUsernameValidation}
-                        error={Boolean(usernameError)}
-                        helperText={usernameError}
-                    />
+            <>
+                <KeyboardAvoidingView
+                    style={globalStyles.slimContainer}
+                    behavior='height'
+                >
+                    <View style={styles.profilePictureContainer}>
+                        <StyledAvatar
+                            username={username}
+                            image={avatar}
+                            size={70}
+                            style={styles.avatar}
+                        />
+                        <Button
+                            mode="contained"
+                            size={3}
+                            onPress={handleOpenImagePicker}
+                        >{i18n.t("change-profile:Change picture")}</Button>
+                    </View>
+                    <View style={styles.inputContainer}>
+                        <Text style={styles.label}>
+                            {i18n.t("change-profile:Username")}
+                        </Text>
+                        <StyledTextInput
+                            style={[styles.input, { borderColor: colors.primary }]}
+                            value={newUsername}
+                            onChangeText={handleUsernameChanged}
+                            onBlur={handleUsernameValidation}
+                            error={Boolean(usernameError)}
+                            helperText={usernameError}
+                        />
 
-                    <Text style={styles.label}>
-                        {i18n.t("change-profile:Email")}
-                    </Text>
-                    <StyledTextInput
-                        disabled
-                        style={[styles.input, { borderColor: colors.primary }]}
-                        value={email}
-                    />
-                </View>
-                <View style={styles.saveContainer}>
-                    <Button
-                        mode="contained"
-                        disabled={Boolean(usernameError)}
-                        onPress={handleSaveChanges}
-                    >
-                        {i18n.t("change-profile:Save")}
-                    </Button>
-                    <ImagePicker />
-                </View>
-            </KeyboardAvoidingView>
+                        <Text style={styles.label}>
+                            {i18n.t("change-profile:Email")}
+                        </Text>
+                        <StyledTextInput
+                            disabled
+                            style={[styles.input, { borderColor: colors.primary }]}
+                            value={email}
+                        />
+                    </View>
+                    <View style={styles.saveContainer}>
+                        <Button
+                            mode="contained"
+                            disabled={Boolean(usernameError)}
+                            onPress={handleSaveChanges}
+                        >
+                            {i18n.t("change-profile:Save")}
+                        </Button>
+                    </View>
+                </KeyboardAvoidingView>
+                <ImagePicker
+                    isOpen={pickImageOpen}
+                    setOpen={setPickImageOpen}
+                />
+            </>
         </TouchableWithoutFeedback>
     )
 }

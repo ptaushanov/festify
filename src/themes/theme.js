@@ -60,6 +60,7 @@ export const DefaultTheme = {
         ...PaperDefaultTheme.colors,
         ...palette,
         surfaceInput: surfaceMaterials.input.light,
+        surfacePicker: surfaceMaterials.surfacePicker.light
     },
 };
 
@@ -72,6 +73,7 @@ export const DarkTheme = {
         ...PaperDarkTheme.colors,
         ...NavigationDarkTheme.colors,
         ...palette,
-        surfaceInput: surfaceMaterials.input.dark
+        surfaceInput: surfaceMaterials.input.dark,
+        surfacePicker: surfaceMaterials.surfacePicker.dark
     },
 };

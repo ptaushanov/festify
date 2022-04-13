@@ -1,46 +1,45 @@
-import { StyleSheet, Text, View, Button } from 'react-native'
-import React, { useRef } from 'react'
+import { StyleSheet, Text, View } from 'react-native'
+import React, { useEffect } from 'react'
 import BottomSheet from 'reanimated-bottom-sheet';
+import { useTheme } from 'react-native-paper';
 
-const ImagePicker = () => {
+const ImagePicker = ({ isOpen, setOpen }) => {
+    const { colors } = useTheme()
+
     const renderContent = () => (
-        <View style={styles.bottomUp}>
+        <View style={[
+            styles.content,
+            { backgroundColor: colors.surfacePicker }
+        ]}>
             <Text>Swipe down to close</Text>
         </View>
-    )
+    );
 
-    const sheetRef = useRef(null)
+    const sheetRef = React.useRef(null);
+
+    useEffect(() => {
+        isOpen && sheetRef.current.snapTo(0)
+    }, [isOpen])
+
+    const handleImagePickerClose = () => setOpen(false)
 
     return (
-        <View>
-            <View style={styles.something}>
-                <Button
-                    title="Open Bottom Sheet"
-                    onPress={() => sheetRef.current.snapTo(0)}
-                />
-            </View>
-            <BottomSheet
-                ref={sheetRef}
-                snapPoints={[450, 300, 0]}
-                borderRadius={10}
-                renderContent={renderContent}
-            />
-        </View>
-    )
+        <BottomSheet
+            ref={sheetRef}
+            snapPoints={[220, 0, 0]}
+            initialSnap={2}
+            borderRadius={20}
+            renderContent={renderContent}
+            onCloseEnd={handleImagePickerClose}
+        />
+    );
 }
 
 export default ImagePicker
 
 const styles = StyleSheet.create({
-    bottomUp: {
-        backgroundColor: 'white',
-        padding: 16,
-        height: 450,
-    },
-    something: {
-        flex: 1,
-        backgroundColor: 'papayawhip',
-        alignItems: 'center',
-        justifyContent: 'center',
+    content: {
+        padding: 10,
+        height: 220,
     }
 })
