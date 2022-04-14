@@ -69,7 +69,8 @@ export function ProfileProvider({ children }) {
         username,
         email,
         avatar,
-        updateProfile
+        updateProfile,
+        saveAvatar
     }
 
     return (

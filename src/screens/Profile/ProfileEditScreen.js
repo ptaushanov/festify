@@ -10,7 +10,7 @@ import { useProfileInfo } from '../../contexts/ProfileContext'
 import ImagePicker from './components/ImagePicker'
 import PillNotification from '../../shared/Notifications/PillNotification'
 
-import { storeProfilePicture } from '../../services/profile-services'
+import { checkDuplicateUsername } from '../../services/authenticate'
 
 import i18n from 'i18n-js'
 
@@ -28,8 +28,18 @@ const ProfileEditScreen = () => {
         setNewUsername(username)
     }, [username])
 
-    const { username, email, avatar, updateProfile } = useProfileInfo()
+    const { username, email, avatar, updateProfile, saveAvatar } = useProfileInfo()
     const handleUsernameChanged = (uname) => { setNewUsername(uname) }
+
+    const verifyUsernameNotDuplicate = async (newUsername) => {
+        try {
+            const isDuplicate = await checkDuplicateUsername(newUsername)
+            const duplicateErrorMessage = i18n.t("auth:username-exists")
+            setUsernameError(isDuplicate ? duplicateErrorMessage : null)
+        } catch (error) {
+            console.error(error)
+        }
+    }
 
     const handleUsernameValidation = () => {
         if (newUsername.length < 4) {
@@ -38,7 +48,11 @@ const ProfileEditScreen = () => {
         else if (newUsername.length > 512) {
             setUsernameError(i18n.t("change-profile:username-max").replace("{0}", 512))
         } else {
-            setUsernameError(null)
+            if (username === newUsername) {
+                setUsernameError(null)
+                return
+            }
+            verifyUsernameNotDuplicate(newUsername)
         }
     }
 

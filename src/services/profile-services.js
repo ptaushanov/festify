@@ -1,5 +1,4 @@
 import { storage, firestore } from "../../firebase.v8";
-import { Platform, useColorScheme } from "react-native";
 
 export const getProfilePictureURL = (userId) => {
     return firestore
@@ -19,9 +18,9 @@ export const storeProfilePicture = async (userId, uri) => {
         xhr.onload = function () {
             resolve(xhr.response);
         };
-        xhr.onerror = function (e) {
-            console.log(e);
-            reject(new TypeError('Network request failed'));
+        xhr.onerror = function (error) {
+            console.log(error);
+            reject(new Error('Failed to read data for profile image'));
         };
         xhr.responseType = 'blob';
         xhr.open('GET', uri, true);
