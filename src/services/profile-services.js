@@ -11,7 +11,7 @@ export const getProfilePictureURL = (userId) => {
         })
 }
 
-export const storeProfilePicture = async (uri) => {
+export const storeProfilePicture = async (userId, uri) => {
     const filename = uri.substring(uri.lastIndexOf('/') + 1)
 
     const blob = await new Promise((resolve, reject) => {
@@ -29,7 +29,7 @@ export const storeProfilePicture = async (uri) => {
     });
 
     return storage
-        .ref(filename)
+        .ref(`images/users/${userId}/${filename}`)
         .put(blob)
         .then(snapshot => snapshot.ref.getDownloadURL())
 }

@@ -1,6 +1,11 @@
 import { createContext, useState, useEffect, useContext } from "react"
 import { auth } from "../../firebase.v8"
-import { getUsername, getProfilePictureURL, updateUserInformation } from "../services/profile-services"
+import {
+    getUsername,
+    getProfilePictureURL,
+    updateUserInformation,
+    storeProfilePicture
+} from "../services/profile-services"
 
 const ProfileContext = createContext()
 
@@ -40,6 +45,15 @@ export function ProfileProvider({ children }) {
         catch (error) {
             console.error(error)
             return false
+        }
+    }
+
+    const saveAvatar = async (newAvatar) => {
+        try {
+            return await storeProfilePicture(newAvatar, auth.currentUser.uid)
+        } catch (error) {
+            console.error(error)
+            return null
         }
     }
 

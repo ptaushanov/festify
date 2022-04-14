@@ -46,11 +46,7 @@ const ProfileEditScreen = () => {
         let newAvatarUploadedURL = null;
 
         if (newAvatar) {
-            try {
-                newAvatarUploadedURL = await storeProfilePicture(newAvatar)
-            } catch (error) {
-                console.error(error)
-            }
+            newAvatarUploadedURL = await saveAvatar(newAvatar)
         }
 
         const updated = await updateProfile({ newUsername, newAvatar: newAvatarUploadedURL })
