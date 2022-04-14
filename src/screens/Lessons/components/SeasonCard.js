@@ -14,12 +14,12 @@ const SeasonCard = ({ title = "", subtitle = "", image, onCardPress, locked = tr
                 <TouchableRipple
                     onPress={onCardPress}
                     rippleColor={
-                        locked ? "transparent" : "rgba(255, 255, 255, .32)"
+                        locked ? "transparent" : "rgba(200, 255, 255, .3)"
                     }
                 >
                     <Card.Content style={[
                         styles.cardContent,
-                        { backgroundColor: locked ? 'rgba(0,0,0, 0.6)' : 'rgba(0,0,0, 0.32)' }
+                        { backgroundColor: locked ? 'rgba(0,0,0, 0.65)' : 'rgba(0,0,0, 0.35)' }
                     ]}>
                         <Title style={styles.text}>
                             {title}
@@ -51,7 +51,7 @@ const styles = StyleSheet.create({
         height: "auto",
     },
     cardContent: {
-        paddingVertical: 12,
+        paddingVertical: 18,
         borderRadius: 10,
     },
     cardImage: {

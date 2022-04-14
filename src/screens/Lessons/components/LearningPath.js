@@ -22,17 +22,17 @@ export default LearningPath
 const styles = StyleSheet.create({
     container: {
         marginTop: 10,
-        marginBottom: 16
+        marginBottom: 20
     },
     text: {
-        fontSize: 32,
+        fontSize: 34,
         fontWeight: "bold",
         paddingLeft: 5
     },
     smallerText: {
         fontWeight: "bold",
-        fontSize: 30,
+        fontSize: 32,
         paddingLeft: 5,
-        lineHeight: 32
+        lineHeight: 34
     }
 })

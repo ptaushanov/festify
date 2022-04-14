@@ -1,4 +1,4 @@
-import { StyleSheet, View } from 'react-native'
+import { StyleSheet, View, ScrollView } from 'react-native'
 import React from 'react'
 import globalStyles from '../../styles/global'
 
@@ -17,7 +17,7 @@ const LessonsScreen = () => {
     const handleCardPress = (identifier) => () => { }
 
     return (
-        <View style={globalStyles.slimContainer}>
+        <ScrollView style={globalStyles.slimContainer}>
             <LearningPath />
             <View style={styles.cardContainer}>
                 <SeasonCard
@@ -52,8 +52,7 @@ const LessonsScreen = () => {
                     onCardPress={handleCardPress(3)}
                 />
             </View>
-
-        </View>
+        </ScrollView >
     )
 }
 
@@ -61,6 +60,6 @@ export default LessonsScreen
 
 const styles = StyleSheet.create({
     cardContainer: {
-        marginVertical: 10
+        marginVertical: 14
     }
 })
