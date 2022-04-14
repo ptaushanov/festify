@@ -44,5 +44,13 @@
     "change-profile:Choose from": "Choose from",
     "change-profile:Camera": "Camera",
     "change-profile:Gallery": "Gallery",
-    "change-profile:Saved": "Saved"
+    "change-profile:Saved": "Saved",
+
+    "lessons:Spring holidays": "Spring holidays",
+    "lessons:Summer holidays": "Summer holidays",
+    "lessons:Autumn holidays": "Autumn holidays",
+    "lessons:Winter holidays": "Winter holidays",
+    "lessons:holidays": "holidays",
+    "lessons:Learning": "Learning",
+    "lessons:Path": "Path"
 }

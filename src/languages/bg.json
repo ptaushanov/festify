@@ -45,5 +45,13 @@
     "change-profile:Choose from": "Избери от",
     "change-profile:Camera": "Камера",
     "change-profile:Gallery": "Галерия",
-    "change-profile:Saved": "Запазено"
+    "change-profile:Saved": "Запазено",
+
+    "lessons:Spring holidays": "Пролетни празници",
+    "lessons:Summer holidays": "Летни празници",
+    "lessons:Autumn holidays": "Есенни празници",
+    "lessons:Winter holidays": "Зимни празници",
+    "lessons:holidays": "празника",
+    "lessons:Learning": "Учебен",
+    "lessons:Path": "План"
 }
