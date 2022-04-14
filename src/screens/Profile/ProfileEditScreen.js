@@ -5,10 +5,12 @@ import StyledAvatar from './components/StyledAvatar'
 import StyledTextInput from '../../shared/TextInput/StyledTextInput'
 import globalStyles from '../../styles/global'
 import Button from '../../shared/Button/Button'
-import { useTheme, Text, Snackbar } from 'react-native-paper'
+import { useTheme, Text } from 'react-native-paper'
 import { useProfileInfo } from '../../contexts/ProfileContext'
 import ImagePicker from './components/ImagePicker'
 import PillNotification from '../../shared/Notifications/PillNotification'
+
+import { storeProfilePicture } from '../../services/profile-services'
 
 import i18n from 'i18n-js'
 
@@ -41,10 +43,21 @@ const ProfileEditScreen = () => {
     }
 
     const handleSaveChanges = async () => {
-        const updated = await updateProfile({ newUsername, newAvatar })
+        let newAvatarUploadedURL = null;
+
+        if (newAvatar) {
+            try {
+                newAvatarUploadedURL = await storeProfilePicture(newAvatar)
+            } catch (error) {
+                console.error(error)
+            }
+        }
+
+        const updated = await updateProfile({ newUsername, newAvatar: newAvatarUploadedURL })
         updated && setNotificationVisible(true)
     }
-    const handleOpenImagePicker = () => { setPickImageOpen(true) }
+
+    const handleOpenImagePicker = () => setPickImageOpen(true)
 
     return (
         <TouchableWithoutFeedback
