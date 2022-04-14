@@ -10,7 +10,7 @@ export const getProfilePictureURL = (userId) => {
         })
 }
 
-export const storeProfilePicture = async (userId, uri) => {
+export const storeProfilePicture = async (uri, userId) => {
     const filename = uri.substring(uri.lastIndexOf('/') + 1)
 
     const blob = await new Promise((resolve, reject) => {
@@ -20,7 +20,7 @@ export const storeProfilePicture = async (userId, uri) => {
         };
         xhr.onerror = function (error) {
             console.log(error);
-            reject(new Error('Failed to read data for profile image'));
+            reject(new TypeError('Network request failed'));
         };
         xhr.responseType = 'blob';
         xhr.open('GET', uri, true);
@@ -30,7 +30,10 @@ export const storeProfilePicture = async (userId, uri) => {
     return storage
         .ref(`images/users/${userId}/${filename}`)
         .put(blob)
-        .then(snapshot => snapshot.ref.getDownloadURL())
+        .then(snapshot => {
+            blob.close()
+            return snapshot.ref.getDownloadURL()
+        })
 }
 
 export const getUsername = (userId) => {
