@@ -3,7 +3,6 @@ import { auth } from "../../firebase.v8"
 import {
     getUnlockedSeasons,
     updateSeasonsDataBySeasonNames,
-    listenToSeasonUpdates
 } from "../services/lessons-services"
 
 const LessonsContext = createContext()
@@ -18,7 +17,7 @@ export function LessonsProvider({ children }) {
 
     const [seasonsData, setSeasonsData] = useState({})
     const [unlockedSeasons, setUnlockedSeasons] = useState([])
-    const [unsubscribeLiveUpdates, setUnsubscribeLiveUpdates] = useState([])
+    const [stopUpdates, setStopUpdates] = useState(() => () => { })
 
     const getSeasonsData = () => {
         getUnlockedSeasons(auth.currentUser.uid)
@@ -29,25 +28,26 @@ export function LessonsProvider({ children }) {
         const unsubscribeSeasonsData =
             updateSeasonsDataBySeasonNames(seasons, setSeasonsData, console.error)
 
-        setUnsubscribeLiveUpdates([() => {
-            alert("jj")
+        setStopUpdates((prevState) => () => {
+            alert("hello")
             unsubscribeSeasonsData()
-        }])
+        })
     }
 
-    useEffect(() => {
-        if (auth.currentUser) {
-            getSeasonsData();
-        }
-        return unsubscribeLiveUpdates[0]
-    }, [auth.currentUser])
+    const startUpdates = () => { getSeasonsData() }
+
+    // useEffect(() => {
+    //     if (auth.currentUser) {
+    //         getSeasonsData();
+    //     }
+    // }, [auth.currentUser])
 
     const lessonsData = {
         seasons,
         unlockedSeasons,
         seasonsData,
-        getSeasonsData,
-        unsubscribeLiveUpdates
+        stopUpdates,
+        startUpdates
     }
 
     return (

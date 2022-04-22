@@ -13,16 +13,27 @@ import winterImage from "../../assets/images/winter.jpg"
 import i18n from 'i18n-js'
 import { useLessonsInfo } from '../../contexts/LessonsContext'
 
-import { Button } from 'react-native-paper'
+import { useFocusEffect } from '@react-navigation/native'
 
 const LessonsScreen = () => {
-
     const {
         unlockedSeasons,
         seasonsData,
-        unsubscribeLiveUpdates
+        startUpdates,
+        stopUpdates
     } = useLessonsInfo()
+
     const handleCardPress = (identifier) => () => { }
+
+    useFocusEffect(
+        React.useCallback(() => {
+            startUpdates()
+            return () => {
+                alert("dd")
+                stopUpdates()
+            }
+        }, [])
+    );
 
     return (
         <ScrollView style={globalStyles.slimContainer}>
@@ -62,9 +73,6 @@ const LessonsScreen = () => {
                     onCardPress={handleCardPress(3)}
                     locked={!unlockedSeasons.includes("winter")}
                 />
-            </View>
-            <View>
-                <Button onPress={unsubscribeLiveUpdates[0]}>kkkkk</Button>
             </View>
         </ScrollView >
     )
