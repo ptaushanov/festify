@@ -19,5 +19,9 @@ export const surfaceMaterials = {
     surfacePicker: {
         light: colors.grey["50"],
         dark: colors.grey["850"]
+    },
+    surfaceCard: {
+        light: colors.grey["50"],
+        dark: colors.grey["850"]
     }
 }
