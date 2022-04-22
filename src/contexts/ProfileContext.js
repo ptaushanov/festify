@@ -61,8 +61,8 @@ export function ProfileProvider({ children }) {
         if (auth.currentUser) {
             handleGetUsername()
             setEmail(auth.currentUser?.email)
+            handleGetAvatar()
         }
-        handleGetAvatar()
     }, [auth.currentUser])
 
     const profileData = {

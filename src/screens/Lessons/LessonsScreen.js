@@ -11,9 +11,17 @@ import autumnImage from "../../assets/images/autumn.jpg"
 import winterImage from "../../assets/images/winter.jpg"
 
 import i18n from 'i18n-js'
+import { useLessonsInfo } from '../../contexts/LessonsContext'
+
+import { Button } from 'react-native-paper'
 
 const LessonsScreen = () => {
 
+    const {
+        unlockedSeasons,
+        seasonsData,
+        unsubscribeLiveUpdates
+    } = useLessonsInfo()
     const handleCardPress = (identifier) => () => { }
 
     return (
@@ -22,35 +30,41 @@ const LessonsScreen = () => {
             <View style={styles.cardContainer}>
                 <SeasonCard
                     title={i18n.t("lessons:Spring holidays")}
-                    subtitle={"12 " + i18n.t("lessons:holidays")}
+                    subtitle={(seasonsData.spring || 0) + " " + i18n.t("lessons:holidays")}
                     image={springImage}
                     onCardPress={handleCardPress(0)}
-                    locked={false}
+                    locked={!unlockedSeasons.includes("spring")}
                 />
             </View>
             <View style={styles.cardContainer}>
                 <SeasonCard
                     title={i18n.t("lessons:Summer holidays")}
-                    subtitle={"8 " + i18n.t("lessons:holidays")}
+                    subtitle={(seasonsData.summer || 0) + " " + i18n.t("lessons:holidays")}
                     image={summerImage}
                     onCardPress={handleCardPress(1)}
+                    locked={!unlockedSeasons.includes("summer")}
                 />
             </View>
             <View style={styles.cardContainer}>
                 <SeasonCard
                     title={i18n.t("lessons:Autumn holidays")}
-                    subtitle={"18 " + i18n.t("lessons:holidays")}
+                    subtitle={(seasonsData.autumn || 0) + " " + i18n.t("lessons:holidays")}
                     image={autumnImage}
                     onCardPress={handleCardPress(2)}
+                    locked={!unlockedSeasons.includes("autumn")}
                 />
             </View>
             <View style={styles.cardContainer}>
                 <SeasonCard
                     title={i18n.t("lessons:Winter holidays")}
-                    subtitle={"11 " + i18n.t("lessons:holidays")}
+                    subtitle={(seasonsData.winter || 0) + " " + i18n.t("lessons:holidays")}
                     image={winterImage}
                     onCardPress={handleCardPress(3)}
+                    locked={!unlockedSeasons.includes("winter")}
                 />
+            </View>
+            <View>
+                <Button onPress={unsubscribeLiveUpdates[0]}>kkkkk</Button>
             </View>
         </ScrollView >
     )
