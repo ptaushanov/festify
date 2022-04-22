@@ -8,6 +8,9 @@ import { useFonts } from 'expo-font';
 
 import AppLoading from 'expo-app-loading';
 
+import { LogBox } from 'react-native';
+LogBox.ignoreLogs(['Setting a timer']);
+
 // Setting the key-value pairs for the different languages we want to support
 i18n.translations = languages
 // Set the locale of the app.
