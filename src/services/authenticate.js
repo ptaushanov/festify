@@ -9,9 +9,8 @@ export const signUpUser = (newUser) => {
             return firestore
                 .collection("users")
                 .doc(uid)
-                .set({ username })
+                .set({ username, unlocked_seasons: ["spring"] })
         })
-
 }
 
 export const logInUser = (newUser) => {

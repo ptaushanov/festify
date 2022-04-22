@@ -1,10 +1,15 @@
 import { StyleSheet, View } from 'react-native'
-import React from 'react'
+import React, { useEffect } from 'react'
 import globalStyles from '../../styles/global'
 import { Text, Button } from 'react-native-paper'
 import { firestore } from '../../../firebase.v8'
 
 const HomeScreen = () => {
+
+    useEffect(() => {
+
+    }, [])
+
     const handlePress = () => {
         firestore.collection("users").add({
             first: "Alan",
