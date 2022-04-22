@@ -13,27 +13,13 @@ import winterImage from "../../assets/images/winter.jpg"
 import i18n from 'i18n-js'
 import { useLessonsInfo } from '../../contexts/LessonsContext'
 
-import { useFocusEffect } from '@react-navigation/native'
-
 const LessonsScreen = () => {
     const {
         unlockedSeasons,
         seasonsData,
-        startUpdates,
-        stopUpdates
     } = useLessonsInfo()
 
     const handleCardPress = (identifier) => () => { }
-
-    useFocusEffect(
-        React.useCallback(() => {
-            startUpdates()
-            return () => {
-                alert("dd")
-                stopUpdates()
-            }
-        }, [])
-    );
 
     return (
         <ScrollView style={globalStyles.slimContainer}>

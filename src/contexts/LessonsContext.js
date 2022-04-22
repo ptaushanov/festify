@@ -1,8 +1,10 @@
-import { createContext, useState, useEffect, useContext } from "react"
+import { createContext, useState, useContext, useCallback } from "react"
+import { useFocusEffect } from "@react-navigation/native"
+
 import { auth } from "../../firebase.v8"
 import {
-    getUnlockedSeasons,
-    updateSeasonsDataBySeasonNames,
+    updateUnlockedSeasons,
+    updateSeasonsData,
 } from "../services/lessons-services"
 
 const LessonsContext = createContext()
@@ -12,42 +14,39 @@ export function useLessonsInfo() {
 }
 
 export function LessonsProvider({ children }) {
-    // Enum seasons
     const seasons = ["spring", "summer", "autumn", "winter"]
 
     const [seasonsData, setSeasonsData] = useState({})
     const [unlockedSeasons, setUnlockedSeasons] = useState([])
-    const [stopUpdates, setStopUpdates] = useState(() => () => { })
 
-    const getSeasonsData = () => {
-        getUnlockedSeasons(auth.currentUser.uid)
-            .then(_unlockedSeasons => {
-                setUnlockedSeasons(_unlockedSeasons)
-            })
+    const listenToSeasonsDataChanges = () => {
+        // Unsubscribe function
+        return () => {
+            // updateUnlockedSeasons(
+            //     auth.currentUser.uid,
+            //     setUnlockedSeasons,
+            //     console.error
+            // )
 
-        const unsubscribeSeasonsData =
-            updateSeasonsDataBySeasonNames(seasons, setSeasonsData, console.error)
-
-        setStopUpdates((prevState) => () => {
-            alert("hello")
-            unsubscribeSeasonsData()
-        })
+            updateSeasonsData(seasons, setSeasonsData, console.error)
+        }
     }
 
-    const startUpdates = () => { getSeasonsData() }
-
-    // useEffect(() => {
-    //     if (auth.currentUser) {
-    //         getSeasonsData();
-    //     }
-    // }, [auth.currentUser])
+    useFocusEffect(
+        useCallback(() => {
+            if (auth.currentUser) {
+                const unsubscribe = listenToSeasonsDataChanges()
+                return () => {
+                    unsubscribe()
+                }
+            }
+        }, [auth.currentUser])
+    );
 
     const lessonsData = {
         seasons,
         unlockedSeasons,
         seasonsData,
-        stopUpdates,
-        startUpdates
     }
 
     return (
