@@ -21,7 +21,11 @@ export function LessonsProvider({ children }) {
 
     const getSeasonsData = () => {
         const unsubscribeUnlockedSeasons =
-            updateUnlockedSeasons(auth.currentUser.uid, setUnlockedSeasons, console.error)
+            updateUnlockedSeasons(
+                auth.currentUser.uid,
+                setUnlockedSeasons,
+                console.error
+            )
 
         const unsubscribeSeasonsData =
             updateSeasonsDataBySeasonNames(seasons, setSeasonsData, console.error)

@@ -1,4 +1,5 @@
 import { StyleSheet, View, ScrollView } from 'react-native'
+import { useNavigation } from '@react-navigation/native'
 import React from 'react'
 import globalStyles from '../../styles/global'
 
@@ -14,12 +15,19 @@ import i18n from 'i18n-js'
 import { useLessonsInfo } from '../../contexts/LessonsContext'
 
 const LessonsScreen = () => {
+    const navigation = useNavigation()
     const {
         unlockedSeasons,
         seasonsData,
     } = useLessonsInfo()
 
-    const handleCardPress = (identifier) => () => { }
+    const handleCardPress = (seasonName) => () => {
+        const timelineName =
+            seasonName.charAt(0).toUpperCase()
+            + seasonName.substring(1)
+            + " Timeline"
+        navigation.navigate(timelineName)
+    }
 
     return (
         <ScrollView style={globalStyles.slimContainer}>
@@ -29,7 +37,7 @@ const LessonsScreen = () => {
                     title={i18n.t("lessons:Spring holidays")}
                     subtitle={(seasonsData.spring || 0) + " " + i18n.t("lessons:holidays")}
                     image={springImage}
-                    onCardPress={handleCardPress(0)}
+                    onCardPress={handleCardPress("spring")}
                     locked={!unlockedSeasons.includes("spring")}
                 />
             </View>
@@ -38,7 +46,7 @@ const LessonsScreen = () => {
                     title={i18n.t("lessons:Summer holidays")}
                     subtitle={(seasonsData.summer || 0) + " " + i18n.t("lessons:holidays")}
                     image={summerImage}
-                    onCardPress={handleCardPress(1)}
+                    onCardPress={handleCardPress("summer")}
                     locked={!unlockedSeasons.includes("summer")}
                 />
             </View>
@@ -47,7 +55,7 @@ const LessonsScreen = () => {
                     title={i18n.t("lessons:Autumn holidays")}
                     subtitle={(seasonsData.autumn || 0) + " " + i18n.t("lessons:holidays")}
                     image={autumnImage}
-                    onCardPress={handleCardPress(2)}
+                    onCardPress={handleCardPress("autumn")}
                     locked={!unlockedSeasons.includes("autumn")}
                 />
             </View>
@@ -56,7 +64,7 @@ const LessonsScreen = () => {
                     title={i18n.t("lessons:Winter holidays")}
                     subtitle={(seasonsData.winter || 0) + " " + i18n.t("lessons:holidays")}
                     image={winterImage}
-                    onCardPress={handleCardPress(3)}
+                    onCardPress={handleCardPress("winter")}
                     locked={!unlockedSeasons.includes("winter")}
                 />
             </View>
