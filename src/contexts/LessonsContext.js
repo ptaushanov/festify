@@ -4,7 +4,7 @@ import { useFocusEffect } from "@react-navigation/native"
 import { auth } from "../../firebase.v8"
 import {
     updateUnlockedSeasons,
-    updateSeasonsData,
+    updateSeasonsDataBySeasonNames,
 } from "../services/lessons-services"
 
 const LessonsContext = createContext()
@@ -19,23 +19,23 @@ export function LessonsProvider({ children }) {
     const [seasonsData, setSeasonsData] = useState({})
     const [unlockedSeasons, setUnlockedSeasons] = useState([])
 
-    const listenToSeasonsDataChanges = () => {
-        // Unsubscribe function
-        return () => {
-            // updateUnlockedSeasons(
-            //     auth.currentUser.uid,
-            //     setUnlockedSeasons,
-            //     console.error
-            // )
+    const getSeasonsData = () => {
+        const unsubscribeUnlockedSeasons =
+            updateUnlockedSeasons(auth.currentUser.uid, setUnlockedSeasons, console.error)
 
-            updateSeasonsData(seasons, setSeasonsData, console.error)
+        const unsubscribeSeasonsData =
+            updateSeasonsDataBySeasonNames(seasons, setSeasonsData, console.error)
+
+        return () => {
+            unsubscribeUnlockedSeasons()
+            unsubscribeSeasonsData()
         }
     }
 
     useFocusEffect(
         useCallback(() => {
             if (auth.currentUser) {
-                const unsubscribe = listenToSeasonsDataChanges()
+                const unsubscribe = getSeasonsData()
                 return () => {
                     unsubscribe()
                 }

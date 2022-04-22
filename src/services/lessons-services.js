@@ -1,6 +1,6 @@
 import { firestore } from "../../firebase.v8";
 
-export const updateSeasonsData = (seasons, snapshotHandler, errorHandler) => {
+export const updateSeasonsDataBySeasonNames = (seasons, snapshotHandler, errorHandler) => {
     return firestore
         .collection("seasons")
         .where("name", "in", seasons)
@@ -27,7 +27,6 @@ export const updateUnlockedSeasons = (userId, snapshotHandler, errorHandler) => 
         .doc(userId)
         .onSnapshot(doc => {
             snapshotHandler(doc.data()?.unlocked_seasons)
-
         }, (error) => {
             errorHandler(error)
         })
