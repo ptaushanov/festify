@@ -8,8 +8,8 @@ import TimelineStartPoint from './components/TimelineStartPoint'
 import placeholder from "../../assets/images/placeholder.jpg"
 
 const LessonsTimeline = ({ route }) => {
-    const { forSeason } = route.params
-    const [expandedIndex, setExpandedIndex] = useState(2)
+    const { forSeason, title } = route.params
+    const [expandedIndex, setExpandedIndex] = useState(-1)
 
     const cards = [
         {
@@ -40,7 +40,7 @@ const LessonsTimeline = ({ route }) => {
             title: "Holiday 4",
             date: "6th May",
             image: placeholder,
-            locked: false,
+            locked: true,
             expanded: expandedIndex,
             expandIndex: 3,
             onExpand: setExpandedIndex
@@ -48,7 +48,7 @@ const LessonsTimeline = ({ route }) => {
             title: "Holiday 5",
             date: "6th May",
             image: placeholder,
-            locked: false,
+            locked: true,
             expanded: expandedIndex,
             expandIndex: 4,
             onExpand: setExpandedIndex
@@ -56,7 +56,7 @@ const LessonsTimeline = ({ route }) => {
             title: "Holiday 6",
             date: "6th May",
             image: placeholder,
-            locked: false,
+            locked: true,
             expanded: expandedIndex,
             expandIndex: 5,
             onExpand: setExpandedIndex
@@ -64,7 +64,7 @@ const LessonsTimeline = ({ route }) => {
             title: "Holiday 7",
             date: "6th May",
             image: placeholder,
-            locked: false,
+            locked: true,
             expanded: expandedIndex,
             expandIndex: 6,
             onExpand: setExpandedIndex
@@ -72,7 +72,7 @@ const LessonsTimeline = ({ route }) => {
     ]
 
     return (
-        <View style={styles.timelineContainer}>
+        <View style={styles.timelineWrapper}>
             <FlatList
                 style={styles.timeline}
                 data={cards}
@@ -80,10 +80,11 @@ const LessonsTimeline = ({ route }) => {
                 keyExtractor={card => card.expandIndex}
                 ListHeaderComponent={() => (
                     <View>
-                        <TimelineTitle title={"lessons:Spring holidays"} />
+                        <TimelineTitle title={`lessons:${title}`} />
                         <TimelineStartPoint />
                     </View>
                 )}
+                contentContainerStyle={styles.timelineContainer}
                 showsVerticalScrollIndicator={false}
                 showsHorizontalScrollIndicator={false}
             />
@@ -94,10 +95,12 @@ const LessonsTimeline = ({ route }) => {
 export default LessonsTimeline
 
 const styles = StyleSheet.create({
-    timelineContainer: {
+    timelineWrapper: {
         flex: 1,
         paddingHorizontal: 20,
-        paddingBottom: 10
+    },
+    timelineContainer: {
+        paddingBottom: 20
     },
     timeline: {
         flex: 1,

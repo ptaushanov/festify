@@ -1,7 +1,7 @@
-import { StyleSheet, View, TouchableWithoutFeedback } from 'react-native'
+import { StyleSheet, View } from 'react-native'
 import { Text, useTheme } from 'react-native-paper'
 import React from 'react'
-import { TouchableRipple } from 'react-native-paper'
+import { TouchableRipple, Surface } from 'react-native-paper'
 import { Ionicons } from '@expo/vector-icons';
 
 const TimelineCardBody = ({
@@ -14,40 +14,48 @@ const TimelineCardBody = ({
   const { colors } = useTheme();
 
   const handleExpandCard = () => {
-    if (expanded === expandIndex) return;
+    if (expanded === expandIndex) {
+      handlePlayPressed()
+      return;
+    }
+
     onExpand(expandIndex)
   }
 
   const handlePlayPressed = () => {
-
+    alert("hi")
   }
 
   return (
-    <TouchableWithoutFeedback onPress={handleExpandCard}>
-      <View style={[
-        styles.container,
-        { backgroundColor: colors.surfaceCard }
-      ]}>
-        <View style={styles.content}>
-          <Text style={styles.title}>{title}</Text>
-          <Text style={styles.date}>{date}</Text>
+    <Surface style={styles.container}>
+      <TouchableRipple
+        onPress={handleExpandCard}
+        style={styles.cardRipple}
+        borderless
+        centered
+      >
+        <View style={styles.contentWrapper}>
+          <View style={styles.content}>
+            <Text style={styles.title}>{title}</Text>
+            <Text style={styles.date}>{date}</Text>
+          </View>
+          {(expanded === expandIndex) && <View>
+            <TouchableRipple
+              onPress={handlePlayPressed}
+              style={styles.playButton}
+              borderless
+              centered
+            >
+              <Ionicons
+                name="play-circle-outline"
+                size={25}
+                color={colors.text}
+              />
+            </TouchableRipple>
+          </View>}
         </View>
-        {(expanded === expandIndex) && <View>
-          <TouchableRipple
-            onPress={handlePlayPressed}
-            style={styles.playButton}
-            borderless
-            centered
-          >
-            <Ionicons
-              name="play-circle-outline"
-              size={25}
-              color={colors.text}
-            />
-          </TouchableRipple>
-        </View>}
-      </View >
-    </TouchableWithoutFeedback>
+      </TouchableRipple>
+    </Surface >
   )
 }
 
@@ -59,6 +67,11 @@ const styles = StyleSheet.create({
     left: -25,
     borderRadius: 6,
     elevation: 2,
+  },
+  cardRipple: {
+    borderRadius: 6
+  },
+  contentWrapper: {
     paddingVertical: 8,
   },
   content: {
