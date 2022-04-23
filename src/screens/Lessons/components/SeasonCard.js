@@ -12,7 +12,7 @@ const SeasonCard = ({ title = "", subtitle = "", image, onCardPress, locked = tr
                 imageStyle={styles.cardImage}
             >
                 <TouchableRipple
-                    onPress={onCardPress}
+                    onPress={locked ? null : onCardPress}
                     rippleColor={
                         locked ? "transparent" : "rgba(200, 255, 255, .3)"
                     }

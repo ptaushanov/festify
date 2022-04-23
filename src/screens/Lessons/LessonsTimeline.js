@@ -17,6 +17,30 @@ const LessonsTimeline = ({ route }) => {
                 image={placeholder}
                 locked={false}
             />
+            <TimelineCard
+                title={"Holiday one"}
+                date={"20th June"}
+                image={placeholder}
+                locked={false}
+            />
+            <TimelineCard
+                title={"Holiday two"}
+                date={"10th April"}
+                image={placeholder}
+                locked={false}
+            />
+            <TimelineCard
+                title={"Holiday three"}
+                date={"2th May"}
+                image={placeholder}
+                locked={false}
+            />
+            <TimelineCard
+                title={"Holiday four"}
+                date={"6th March"}
+                image={placeholder}
+                locked={false}
+            />
         </View>
     )
 }
