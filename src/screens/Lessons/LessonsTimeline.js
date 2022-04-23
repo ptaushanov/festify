@@ -46,19 +46,16 @@ const LessonsTimeline = ({ route }) => {
                     title={"Holiday three"}
                     date={"2th May"}
                     image={placeholder}
-                    locked={false}
                 />
                 <TimelineCard
                     title={"Holiday four"}
                     date={"6th March"}
                     image={placeholder}
-                    locked={false}
                 />
                 <TimelineCard
                     title={"Holiday four"}
                     date={"6th March"}
                     image={placeholder}
-                    locked={false}
                 />
                 <TimelineCard
                     title={"Holiday four"}
@@ -75,6 +72,5 @@ export default LessonsTimeline
 const styles = StyleSheet.create({
     timelineContainer: {
         paddingHorizontal: 20,
-        paddingVertical: 10
     }
 })

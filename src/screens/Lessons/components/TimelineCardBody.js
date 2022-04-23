@@ -56,14 +56,14 @@ export default TimelineCardBody
 const styles = StyleSheet.create({
   container: {
     position: "relative",
-    left: -35,
+    left: -25,
     borderRadius: 6,
     elevation: 2,
     paddingVertical: 8,
   },
   content: {
     paddingHorizontal: 30,
-    paddingLeft: 55,
+    paddingLeft: 45,
   },
   title: {
     fontSize: 18
