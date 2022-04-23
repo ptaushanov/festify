@@ -1,7 +1,9 @@
-import { StyleSheet, View, ScrollView } from 'react-native'
+import { StyleSheet, View, FlatList } from 'react-native'
 import React, { useState } from 'react'
 
 import TimelineCard from './components/TimelineCard'
+import TimelineTitle from './components/TimelineTitle'
+import TimelineStartPoint from './components/TimelineStartPoint'
 
 import placeholder from "../../assets/images/placeholder.jpg"
 
@@ -9,60 +11,82 @@ const LessonsTimeline = ({ route }) => {
     const { forSeason } = route.params
     const [expandedIndex, setExpandedIndex] = useState(2)
 
+    const cards = [
+        {
+            title: "Holiday 1",
+            date: "18th May",
+            image: placeholder,
+            locked: false,
+            expanded: expandedIndex,
+            expandIndex: 0,
+            onExpand: setExpandedIndex
+        }, {
+            title: "Holiday 2",
+            date: "6th May",
+            image: placeholder,
+            locked: false,
+            expanded: expandedIndex,
+            expandIndex: 1,
+            onExpand: setExpandedIndex
+        }, {
+            title: "Holiday 3",
+            date: "6th May",
+            image: placeholder,
+            locked: false,
+            expanded: expandedIndex,
+            expandIndex: 2,
+            onExpand: setExpandedIndex
+        }, {
+            title: "Holiday 4",
+            date: "6th May",
+            image: placeholder,
+            locked: false,
+            expanded: expandedIndex,
+            expandIndex: 3,
+            onExpand: setExpandedIndex
+        }, {
+            title: "Holiday 5",
+            date: "6th May",
+            image: placeholder,
+            locked: false,
+            expanded: expandedIndex,
+            expandIndex: 4,
+            onExpand: setExpandedIndex
+        }, {
+            title: "Holiday 6",
+            date: "6th May",
+            image: placeholder,
+            locked: false,
+            expanded: expandedIndex,
+            expandIndex: 5,
+            onExpand: setExpandedIndex
+        }, {
+            title: "Holiday 7",
+            date: "6th May",
+            image: placeholder,
+            locked: false,
+            expanded: expandedIndex,
+            expandIndex: 6,
+            onExpand: setExpandedIndex
+        }
+    ]
+
     return (
         <View style={styles.timelineContainer}>
-            <ScrollView
+            <FlatList
+                style={styles.timeline}
+                data={cards}
+                renderItem={({ item: props }) => (<TimelineCard  {...props} />)}
+                keyExtractor={card => card.expandIndex}
+                ListHeaderComponent={() => (
+                    <View>
+                        <TimelineTitle title={"lessons:Spring holidays"} />
+                        <TimelineStartPoint />
+                    </View>
+                )}
                 showsVerticalScrollIndicator={false}
                 showsHorizontalScrollIndicator={false}
-            >
-                <TimelineCard
-                    title={"Holiday one"}
-                    date={"18th May"}
-                    image={placeholder}
-                    locked={false}
-                    expanded={expandedIndex}
-                    expandIndex={0}
-                    onExpand={setExpandedIndex}
-                />
-                <TimelineCard
-                    title={"Holiday one"}
-                    date={"20th June"}
-                    image={placeholder}
-                    locked={false}
-                    expanded={expandedIndex}
-                    expandIndex={1}
-                    onExpand={setExpandedIndex}
-                />
-                <TimelineCard
-                    title={"Holiday two"}
-                    date={"10th April"}
-                    image={placeholder}
-                    locked={false}
-                    expanded={expandedIndex}
-                    expandIndex={2}
-                    onExpand={setExpandedIndex}
-                />
-                <TimelineCard
-                    title={"Holiday three"}
-                    date={"2th May"}
-                    image={placeholder}
-                />
-                <TimelineCard
-                    title={"Holiday four"}
-                    date={"6th March"}
-                    image={placeholder}
-                />
-                <TimelineCard
-                    title={"Holiday four"}
-                    date={"6th March"}
-                    image={placeholder}
-                />
-                <TimelineCard
-                    title={"Holiday four"}
-                    date={"6th March"}
-                    image={placeholder}
-                />
-            </ScrollView>
+            />
         </View>
     )
 }
@@ -71,6 +95,11 @@ export default LessonsTimeline
 
 const styles = StyleSheet.create({
     timelineContainer: {
+        flex: 1,
         paddingHorizontal: 20,
+        paddingBottom: 10
+    },
+    timeline: {
+        flex: 1,
     }
 })
