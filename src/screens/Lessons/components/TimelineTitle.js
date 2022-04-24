@@ -17,6 +17,8 @@ const styles = StyleSheet.create({
     title: {
         fontSize: 28,
         fontWeight: "bold",
-        paddingVertical: 15
+        paddingTop: 25,
+        paddingBottom: 15,
+        paddingLeft: 27,
     }
 })

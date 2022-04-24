@@ -7,6 +7,7 @@ import TimelineStartPoint from './components/TimelineStartPoint'
 
 import { useLessonsInfo } from '../../contexts/LessonsContext'
 import { useFocusEffect } from '@react-navigation/native'
+import { ActivityIndicator } from 'react-native-paper'
 
 import noImage from "../../assets/images/no_image.jpg"
 
@@ -25,7 +26,7 @@ const LessonsTimeline = ({ route }) => {
                     title: holiday.name || "",
                     date: holiday.celebrated_on || "",
                     image: holiday.thumbnail ? { uri: holiday.thumbnail } : noImage,
-                    expanded: expandedIndex,
+                    locked: false,
                     expandIndex: index,
                     onExpand: setExpandedIndex
                 }))
@@ -39,13 +40,18 @@ const LessonsTimeline = ({ route }) => {
             <FlatList
                 style={styles.timeline}
                 data={cards}
-                renderItem={({ item: props }) => (<TimelineCard  {...props} />)}
+                renderItem={({ item: props }) => (
+                    <TimelineCard expanded={expandedIndex}  {...props} />
+                )}
                 keyExtractor={card => card.expandIndex}
                 ListHeaderComponent={() => (
                     <View>
                         <TimelineTitle title={`lessons:${title}`} />
-                        <TimelineStartPoint />
+                        {cards.length > 0 && <TimelineStartPoint />}
                     </View>
+                )}
+                ListEmptyComponent={() => (
+                    <ActivityIndicator size="large" style={styles.indicator} />
                 )}
                 contentContainerStyle={styles.timelineContainer}
                 showsVerticalScrollIndicator={false}
@@ -63,9 +69,12 @@ const styles = StyleSheet.create({
         paddingHorizontal: 20,
     },
     timelineContainer: {
-        paddingBottom: 20
+        paddingBottom: 20,
     },
     timeline: {
         flex: 1,
+    },
+    indicator: {
+        marginTop: "60%"
     }
 })

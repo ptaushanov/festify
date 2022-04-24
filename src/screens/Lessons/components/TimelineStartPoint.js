@@ -17,9 +17,9 @@ export default TimelineStartPoint
 
 const styles = StyleSheet.create({
     point: {
-        width: 30,
+        width: 20,
         aspectRatio: 1 / 1,
-        marginLeft: 22,
+        marginLeft: 27,
         borderRadius: 100,
         borderWidth: 2
     }
