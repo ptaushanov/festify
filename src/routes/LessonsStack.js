@@ -1,5 +1,5 @@
 import { createStackNavigator } from '@react-navigation/stack';
-import { LessonsScreen, LessonsTimeline } from "../screens"
+import { LessonsScreen, LessonsTimeline, LessonMain } from "../screens"
 import AppbarMain from '../shared/AppBar/AppbarMain';
 import AppbarStack from '../shared/AppBar/AppbarStack';
 
@@ -58,6 +58,17 @@ export default function LessonsStack() {
                     initialParams={{
                         forSeason: "winter",
                         title: "Winter holidays"
+                    }}
+                />
+                <Screen
+                    name="Lesson Main"
+                    component={LessonMain}
+                    initialParams={{
+                        forSeason: "winter",
+                        title: "Winter holidays"
+                    }}
+                    options={{
+                        header: () => null
                     }}
                 />
             </Navigator>

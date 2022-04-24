@@ -4,14 +4,18 @@ import React from 'react'
 import { TouchableRipple, Surface } from 'react-native-paper'
 import { Ionicons } from '@expo/vector-icons';
 
+import { useNavigation } from '@react-navigation/native';
+
 const TimelineCardBody = ({
   title = "",
   date = "",
   expanded = -1,
   expandIndex,
-  onExpand
+  onExpand,
+  lessonRef
 }) => {
   const { colors } = useTheme();
+  const navigation = useNavigation();
 
   const handleExpandCard = () => {
     if (expanded === expandIndex) {
@@ -23,7 +27,8 @@ const TimelineCardBody = ({
   }
 
   const handlePlayPressed = () => {
-    alert("hi")
+    // lessonRef?.get().then(doc => alert(doc.exists))
+    navigation.navigate("Lesson Main")
   }
 
   return (

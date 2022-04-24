@@ -13,7 +13,8 @@ const TimelineCard = ({
     locked = true,
     expanded = -1,
     expandIndex,
-    onExpand
+    onExpand,
+    lessonRef
 }) => {
     const { colors } = useTheme()
 
@@ -28,6 +29,7 @@ const TimelineCard = ({
                     expanded={expanded}
                     expandIndex={expandIndex}
                     onExpand={onExpand}
+                    lessonRef={lessonRef}
                 />
             }
         </View>

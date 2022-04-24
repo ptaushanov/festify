@@ -18,18 +18,23 @@ const LessonsTimeline = ({ route }) => {
     const { getTimelineDataBySeason } = useLessonsInfo()
     const [cards, setCards] = useState([])
 
+    const remapHolidays = (holidays) => {
+        return holidays.map((holiday, index) => ({
+            title: holiday.name || "",
+            date: holiday.celebrated_on || "",
+            image: holiday.thumbnail ? { uri: holiday.thumbnail } : noImage,
+            lessonRef: holiday.lessonRef,
+            locked: false,
+            expandIndex: index,
+            onExpand: setExpandedIndex
+        }))
+    }
+
     useFocusEffect(
         useCallback(() => {
             (async () => {
                 const { holidays } = await getTimelineDataBySeason(forSeason)
-                const holidaysWithMeta = holidays.map((holiday, index) => ({
-                    title: holiday.name || "",
-                    date: holiday.celebrated_on || "",
-                    image: holiday.thumbnail ? { uri: holiday.thumbnail } : noImage,
-                    locked: false,
-                    expandIndex: index,
-                    onExpand: setExpandedIndex
-                }))
+                const holidaysWithMeta = remapHolidays(holidays)
                 setCards(holidaysWithMeta)
             })()
         }, [forSeason])

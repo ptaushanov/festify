@@ -17,8 +17,8 @@ import { useLessonsInfo } from '../../contexts/LessonsContext'
 const LessonsScreen = () => {
     const navigation = useNavigation()
     const {
-        unlockedSeasons,
         seasonsData,
+        unlockedSeasons = []
     } = useLessonsInfo()
 
     const handleCardPress = (seasonName) => () => {
