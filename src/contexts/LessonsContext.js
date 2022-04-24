@@ -19,6 +19,15 @@ export function LessonsProvider({ children }) {
     const [seasonsData, setSeasonsData] = useState({})
     const [unlockedSeasons, setUnlockedSeasons] = useState([])
 
+    const handleUpdatedSeasonsData = (newSeasonData) => {
+        setSeasonsData(prevSeasonsData => {
+            return {
+                ...prevSeasonsData,
+                ...newSeasonData
+            }
+        })
+    }
+
     const getSeasonsData = () => {
         const unsubscribeUnlockedSeasons =
             updateUnlockedSeasons(
@@ -28,7 +37,7 @@ export function LessonsProvider({ children }) {
             )
 
         const unsubscribeSeasonsData =
-            updateSeasonsDataBySeasonNames(seasons, setSeasonsData, console.error)
+            updateSeasonsDataBySeasonNames(seasons, handleUpdatedSeasonsData, console.error)
 
         return () => {
             unsubscribeUnlockedSeasons()

@@ -1,24 +1,32 @@
 import { firestore } from "../../firebase.v8";
 
 export const updateSeasonsDataBySeasonNames = (seasons, snapshotHandler, errorHandler) => {
-    return firestore
-        .collection("seasons")
-        .where("name", "in", seasons)
-        .onSnapshot((querySnapshot) => {
-            const docs = []
-            querySnapshot.forEach(doc => {
-                docs.push(doc.data())
-            })
+    const seasonReferences =
+        seasons.map(season => firestore.collection("seasons").doc(season))
 
-            const seasonsData = docs.reduce((acc, season) => {
-                acc[season.name] = season.card_count
-                return acc;
-            }, {})
+    const unsubscribeArray = []
+    seasonReferences
+        .forEach(reference => {
+            const unsubscribe =
+                reference.onSnapshot((document) => {
+                    if (!document.data()) { return }
 
-            snapshotHandler(seasonsData)
-        }, (error) => {
-            errorHandler(error)
+                    const { card_count } = document.data()
+                    const seasonName = document.id
+
+                    const seasonsData = {
+                        [seasonName]: card_count
+                    }
+
+                    snapshotHandler(seasonsData)
+                }, (error) => {
+                    errorHandler(error)
+                })
+            unsubscribeArray.push(unsubscribe)
         })
+
+    const unsubscribeFunction = () => unsubscribeArray.forEach(unsubscribe => unsubscribe())
+    return unsubscribeFunction
 }
 
 export const updateUnlockedSeasons = (userId, snapshotHandler, errorHandler) => {
