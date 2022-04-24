@@ -2,6 +2,14 @@ import { auth, firestore } from "../../firebase.v8";
 
 export const signUpUser = (newUser) => {
     const { username, email, password } = newUser;
+    const unlocked_seasons = ["spring"]
+
+    const unlocked_lessons = {
+        spring: [0],
+        summer: [],
+        autumn: [],
+        winter: []
+    }
 
     return auth.createUserWithEmailAndPassword(email, password)
         .then(userCredentials => {
@@ -9,7 +17,7 @@ export const signUpUser = (newUser) => {
             return firestore
                 .collection("users")
                 .doc(uid)
-                .set({ username, unlocked_seasons: ["spring"] })
+                .set({ username, unlocked_seasons, unlocked_lessons })
         })
 }
 

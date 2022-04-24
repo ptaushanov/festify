@@ -5,6 +5,7 @@ import * as languages from "./src/languages"
 import * as Localization from 'expo-localization';
 import i18n from 'i18n-js';
 import { useFonts } from 'expo-font';
+import addExtensions from './extensions';
 
 import AppLoading from 'expo-app-loading';
 
@@ -17,6 +18,9 @@ i18n.translations = languages
 i18n.locale = Localization.locale;
 // When a value is missing from a language it'll fallback to another language with the key present.
 i18n.fallbacks = true;
+
+// Adding custom language feature extensions
+addExtensions();
 
 export default function App() {
   const [fontsLoaded] = useFonts({

@@ -6,11 +6,12 @@ import { useNavigation } from '@react-navigation/native';
 
 const AppbarStack = ({ route }) => {
     const navigation = useNavigation();
+    console.log(route.params)
     return (
         <Appbar.Header>
             <Appbar.BackAction onPress={navigation.goBack} />
             <Appbar.Content
-                title={i18n.t(route.name)}
+                title={i18n.t(route.params?.appBarTitle || route.name)}
                 style={styles.content}
             />
         </Appbar.Header>

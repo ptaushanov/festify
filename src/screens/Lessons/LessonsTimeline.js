@@ -50,10 +50,11 @@ const LessonsTimeline = ({ route }) => {
                 )}
                 keyExtractor={card => card.expandIndex}
                 ListHeaderComponent={() => (
-                    <View>
-                        <TimelineTitle title={`lessons:${title}`} />
-                        {cards.length > 0 && <TimelineStartPoint />}
-                    </View>
+                    cards.length > 0 ?
+                        <View>
+                            <TimelineTitle title={`lessons:${title}`} />
+                            <TimelineStartPoint />
+                        </View> : null
                 )}
                 ListEmptyComponent={() => (
                     <ActivityIndicator size="large" style={styles.indicator} />
@@ -80,6 +81,6 @@ const styles = StyleSheet.create({
         flex: 1,
     },
     indicator: {
-        marginTop: "60%"
+        marginTop: "80%"
     }
 })

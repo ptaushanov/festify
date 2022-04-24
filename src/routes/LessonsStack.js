@@ -29,44 +29,12 @@ export default function LessonsStack() {
                     }}
                 />
                 <Screen
-                    name="Spring Timeline"
+                    name="Season Timeline"
                     component={LessonsTimeline}
-                    initialParams={{
-                        forSeason: "spring",
-                        title: "Spring holidays"
-                    }}
-                />
-                <Screen
-                    name="Summer Timeline"
-                    component={LessonsTimeline}
-                    initialParams={{
-                        forSeason: "summer",
-                        title: "Summer holidays"
-                    }}
-                />
-                <Screen
-                    name="Autumn Timeline"
-                    component={LessonsTimeline}
-                    initialParams={{
-                        forSeason: "autumn",
-                        title: "Autumn holidays"
-                    }}
-                />
-                <Screen
-                    name="Winter Timeline"
-                    component={LessonsTimeline}
-                    initialParams={{
-                        forSeason: "winter",
-                        title: "Winter holidays"
-                    }}
                 />
                 <Screen
                     name="Lesson Main"
                     component={LessonMain}
-                    initialParams={{
-                        forSeason: "winter",
-                        title: "Winter holidays"
-                    }}
                     options={{
                         header: () => null
                     }}

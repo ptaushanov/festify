@@ -22,11 +22,14 @@ const LessonsScreen = () => {
     } = useLessonsInfo()
 
     const handleCardPress = (seasonName) => () => {
-        const timelineName =
-            seasonName.charAt(0).toUpperCase()
-            + seasonName.substring(1)
-            + " Timeline"
-        navigation.navigate(timelineName)
+        const timelineName = seasonName.capitalize() + " Timeline"
+
+        const params = {
+            forSeason: seasonName,
+            title: seasonName.capitalize() + " holidays",
+            appBarTitle: timelineName
+        }
+        navigation.navigate("Season Timeline", params)
     }
 
     return (
