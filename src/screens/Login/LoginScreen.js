@@ -30,7 +30,6 @@ const LoginScreen = () => {
 
     useEffect(() => {
         if (hasLoggedIn) {
-            console.log("Logged in")
             navigation.replace("BottomNavigation")
         }
     }, [hasLoggedIn])

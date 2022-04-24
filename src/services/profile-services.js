@@ -19,7 +19,7 @@ export const storeProfilePicture = async (uri, userId) => {
             resolve(xhr.response);
         };
         xhr.onerror = function (error) {
-            console.log(error);
+            console.error(error);
             reject(new TypeError('Network request failed'));
         };
         xhr.responseType = 'blob';
