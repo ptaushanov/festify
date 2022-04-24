@@ -50,5 +50,5 @@ export const updateUserInformation = (userId, { username, avatar }) => {
     return firestore
         .collection("users")
         .doc(userId)
-        .set({ username, avatar })
+        .update({ username, avatar })
 }
