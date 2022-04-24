@@ -1,75 +1,38 @@
 import { StyleSheet, View, FlatList } from 'react-native'
-import React, { useState } from 'react'
+import React, { useState, useCallback } from 'react'
 
 import TimelineCard from './components/TimelineCard'
 import TimelineTitle from './components/TimelineTitle'
 import TimelineStartPoint from './components/TimelineStartPoint'
 
-import placeholder from "../../assets/images/placeholder.jpg"
+import { useLessonsInfo } from '../../contexts/LessonsContext'
+import { useFocusEffect } from '@react-navigation/native'
+
+import noImage from "../../assets/images/no_image.jpg"
 
 const LessonsTimeline = ({ route }) => {
     const { forSeason, title } = route.params
     const [expandedIndex, setExpandedIndex] = useState(-1)
 
-    const cards = [
-        {
-            title: "Holiday 1",
-            date: "18th May",
-            image: placeholder,
-            locked: false,
-            expanded: expandedIndex,
-            expandIndex: 0,
-            onExpand: setExpandedIndex
-        }, {
-            title: "Holiday 2",
-            date: "6th May",
-            image: placeholder,
-            locked: false,
-            expanded: expandedIndex,
-            expandIndex: 1,
-            onExpand: setExpandedIndex
-        }, {
-            title: "Holiday 3",
-            date: "6th May",
-            image: placeholder,
-            locked: false,
-            expanded: expandedIndex,
-            expandIndex: 2,
-            onExpand: setExpandedIndex
-        }, {
-            title: "Holiday 4",
-            date: "6th May",
-            image: placeholder,
-            locked: true,
-            expanded: expandedIndex,
-            expandIndex: 3,
-            onExpand: setExpandedIndex
-        }, {
-            title: "Holiday 5",
-            date: "6th May",
-            image: placeholder,
-            locked: true,
-            expanded: expandedIndex,
-            expandIndex: 4,
-            onExpand: setExpandedIndex
-        }, {
-            title: "Holiday 6",
-            date: "6th May",
-            image: placeholder,
-            locked: true,
-            expanded: expandedIndex,
-            expandIndex: 5,
-            onExpand: setExpandedIndex
-        }, {
-            title: "Holiday 7",
-            date: "6th May",
-            image: placeholder,
-            locked: true,
-            expanded: expandedIndex,
-            expandIndex: 6,
-            onExpand: setExpandedIndex
-        }
-    ]
+    const { getTimelineDataBySeason } = useLessonsInfo()
+    const [cards, setCards] = useState([])
+
+    useFocusEffect(
+        useCallback(() => {
+            (async () => {
+                const { holidays } = await getTimelineDataBySeason(forSeason)
+                const holidaysWithMeta = holidays.map((holiday, index) => ({
+                    title: holiday.name || "",
+                    date: holiday.celebrated_on || "",
+                    image: holiday.thumbnail ? { uri: holiday.thumbnail } : noImage,
+                    expanded: expandedIndex,
+                    expandIndex: index,
+                    onExpand: setExpandedIndex
+                }))
+                setCards(holidaysWithMeta)
+            })()
+        }, [forSeason])
+    )
 
     return (
         <View style={styles.timelineWrapper}>

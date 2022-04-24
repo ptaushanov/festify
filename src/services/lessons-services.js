@@ -9,7 +9,7 @@ export const updateSeasonsDataBySeasonNames = (seasons, snapshotHandler, errorHa
         .forEach(reference => {
             const unsubscribe =
                 reference.onSnapshot((document) => {
-                    if (!document.data()) { return }
+                    if (!document.exists) { return }
 
                     const { card_count } = document.data()
                     const seasonName = document.id
@@ -37,5 +37,16 @@ export const updateUnlockedSeasons = (userId, snapshotHandler, errorHandler) => 
             snapshotHandler(doc.data()?.unlocked_seasons)
         }, (error) => {
             errorHandler(error)
+        })
+}
+
+export const findTimelineDataBySeason = (season) => {
+    return firestore
+        .collection("seasons_timeline")
+        .doc(season)
+        .get()
+        .then(doc => {
+            if (!doc.exists) { return null }
+            return doc.data()
         })
 }
