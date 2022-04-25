@@ -6,7 +6,8 @@ import {
     updateUnlockedSeasons,
     updateSeasonsDataBySeasonNames,
     findTimelineDataBySeason,
-    findUnlockedLessonsBySeason
+    findUnlockedLessonsBySeason,
+    findLesson
 } from "../services/lessons-services"
 
 const LessonsContext = createContext()
@@ -57,6 +58,11 @@ export function LessonsProvider({ children }) {
             .catch(error => console.error(error))
     }
 
+    const getLesson = (lessonRef) => {
+        return findLesson(lessonRef)
+            .catch(error => console.error(error))
+    }
+
     useFocusEffect(
         useCallback(() => {
             if (auth.currentUser) {
@@ -73,7 +79,8 @@ export function LessonsProvider({ children }) {
         unlockedSeasons,
         seasonsData,
         getTimelineDataBySeason,
-        getUnlockedLessonsBySeason
+        getUnlockedLessonsBySeason,
+        getLesson
     }
 
     return (

@@ -62,3 +62,12 @@ export const findUnlockedLessonsBySeason = (userId, season) => {
             return unlocked_lessons[season]
         })
 }
+
+export const findLesson = (lessonRef) => {
+    return lessonRef
+        .get()
+        .then(doc => {
+            if (!doc.exists) { return null }
+            return doc.data()
+        })
+}

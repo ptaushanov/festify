@@ -27,8 +27,8 @@ const TimelineCardBody = ({
   }
 
   const handlePlayPressed = () => {
-    // lessonRef?.get().then(doc => alert(doc.exists))
-    navigation.navigate("Lesson Main")
+    const params = { lessonRef }
+    navigation.navigate("Lesson Main", params)
   }
 
   return (
