@@ -36,15 +36,22 @@ const LessonMain = () => {
         return pageCount + questionCount
     }
 
+    const getCurrentPageContent = () => {
+        return lesson.content["page" + currentStep]
+    }
+
     return (
-        <View style={styles.container}>
+        <View style={styles.flexContainer}>
             {lesson ? (
-                <View>
+                <View style={styles.flexContainer}>
                     <ProgressIndicator
                         steps={determineStepCount()}
                         currentStep={currentStep}
                     />
-                    <LessonContent content={lesson} />
+                    <LessonContent
+                        title={lesson.holiday_name}
+                        content={getCurrentPageContent()}
+                    />
                     {/* TODO: Add lesson navigation */}
                 </View>
             ) :
@@ -59,7 +66,7 @@ const LessonMain = () => {
 export default LessonMain
 
 const styles = StyleSheet.create({
-    container: {
+    flexContainer: {
         flex: 1
     },
     indicator: {

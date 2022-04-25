@@ -9,7 +9,7 @@ const ProgressIndicator = ({ steps, currentStep }) => {
     const stepMarkers = Array(steps)
         .fill(null)
         .map((_, id) => (
-            <View style={[
+            <View key={id} style={[
                 { backgroundColor: colors.primary },
                 currentStep === id ?
                     { backgroundColor: colors.accent } : null,
@@ -28,8 +28,9 @@ export default ProgressIndicator
 
 const styles = StyleSheet.create({
     stepContainer: {
-        marginTop: 40,
-        paddingHorizontal: 15,
+        marginTop: 30,
+        paddingHorizontal: 20,
+        paddingVertical: 20,
         flexDirection: "row"
     },
     step: {
