@@ -5,6 +5,7 @@ import { TouchableRipple, Surface } from 'react-native-paper'
 import { Ionicons } from '@expo/vector-icons';
 
 import { useNavigation } from '@react-navigation/native';
+import { useLessonsInfo } from '../../../contexts/LessonsContext';
 
 const TimelineCardBody = ({
   title = "",
@@ -16,6 +17,7 @@ const TimelineCardBody = ({
 }) => {
   const { colors } = useTheme();
   const navigation = useNavigation();
+  const { setCurrentLessonRef } = useLessonsInfo()
 
   const handleExpandCard = () => {
     if (expanded === expandIndex) {
@@ -27,8 +29,9 @@ const TimelineCardBody = ({
   }
 
   const handlePlayPressed = () => {
-    const params = { lessonRef }
-    navigation.navigate("Lesson Main", params)
+    // Set in a context because params have to be serializable
+    setCurrentLessonRef(lessonRef)
+    navigation.navigate("Lesson Main")
   }
 
   return (

@@ -21,6 +21,7 @@ export function LessonsProvider({ children }) {
 
     const [seasonsData, setSeasonsData] = useState({})
     const [unlockedSeasons, setUnlockedSeasons] = useState([])
+    const [currentLessonRef, setCurrentLessonRef] = useState(null)
 
     const handleUpdatedSeasonsData = (newSeasonData) => {
         setSeasonsData(prevSeasonsData => {
@@ -78,6 +79,8 @@ export function LessonsProvider({ children }) {
         seasons,
         unlockedSeasons,
         seasonsData,
+        currentLessonRef,
+        setCurrentLessonRef,
         getTimelineDataBySeason,
         getUnlockedLessonsBySeason,
         getLesson
