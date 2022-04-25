@@ -8,11 +8,11 @@ export const updateSeasonsDataBySeasonNames = (seasons, snapshotHandler, errorHa
     seasonReferences
         .forEach(reference => {
             const unsubscribe =
-                reference.onSnapshot((document) => {
-                    if (!document.exists) { return }
+                reference.onSnapshot((doc) => {
+                    if (!doc.exists) { return }
 
-                    const { card_count } = document.data()
-                    const seasonName = document.id
+                    const { card_count } = doc.data()
+                    const seasonName = doc.id
 
                     const seasonsData = {
                         [seasonName]: card_count
@@ -48,5 +48,17 @@ export const findTimelineDataBySeason = (season) => {
         .then(doc => {
             if (!doc.exists) { return null }
             return doc.data()
+        })
+}
+
+export const findUnlockedLessonsBySeason = (userId, season) => {
+    return firestore
+        .collection("users")
+        .doc(userId)
+        .get()
+        .then(doc => {
+            if (!doc.exists) { return null }
+            const { unlocked_lessons } = doc.data()
+            return unlocked_lessons[season]
         })
 }

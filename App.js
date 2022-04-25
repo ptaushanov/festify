@@ -10,7 +10,7 @@ import addExtensions from './extensions';
 import AppLoading from 'expo-app-loading';
 
 import { LogBox } from 'react-native';
-LogBox.ignoreLogs(['Setting a timer']);
+LogBox.ignoreLogs(['Setting a timer', 'AsyncStorage has been']);
 
 // Setting the key-value pairs for the different languages we want to support
 i18n.translations = languages

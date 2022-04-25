@@ -6,7 +6,6 @@ import { useNavigation } from '@react-navigation/native';
 
 const AppbarStack = ({ route }) => {
     const navigation = useNavigation();
-    console.log(route.params)
     return (
         <Appbar.Header>
             <Appbar.BackAction onPress={navigation.goBack} />

@@ -14,17 +14,23 @@ import noImage from "../../assets/images/no_image.jpg"
 const LessonsTimeline = ({ route }) => {
     const { forSeason, title } = route.params
     const [expandedIndex, setExpandedIndex] = useState(-1)
-
-    const { getTimelineDataBySeason } = useLessonsInfo()
     const [cards, setCards] = useState([])
 
-    const remapHolidays = (holidays) => {
+    const {
+        getTimelineDataBySeason,
+        getUnlockedLessonsBySeason
+    } = useLessonsInfo()
+
+    const remapHolidays = async (holidays) => {
+        const unlockedLessons =
+            await getUnlockedLessonsBySeason(forSeason);
+
         return holidays.map((holiday, index) => ({
             title: holiday.name || "",
             date: holiday.celebrated_on || "",
             image: holiday.thumbnail ? { uri: holiday.thumbnail } : noImage,
             lessonRef: holiday.lessonRef,
-            locked: false,
+            locked: !Boolean(unlockedLessons?.includes(index)),
             expandIndex: index,
             onExpand: setExpandedIndex
         }))
@@ -34,7 +40,7 @@ const LessonsTimeline = ({ route }) => {
         useCallback(() => {
             (async () => {
                 const { holidays } = await getTimelineDataBySeason(forSeason)
-                const holidaysWithMeta = remapHolidays(holidays)
+                const holidaysWithMeta = await remapHolidays(holidays)
                 setCards(holidaysWithMeta)
             })()
         }, [forSeason])

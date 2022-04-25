@@ -5,7 +5,8 @@ import { auth } from "../../firebase.v8"
 import {
     updateUnlockedSeasons,
     updateSeasonsDataBySeasonNames,
-    findTimelineDataBySeason
+    findTimelineDataBySeason,
+    findUnlockedLessonsBySeason
 } from "../services/lessons-services"
 
 const LessonsContext = createContext()
@@ -51,6 +52,11 @@ export function LessonsProvider({ children }) {
             .catch(error => console.error(error))
     }
 
+    const getUnlockedLessonsBySeason = (season) => {
+        return findUnlockedLessonsBySeason(auth.currentUser.uid, season)
+            .catch(error => console.error(error))
+    }
+
     useFocusEffect(
         useCallback(() => {
             if (auth.currentUser) {
@@ -66,7 +72,8 @@ export function LessonsProvider({ children }) {
         seasons,
         unlockedSeasons,
         seasonsData,
-        getTimelineDataBySeason
+        getTimelineDataBySeason,
+        getUnlockedLessonsBySeason
     }
 
     return (
