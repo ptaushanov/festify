@@ -1,9 +1,12 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, View } from 'react-native'
 import React, { useState, useCallback } from 'react'
-import globalStyles from '../../styles/global'
 
 import { useLessonsInfo } from '../../contexts/LessonsContext'
 import { useFocusEffect } from '@react-navigation/native'
+
+import { ActivityIndicator } from 'react-native-paper'
+import LessonContent from './components/LessonContent'
+import ProgressIndicator from './components/ProgressIndicator'
 
 const LessonMain = () => {
     const {
@@ -12,10 +15,11 @@ const LessonMain = () => {
     } = useLessonsInfo()
 
     const [lesson, setLesson] = useState(null)
+    const currentStep = 0
 
     const getLessonOnFocus = async () => {
         const _lesson = await getLesson(currentLessonRef)
-        setLesson(lesson)
+        setLesson(_lesson)
     }
 
     useFocusEffect(
@@ -24,13 +28,42 @@ const LessonMain = () => {
         }, [currentLessonRef])
     )
 
+    const determineStepCount = () => {
+        const { content, questions } = lesson
+        const pageCount = content ? Object.keys(content).length : 0
+        const questionCount = questions ? questions.length : 0
+
+        return pageCount + questionCount
+    }
+
     return (
-        <View style={globalStyles.container}>
-            <Text>LessonMain</Text>
+        <View style={styles.container}>
+            {lesson ? (
+                <View>
+                    <ProgressIndicator
+                        steps={determineStepCount()}
+                        currentStep={currentStep}
+                    />
+                    <LessonContent content={lesson} />
+                    {/* TODO: Add lesson navigation */}
+                </View>
+            ) :
+                <ActivityIndicator
+                    size="large"
+                    style={styles.indicator}
+                />}
         </View>
     )
 }
 
 export default LessonMain
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+    container: {
+        flex: 1
+    },
+    indicator: {
+        alignSelf: "center",
+        flex: 1
+    }
+})
