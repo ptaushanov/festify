@@ -5,7 +5,7 @@ import QuestionTitle from './QuestionTitle'
 import AnswerCard from './AnswerCard'
 
 const LessonQuestion = ({ content }) => {
-    const [selectedAnswer, setSelectedAnswer] = useState(-1)
+    const [selectedIndex, setSelectedIndex] = useState(-1)
 
     return (
         <View style={styles.questionContainer}>
@@ -15,7 +15,9 @@ const LessonQuestion = ({ content }) => {
                     <AnswerCard
                         key={index}
                         text={choice}
-                        state="normal"
+                        state={selectedIndex === index ? "selected" : "normal"}
+                        selectIndex={index}
+                        onSelect={setSelectedIndex}
                     />
                 ))}
             </View>

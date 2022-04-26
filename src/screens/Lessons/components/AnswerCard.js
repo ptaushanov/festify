@@ -5,15 +5,40 @@ import { Ionicons } from '@expo/vector-icons';
 
 import { useTheme } from 'react-native-paper'
 
-const AnswerCard = ({ text = "", state = "normal" }) => {
+const AnswerCard = ({
+    text = "",
+    state = "normal",
+    selectIndex,
+    onSelect,
+}) => {
     const { colors } = useTheme()
+    const themedStyle = { backgroundColor: colors.surfaceCard }
 
-    const themedStyle = {
-        borderWidth: state !== "normal" ? 2 : 0,
-        borderColor: state === "correct" ? colors.success :
-            state === "selected" ? colors.primary :
-                state === "incorrect" ? colors.danger : "transparent"
+    switch (state) {
+        case "correct":
+        case "selected":
+        case "incorrect":
+            themedStyle.borderWidth = 2
+            break
+        default:
+            themedStyle.borderWidth = 0
     }
+
+    switch (state) {
+        case "correct":
+            themedStyle.borderColor = colors.success
+            break
+        case "selected":
+            themedStyle.borderColor = colors.primary
+            break
+        case "incorrect":
+            themedStyle.borderColor = colors.danger
+            break
+        default:
+            themedStyle.borderColor = "transparent"
+    }
+
+    const handleChoiceSelect = () => { onSelect(selectIndex) }
 
     return (
         <Surface style={[
@@ -21,7 +46,7 @@ const AnswerCard = ({ text = "", state = "normal" }) => {
             themedStyle
         ]}>
             <TouchableRipple
-                onPress={() => { }}
+                onPress={handleChoiceSelect}
                 borderless
                 centered
                 style={styles.ripple}
@@ -48,7 +73,7 @@ const styles = StyleSheet.create({
     cardSurface: {
         elevation: 2,
         borderRadius: 6,
-        marginVertical: 6
+        marginVertical: 6,
     },
     ripple: {
         borderRadius: 6
