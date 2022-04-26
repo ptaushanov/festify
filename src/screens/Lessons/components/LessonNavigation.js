@@ -6,19 +6,15 @@ import { Ionicons } from '@expo/vector-icons';
 import { IconButton } from 'react-native-paper';
 
 import { useTheme } from 'react-native-paper';
-import { useNavigation } from '@react-navigation/native';
 import i18n from 'i18n-js';
 
-const LessonNavigation = ({ actionButtonText, onActionButtonPress }) => {
+const LessonNavigation = ({ actionButtonText, onActionButtonPress, onBackButtonPress }) => {
     const { colors } = useTheme()
-    const navigation = useNavigation()
 
     const themedStyles = {
         borderTopColor: colors.divider,
         backgroundColor: colors.surface
     }
-
-    const handleBackPressed = () => { navigation.goBack() }
 
     return (
         <View style={[
@@ -35,7 +31,7 @@ const LessonNavigation = ({ actionButtonText, onActionButtonPress }) => {
                 )}
                 size={35}
                 style={styles.backButton}
-                onPress={handleBackPressed}
+                onPress={onBackButtonPress}
             />
             <Button
                 mode="contained"

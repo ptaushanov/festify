@@ -3,6 +3,7 @@ import React, { useState, useCallback } from 'react'
 
 import { useLessonsInfo } from '../../contexts/LessonsContext'
 import { useFocusEffect } from '@react-navigation/native'
+import { useNavigation } from '@react-navigation/native'
 
 import { ActivityIndicator } from 'react-native-paper'
 import LessonContent from './components/LessonContent'
@@ -11,34 +12,29 @@ import LessonNavigation from './components/LessonNavigation'
 
 const LessonMain = () => {
     const {
-        getLesson,
         currentLessonRef,
+        loadLessonData,
+        unloadLessonData,
+        lessonData,
+        currentStep,
+        counters
     } = useLessonsInfo()
 
-    const [lesson, setLesson] = useState(null)
-    const currentStep = 0
-
-    const getLessonOnFocus = async () => {
-        const _lesson = await getLesson(currentLessonRef)
-        setLesson(_lesson)
-    }
+    const navigation = useNavigation()
 
     useFocusEffect(
         useCallback(() => {
-            currentLessonRef && getLessonOnFocus()
+            currentLessonRef && loadLessonData()
         }, [currentLessonRef])
     )
 
-    const determineStepCount = () => {
-        const { content, questions } = lesson
-        const pageCount = content ? Object.keys(content).length : 0
-        const questionCount = questions ? questions.length : 0
-
-        return pageCount + questionCount
+    const getCurrentPageContent = () => {
+        return lessonData.content["page" + currentStep]
     }
 
-    const getCurrentPageContent = () => {
-        return lesson.content["page" + currentStep]
+    const handleBackButtonPressed = () => {
+        unloadLessonData()
+        navigation.goBack()
     }
 
     const handleActionButtonPressed = () => {
@@ -47,18 +43,19 @@ const LessonMain = () => {
 
     return (
         <View style={styles.flexContainer}>
-            {lesson ? (
+            {lessonData ? (
                 <View style={styles.flexContainer}>
                     <ProgressIndicator
-                        steps={determineStepCount()}
+                        steps={counters.stepsCount}
                         currentStep={currentStep}
                     />
                     <LessonContent
-                        title={lesson.holiday_name}
+                        title={lessonData.holiday_name}
                         content={getCurrentPageContent()}
                     />
                     <LessonNavigation
                         actionButtonText="Next"
+                        onBackButtonPress={handleBackButtonPressed}
                         onActionButtonPress={handleActionButtonPressed}
                     />
                 </View>

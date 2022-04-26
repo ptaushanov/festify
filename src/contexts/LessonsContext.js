@@ -1,4 +1,4 @@
-import { createContext, useState, useContext, useCallback } from "react"
+import { createContext, useState, useContext, useCallback, useEffect } from "react"
 import { useFocusEffect } from "@react-navigation/native"
 
 import { auth } from "../../firebase.v8"
@@ -20,8 +20,16 @@ export function LessonsProvider({ children }) {
     const seasons = ["spring", "summer", "autumn", "winter"]
 
     const [seasonsData, setSeasonsData] = useState({})
+
     const [unlockedSeasons, setUnlockedSeasons] = useState([])
     const [currentLessonRef, setCurrentLessonRef] = useState(null)
+
+    const [lessonData, setLessonData] = useState(null)
+    const [currentStep, setCurrentStep] = useState(0)
+    const [counters, setCounters] = useState({
+        pageCount: 0,
+        questionCount: 0
+    })
 
     const handleUpdatedSeasonsData = (newSeasonData) => {
         setSeasonsData(prevSeasonsData => {
@@ -59,9 +67,32 @@ export function LessonsProvider({ children }) {
             .catch(error => console.error(error))
     }
 
-    const getLesson = (lessonRef) => {
-        return findLesson(lessonRef)
-            .catch(error => console.error(error))
+    const determineStepCount = (lessonData) => {
+        const { content, questions } = lessonData
+        const pageCount = content ? Object.keys(content).length : 0
+        const questionCount = questions ? questions.length : 0
+
+        setCounters((prevCounters) => ({
+            ...prevCounters,
+            pageCount,
+            questionCount,
+            stepsCount: pageCount + questionCount
+        }))
+    }
+
+    const loadLessonData = async () => {
+        try {
+            const _lessonData = await findLesson(currentLessonRef)
+            setLessonData(_lessonData)
+            determineStepCount(_lessonData)
+        } catch (error) {
+            console.error(error)
+        }
+    }
+
+    const unloadLessonData = () => {
+        setLessonData(null)
+        setCurrentStep(0)
     }
 
     useFocusEffect(
@@ -83,7 +114,11 @@ export function LessonsProvider({ children }) {
         setCurrentLessonRef,
         getTimelineDataBySeason,
         getUnlockedLessonsBySeason,
-        getLesson
+        loadLessonData,
+        unloadLessonData,
+        lessonData,
+        currentStep,
+        counters
     }
 
     return (
