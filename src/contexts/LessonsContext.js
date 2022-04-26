@@ -28,7 +28,8 @@ export function LessonsProvider({ children }) {
     const [currentStep, setCurrentStep] = useState(0)
     const [counters, setCounters] = useState({
         pageCount: 0,
-        questionCount: 0
+        questionCount: 0,
+        stepsCount: 0
     })
 
     const handleUpdatedSeasonsData = (newSeasonData) => {
@@ -118,6 +119,7 @@ export function LessonsProvider({ children }) {
         unloadLessonData,
         lessonData,
         currentStep,
+        setCurrentStep,
         counters
     }
 

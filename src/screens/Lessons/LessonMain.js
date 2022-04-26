@@ -1,14 +1,14 @@
 import { StyleSheet, View } from 'react-native'
-import React, { useState, useCallback } from 'react'
+import React, { useCallback } from 'react'
 
 import { useLessonsInfo } from '../../contexts/LessonsContext'
 import { useFocusEffect } from '@react-navigation/native'
 import { useNavigation } from '@react-navigation/native'
 
 import { ActivityIndicator } from 'react-native-paper'
-import LessonContent from './components/LessonContent'
 import ProgressIndicator from './components/ProgressIndicator'
 import LessonNavigation from './components/LessonNavigation'
+import AdaptableContent from './components/AdaptableContent'
 
 const LessonMain = () => {
     const {
@@ -17,6 +17,7 @@ const LessonMain = () => {
         unloadLessonData,
         lessonData,
         currentStep,
+        setCurrentStep,
         counters
     } = useLessonsInfo()
 
@@ -28,17 +29,24 @@ const LessonMain = () => {
         }, [currentLessonRef])
     )
 
-    const getCurrentPageContent = () => {
-        return lessonData.content["page" + currentStep]
-    }
-
     const handleBackButtonPressed = () => {
+        if (currentStep > 0) {
+            setCurrentStep(currentStep - 1)
+            return
+        }
+
         unloadLessonData()
         navigation.goBack()
     }
 
     const handleActionButtonPressed = () => {
-
+        const nextStep = currentStep + 1
+        if (nextStep < counters.stepsCount) {
+            setCurrentStep(nextStep)
+        }
+        else {
+            // TODO: Finish lesson
+        }
     }
 
     return (
@@ -49,9 +57,10 @@ const LessonMain = () => {
                         steps={counters.stepsCount}
                         currentStep={currentStep}
                     />
-                    <LessonContent
-                        title={lessonData.holiday_name}
-                        content={getCurrentPageContent()}
+                    <AdaptableContent
+                        lesson={lessonData}
+                        counters={counters}
+                        currentStep={currentStep}
                     />
                     <LessonNavigation
                         actionButtonText="Next"

@@ -4,9 +4,9 @@ import React from 'react'
 
 const LessonTitle = ({ title = "" }) => {
     return (
-        <View>
-            <Text style={styles.title}>{title}</Text>
-        </View>
+        <Text style={styles.title}>
+            {title}
+        </Text>
     )
 }
 

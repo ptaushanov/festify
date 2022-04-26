@@ -8,7 +8,11 @@ import { IconButton } from 'react-native-paper';
 import { useTheme } from 'react-native-paper';
 import i18n from 'i18n-js';
 
-const LessonNavigation = ({ actionButtonText, onActionButtonPress, onBackButtonPress }) => {
+const LessonNavigation = ({
+    actionButtonText,
+    onActionButtonPress,
+    onBackButtonPress
+}) => {
     const { colors } = useTheme()
 
     const themedStyles = {
