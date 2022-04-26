@@ -26,6 +26,8 @@ export function LessonsProvider({ children }) {
 
     const [lessonData, setLessonData] = useState(null)
     const [currentStep, setCurrentStep] = useState(0)
+    const [currentChoice, setCurrentChoice] = useState(-1)
+    const [currentQuestionStatus, setCurrentQuestionStatus] = useState("default")
     const [counters, setCounters] = useState({
         pageCount: 0,
         questionCount: 0,
@@ -120,7 +122,11 @@ export function LessonsProvider({ children }) {
         lessonData,
         currentStep,
         setCurrentStep,
-        counters
+        counters,
+        currentChoice,
+        setCurrentChoice,
+        currentQuestionStatus,
+        setCurrentQuestionStatus
     }
 
     return (

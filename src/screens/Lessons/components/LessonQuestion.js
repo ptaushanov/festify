@@ -4,8 +4,13 @@ import React, { useState } from 'react'
 import QuestionTitle from './QuestionTitle'
 import AnswerCard from './AnswerCard'
 
+import { useLessonsInfo } from '../../../contexts/LessonsContext'
+
 const LessonQuestion = ({ content }) => {
-    const [selectedIndex, setSelectedIndex] = useState(-1)
+    const {
+        currentChoice,
+        setCurrentChoice
+    } = useLessonsInfo()
 
     return (
         <View style={styles.questionContainer}>
@@ -15,9 +20,9 @@ const LessonQuestion = ({ content }) => {
                     <AnswerCard
                         key={index}
                         text={choice}
-                        state={selectedIndex === index ? "selected" : "normal"}
+                        state={currentChoice === index ? "selected" : "normal"}
                         selectIndex={index}
-                        onSelect={setSelectedIndex}
+                        onSelect={setCurrentChoice}
                     />
                 ))}
             </View>

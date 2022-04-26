@@ -3,7 +3,6 @@ import React, { useCallback } from 'react'
 
 import { useLessonsInfo } from '../../contexts/LessonsContext'
 import { useFocusEffect } from '@react-navigation/native'
-import { useNavigation } from '@react-navigation/native'
 
 import { ActivityIndicator } from 'react-native-paper'
 import ProgressIndicator from './components/ProgressIndicator'
@@ -14,40 +13,16 @@ const LessonMain = () => {
     const {
         currentLessonRef,
         loadLessonData,
-        unloadLessonData,
         lessonData,
         currentStep,
-        setCurrentStep,
-        counters
+        counters,
     } = useLessonsInfo()
-
-    const navigation = useNavigation()
 
     useFocusEffect(
         useCallback(() => {
             currentLessonRef && loadLessonData()
         }, [currentLessonRef])
     )
-
-    const handleBackButtonPressed = () => {
-        if (currentStep > 0) {
-            setCurrentStep(currentStep - 1)
-            return
-        }
-
-        unloadLessonData()
-        navigation.goBack()
-    }
-
-    const handleActionButtonPressed = () => {
-        const nextStep = currentStep + 1
-        if (nextStep < counters.stepsCount) {
-            setCurrentStep(nextStep)
-        }
-        else {
-            // TODO: Finish lesson
-        }
-    }
 
     return (
         <View style={styles.flexContainer}>
@@ -62,11 +37,7 @@ const LessonMain = () => {
                         counters={counters}
                         currentStep={currentStep}
                     />
-                    <LessonNavigation
-                        actionButtonText="Next"
-                        onBackButtonPress={handleBackButtonPressed}
-                        onActionButtonPress={handleActionButtonPressed}
-                    />
+                    <LessonNavigation />
                 </View>
             ) :
                 <ActivityIndicator
