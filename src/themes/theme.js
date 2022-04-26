@@ -9,7 +9,7 @@ import {
     DarkTheme as PaperDarkTheme
 } from '@react-navigation/native';
 
-import { palette, surfaceMaterials } from "./palette"
+import { palette, surfaceMaterials, customMaterials } from "./palette"
 
 const fontConfig = {
     ios: {
@@ -62,7 +62,8 @@ export const DefaultTheme = {
         surfaceInput: surfaceMaterials.input.light,
         surfacePicker: surfaceMaterials.surfacePicker.light,
         surfaceCard: surfaceMaterials.surfaceCard.light,
-        textReverse: PaperDarkTheme.colors.text
+        textReverse: PaperDarkTheme.colors.text,
+        divider: customMaterials.divider.light
     },
 };
 
@@ -78,6 +79,7 @@ export const DarkTheme = {
         surfaceInput: surfaceMaterials.input.dark,
         surfacePicker: surfaceMaterials.surfacePicker.dark,
         surfaceCard: surfaceMaterials.surfaceCard.dark,
-        textReverse: PaperDefaultTheme.colors.text
+        textReverse: PaperDefaultTheme.colors.text,
+        divider: customMaterials.divider.dark
     },
 };

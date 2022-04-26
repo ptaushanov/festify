@@ -7,6 +7,7 @@ import { useFocusEffect } from '@react-navigation/native'
 import { ActivityIndicator } from 'react-native-paper'
 import LessonContent from './components/LessonContent'
 import ProgressIndicator from './components/ProgressIndicator'
+import LessonNavigation from './components/LessonNavigation'
 
 const LessonMain = () => {
     const {
@@ -40,6 +41,10 @@ const LessonMain = () => {
         return lesson.content["page" + currentStep]
     }
 
+    const handleActionButtonPressed = () => {
+
+    }
+
     return (
         <View style={styles.flexContainer}>
             {lesson ? (
@@ -52,7 +57,10 @@ const LessonMain = () => {
                         title={lesson.holiday_name}
                         content={getCurrentPageContent()}
                     />
-                    {/* TODO: Add lesson navigation */}
+                    <LessonNavigation
+                        actionButtonText="Next"
+                        onActionButtonPress={handleActionButtonPressed}
+                    />
                 </View>
             ) :
                 <ActivityIndicator

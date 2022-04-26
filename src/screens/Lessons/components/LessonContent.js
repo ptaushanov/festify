@@ -54,11 +54,12 @@ const styles = StyleSheet.create({
     },
     image: {
         borderRadius: 4,
+        marginVertical: 10,
     },
     text: {
         fontSize: 16,
         lineHeight: 20,
-        paddingVertical: 20,
+        paddingVertical: 10,
         textAlign: "justify",
     }
 })
