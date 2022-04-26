@@ -21,7 +21,9 @@ const LessonNavigation = () => {
         currentStep,
         counters,
         currentChoice,
-        setCurrentChoice
+        setCurrentChoice,
+        checkAnswer,
+        setCurrentChoiceState
     } = useLessonsInfo()
 
     const { pageCount, stepsCount } = counters
@@ -35,9 +37,15 @@ const LessonNavigation = () => {
         }
     }, [currentStep])
 
+    const resetContextState = () => {
+        setCurrentChoice(-1)
+        setCurrentChoiceState("normal")
+    }
+
     const handleBackButtonPressed = () => {
+        resetContextState()
+
         if (currentStep > 0) {
-            setCurrentChoice(-1)
             setCurrentStep(currentStep - 1)
             return
         }
@@ -49,19 +57,23 @@ const LessonNavigation = () => {
     const handleActionButtonPressed = () => {
         switch (actionMode) {
             case "Check":
-                // TODO: ???
+                const correct = checkAnswer()
+                setActionMode(correct ? "Next" : "Try again")
                 return
             case "Try again":
-                // TODO: ???
+                resetContextState()
+                setActionMode("Check")
                 return
         }
 
         const nextStep = currentStep + 1
         if (nextStep < counters.stepsCount) {
             setCurrentStep(nextStep)
+            setCurrentChoiceState("normal")
         }
         else {
-            // TODO: Finish lesson
+            // resetContextState()
+            // setActionMode("Finish")
         }
     }
 

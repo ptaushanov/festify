@@ -1,5 +1,5 @@
 import { StyleSheet, View } from 'react-native'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import QuestionTitle from './QuestionTitle'
 import AnswerCard from './AnswerCard'
@@ -7,10 +7,11 @@ import AnswerCard from './AnswerCard'
 import { useLessonsInfo } from '../../../contexts/LessonsContext'
 
 const LessonQuestion = ({ content }) => {
-    const {
-        currentChoice,
-        setCurrentChoice
-    } = useLessonsInfo()
+    const { setCurrentCorrectAnswer } = useLessonsInfo()
+
+    useEffect(() => {
+        setCurrentCorrectAnswer(content.answer)
+    }, [content])
 
     return (
         <View style={styles.questionContainer}>
@@ -20,9 +21,7 @@ const LessonQuestion = ({ content }) => {
                     <AnswerCard
                         key={index}
                         text={choice}
-                        state={currentChoice === index ? "selected" : "normal"}
                         selectIndex={index}
-                        onSelect={setCurrentChoice}
                     />
                 ))}
             </View>

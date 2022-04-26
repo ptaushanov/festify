@@ -1,20 +1,34 @@
 import { StyleSheet, View } from 'react-native'
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { Surface, Text, TouchableRipple } from 'react-native-paper'
 import { Ionicons } from '@expo/vector-icons';
 
 import { useTheme } from 'react-native-paper'
+import { useLessonsInfo } from '../../../contexts/LessonsContext';
 
 const AnswerCard = ({
     text = "",
-    state = "normal",
     selectIndex,
-    onSelect,
 }) => {
     const { colors } = useTheme()
     const themedStyle = { backgroundColor: colors.surfaceCard }
+    const [cardState, setCardState] = useState("normal")
 
-    switch (state) {
+    const {
+        currentChoice,
+        setCurrentChoice,
+        currentChoiceState,
+    } = useLessonsInfo()
+
+    useEffect(() => {
+        setCardState(currentChoice === selectIndex ? "selected" : "normal")
+    }, [currentChoice])
+
+    useEffect(() => {
+        setCardState(currentChoice === selectIndex ? currentChoiceState : "normal")
+    }, [currentChoiceState])
+
+    switch (cardState) {
         case "correct":
         case "selected":
         case "incorrect":
@@ -24,7 +38,7 @@ const AnswerCard = ({
             themedStyle.borderWidth = 0
     }
 
-    switch (state) {
+    switch (cardState) {
         case "correct":
             themedStyle.borderColor = colors.success
             break
@@ -38,7 +52,14 @@ const AnswerCard = ({
             themedStyle.borderColor = "transparent"
     }
 
-    const handleChoiceSelect = () => { onSelect(selectIndex) }
+    const handleChoiceSelect = () => {
+        switch (currentChoiceState) {
+            case "correct":
+            case "incorrect":
+                return
+        }
+        setCurrentChoice(selectIndex)
+    }
 
     return (
         <Surface style={[
@@ -56,9 +77,9 @@ const AnswerCard = ({
                         {text}
                     </Text>
 
-                    {state === "correct" ?
+                    {cardState === "correct" ?
                         <Ionicons name="checkmark" size={24} color={colors.success} /> :
-                        state === "incorrect" ?
+                        cardState === "incorrect" ?
                             <Ionicons name="close" size={24} color={colors.danger} /> : null
                     }
                 </View>

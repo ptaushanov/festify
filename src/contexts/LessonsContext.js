@@ -1,4 +1,4 @@
-import { createContext, useState, useContext, useCallback, useEffect } from "react"
+import { createContext, useState, useContext, useCallback } from "react"
 import { useFocusEffect } from "@react-navigation/native"
 
 import { auth } from "../../firebase.v8"
@@ -26,13 +26,16 @@ export function LessonsProvider({ children }) {
 
     const [lessonData, setLessonData] = useState(null)
     const [currentStep, setCurrentStep] = useState(0)
-    const [currentChoice, setCurrentChoice] = useState(-1)
-    const [currentQuestionStatus, setCurrentQuestionStatus] = useState("default")
+
     const [counters, setCounters] = useState({
         pageCount: 0,
         questionCount: 0,
         stepsCount: 0
     })
+
+    const [currentCorrectAnswer, setCurrentCorrectAnswer] = useState(-2)
+    const [currentChoice, setCurrentChoice] = useState(-1)
+    const [currentChoiceState, setCurrentChoiceState] = useState("normal")
 
     const handleUpdatedSeasonsData = (newSeasonData) => {
         setSeasonsData(prevSeasonsData => {
@@ -98,6 +101,12 @@ export function LessonsProvider({ children }) {
         setCurrentStep(0)
     }
 
+    const checkAnswer = () => {
+        const correct = currentCorrectAnswer === currentChoice
+        setCurrentChoiceState(correct ? "correct" : "incorrect")
+        return correct
+    }
+
     useFocusEffect(
         useCallback(() => {
             if (auth.currentUser) {
@@ -125,8 +134,10 @@ export function LessonsProvider({ children }) {
         counters,
         currentChoice,
         setCurrentChoice,
-        currentQuestionStatus,
-        setCurrentQuestionStatus
+        setCurrentCorrectAnswer,
+        checkAnswer,
+        currentChoiceState,
+        setCurrentChoiceState
     }
 
     return (
