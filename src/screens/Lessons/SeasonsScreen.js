@@ -18,7 +18,7 @@ const SeasonsScreen = () => {
     const navigation = useNavigation()
     const {
         seasonsData,
-        unlockedSeasons = []
+        unlockedSeasons
     } = useLessonsInfo()
 
     const handleCardPress = (seasonName) => () => {

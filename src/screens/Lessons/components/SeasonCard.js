@@ -12,7 +12,9 @@ const SeasonCard = ({ title = "", subtitle = "", image, onCardPress, locked = tr
                 imageStyle={styles.cardImage}
             >
                 <TouchableRipple
+                    borderless
                     onPress={locked ? null : onCardPress}
+                    style={styles.ripple}
                     rippleColor={
                         locked ? "transparent" : "rgba(200, 255, 255, .3)"
                     }
@@ -49,6 +51,9 @@ const styles = StyleSheet.create({
     card: {
         width: "auto",
         height: "auto",
+    },
+    ripple: {
+        borderRadius: 10,
     },
     cardContent: {
         paddingVertical: 18,

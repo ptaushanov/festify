@@ -49,14 +49,16 @@ const AnswerCard = ({ text = "", selectIndex }) => {
             themedStyle.borderColor = "transparent"
     }
 
-    const handleChoiceSelect = () => {
+    const checkCardDisabled = () => {
         switch (questionState) {
             case "correct":
             case "incorrect":
-                return
+                return true
+            default:
+                return false
         }
-        setCurrentChoice(selectIndex)
     }
+    const handleChoiceSelect = () => { setCurrentChoice(selectIndex) }
 
     return (
         <Surface style={[
@@ -64,7 +66,7 @@ const AnswerCard = ({ text = "", selectIndex }) => {
             themedStyle
         ]}>
             <TouchableRipple
-                onPress={handleChoiceSelect}
+                onPress={checkCardDisabled() ? null : handleChoiceSelect}
                 borderless
                 centered
                 style={styles.ripple}

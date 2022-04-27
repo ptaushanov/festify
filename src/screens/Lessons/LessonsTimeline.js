@@ -1,4 +1,4 @@
-import { StyleSheet, View, FlatList, Pressable } from 'react-native'
+import { StyleSheet, View, FlatList } from 'react-native'
 import React, { useState, useCallback } from 'react'
 
 import TimelineCard from './components/TimelineCard'
@@ -46,13 +46,9 @@ const LessonsTimeline = ({ route }) => {
         }, [forSeason])
     )
 
-    const handleShrinkCards = () => { setExpandedIndex(-1) }
 
     return (
-        <Pressable
-            style={styles.timelineWrapper}
-            onPress={handleShrinkCards}
-        >
+        <View style={styles.timelineWrapper}>
             <FlatList
                 style={styles.timeline}
                 data={cards}
@@ -74,7 +70,7 @@ const LessonsTimeline = ({ route }) => {
                 showsVerticalScrollIndicator={false}
                 showsHorizontalScrollIndicator={false}
             />
-        </Pressable>
+        </View>
     )
 }
 

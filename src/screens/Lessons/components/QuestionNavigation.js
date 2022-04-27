@@ -19,8 +19,13 @@ const QuestionNavigation = () => {
     const setActionTextFromState = (state) => {
         switch (state) {
             case "correct":
-                setActionButtonText("Next")
-                break
+                const nextStep = currentStep + 1
+                if (nextStep < counter.stepsCount) {
+                    setActionButtonText("Next")
+                    break;
+                }
+                setActionButtonText("Finish")
+                break;
             case "incorrect":
                 setActionButtonText("Try again")
                 break
@@ -48,6 +53,9 @@ const QuestionNavigation = () => {
         const nextStep = currentStep + 1
         if (nextStep < counter.stepsCount) {
             setCurrentStep(nextStep)
+        }
+        else {
+            alert("Finished")
         }
     }
 
