@@ -27,15 +27,11 @@ export function LessonsProvider({ children }) {
     const [lessonData, setLessonData] = useState(null)
     const [currentStep, setCurrentStep] = useState(0)
 
-    const [counters, setCounters] = useState({
+    const [counter, setCounter] = useState({
         pageCount: 0,
         questionCount: 0,
         stepsCount: 0
     })
-
-    const [currentCorrectAnswer, setCurrentCorrectAnswer] = useState(-2)
-    const [currentChoice, setCurrentChoice] = useState(-1)
-    const [currentChoiceState, setCurrentChoiceState] = useState("normal")
 
     const handleUpdatedSeasonsData = (newSeasonData) => {
         setSeasonsData(prevSeasonsData => {
@@ -73,13 +69,13 @@ export function LessonsProvider({ children }) {
             .catch(error => console.error(error))
     }
 
-    const determineStepCount = (lessonData) => {
+    const determineCounts = (lessonData) => {
         const { content, questions } = lessonData
         const pageCount = content ? Object.keys(content).length : 0
         const questionCount = questions ? questions.length : 0
 
-        setCounters((prevCounters) => ({
-            ...prevCounters,
+        setCounter((prevCounter) => ({
+            ...prevCounter,
             pageCount,
             questionCount,
             stepsCount: pageCount + questionCount
@@ -90,7 +86,7 @@ export function LessonsProvider({ children }) {
         try {
             const _lessonData = await findLesson(currentLessonRef)
             setLessonData(_lessonData)
-            determineStepCount(_lessonData)
+            determineCounts(_lessonData)
         } catch (error) {
             console.error(error)
         }
@@ -101,11 +97,11 @@ export function LessonsProvider({ children }) {
         setCurrentStep(0)
     }
 
-    const checkAnswer = () => {
-        const correct = currentCorrectAnswer === currentChoice
-        setCurrentChoiceState(correct ? "correct" : "incorrect")
-        return correct
-    }
+    // const checkAnswer = () => {
+    //     const correct = currentCorrectAnswer === currentChoice
+    //     setCurrentChoiceState(correct ? "correct" : "incorrect")
+    //     return correct
+    // }
 
     useFocusEffect(
         useCallback(() => {
@@ -131,13 +127,13 @@ export function LessonsProvider({ children }) {
         lessonData,
         currentStep,
         setCurrentStep,
-        counters,
-        currentChoice,
-        setCurrentChoice,
-        setCurrentCorrectAnswer,
-        checkAnswer,
-        currentChoiceState,
-        setCurrentChoiceState
+        counter,
+        // currentChoice,
+        // setCurrentChoice,
+        // setCurrentCorrectAnswer,
+        // checkAnswer,
+        // currentChoiceState,
+        // setCurrentChoiceState
     }
 
     return (

@@ -1,5 +1,5 @@
 import { createStackNavigator } from '@react-navigation/stack';
-import { LessonsScreen, LessonsTimeline, LessonMain } from "../screens"
+import { SeasonsScreen, LessonsTimeline, LessonScreen } from "../screens"
 import AppbarMain from '../shared/AppBar/AppbarMain';
 import AppbarStack from '../shared/AppBar/AppbarStack';
 
@@ -20,7 +20,7 @@ export default function LessonsStack() {
             >
                 <Screen
                     name="Lessons"
-                    component={LessonsScreen}
+                    component={SeasonsScreen}
                     options={{
                         headerMode: "screen",
                         header: ({ route }) => {
@@ -34,7 +34,7 @@ export default function LessonsStack() {
                 />
                 <Screen
                     name="Lesson Main"
-                    component={LessonMain}
+                    component={LessonScreen}
                     options={{
                         header: () => null
                     }}

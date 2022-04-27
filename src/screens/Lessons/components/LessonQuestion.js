@@ -1,23 +1,18 @@
 import { StyleSheet, View } from 'react-native'
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 
 import QuestionTitle from './QuestionTitle'
 import AnswerCard from './AnswerCard'
+import { useQuestionInfo } from '../../../contexts/QuestionContext'
 
-import { useLessonsInfo } from '../../../contexts/LessonsContext'
-
-const LessonQuestion = ({ content }) => {
-    const { setCurrentCorrectAnswer } = useLessonsInfo()
-
-    useEffect(() => {
-        setCurrentCorrectAnswer(content.answer)
-    }, [content])
+const LessonQuestion = () => {
+    const { question } = useQuestionInfo()
 
     return (
         <View style={styles.questionContainer}>
-            <QuestionTitle title={content.title} />
+            <QuestionTitle title={question.title} />
             <View style={styles.answerContainer}>
-                {content.choices.map((choice, index) => (
+                {question.choices.map((choice, index) => (
                     <AnswerCard
                         key={index}
                         text={choice}

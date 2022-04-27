@@ -14,7 +14,7 @@ import winterImage from "../../assets/images/winter.jpg"
 import i18n from 'i18n-js'
 import { useLessonsInfo } from '../../contexts/LessonsContext'
 
-const LessonsScreen = () => {
+const SeasonsScreen = () => {
     const navigation = useNavigation()
     const {
         seasonsData,
@@ -75,7 +75,7 @@ const LessonsScreen = () => {
     )
 }
 
-export default LessonsScreen
+export default SeasonsScreen
 
 const styles = StyleSheet.create({
     cardContainer: {

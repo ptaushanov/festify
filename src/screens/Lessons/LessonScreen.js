@@ -6,16 +6,15 @@ import { useFocusEffect } from '@react-navigation/native'
 
 import { ActivityIndicator } from 'react-native-paper'
 import ProgressIndicator from './components/ProgressIndicator'
-import LessonNavigation from './components/LessonNavigation'
 import AdaptableContent from './components/AdaptableContent'
 
-const LessonMain = () => {
+const LessonScreen = () => {
     const {
         currentLessonRef,
         loadLessonData,
         lessonData,
         currentStep,
-        counters,
+        counter,
     } = useLessonsInfo()
 
     useFocusEffect(
@@ -29,15 +28,14 @@ const LessonMain = () => {
             {lessonData ? (
                 <View style={styles.flexContainer}>
                     <ProgressIndicator
-                        steps={counters.stepsCount}
+                        steps={counter.stepsCount}
                         currentStep={currentStep}
                     />
                     <AdaptableContent
                         lesson={lessonData}
-                        counters={counters}
+                        counter={counter}
                         currentStep={currentStep}
                     />
-                    <LessonNavigation />
                 </View>
             ) :
                 <ActivityIndicator
@@ -48,7 +46,7 @@ const LessonMain = () => {
     )
 }
 
-export default LessonMain
+export default LessonScreen
 
 const styles = StyleSheet.create({
     flexContainer: {
