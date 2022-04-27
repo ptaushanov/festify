@@ -4,29 +4,26 @@ import { Surface, Text, TouchableRipple } from 'react-native-paper'
 import { Ionicons } from '@expo/vector-icons';
 
 import { useTheme } from 'react-native-paper'
-import { useLessonsInfo } from '../../../contexts/LessonsContext';
+import { useQuestionInfo } from '../../../contexts/QuestionContext';
 
-const AnswerCard = ({
-    text = "",
-    selectIndex,
-}) => {
+const AnswerCard = ({ text = "", selectIndex }) => {
+    const [cardState, setCardState] = useState("normal")
     const { colors } = useTheme()
     const themedStyle = { backgroundColor: colors.surfaceCard }
-    const [cardState, setCardState] = useState("normal")
 
     const {
         currentChoice,
         setCurrentChoice,
-        currentChoiceState,
-    } = useLessonsInfo()
+        questionState,
+    } = useQuestionInfo()
 
     useEffect(() => {
         setCardState(currentChoice === selectIndex ? "selected" : "normal")
     }, [currentChoice])
 
     useEffect(() => {
-        setCardState(currentChoice === selectIndex ? currentChoiceState : "normal")
-    }, [currentChoiceState])
+        setCardState(currentChoice === selectIndex ? questionState : "normal")
+    }, [questionState])
 
     switch (cardState) {
         case "correct":
@@ -53,7 +50,7 @@ const AnswerCard = ({
     }
 
     const handleChoiceSelect = () => {
-        switch (currentChoiceState) {
+        switch (questionState) {
             case "correct":
             case "incorrect":
                 return

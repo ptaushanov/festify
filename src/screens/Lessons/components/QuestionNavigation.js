@@ -75,7 +75,7 @@ const QuestionNavigation = () => {
             onBackButtonPress={handleBackButtonPressed}
             onActionButtonPress={handleActionButtonPressed}
             actionButtonText={actionButtonText}
-            actionButtonDisabled={checkActionDisabled}
+            actionButtonDisabled={checkActionDisabled()}
         />
     )
 }
