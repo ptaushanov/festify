@@ -7,12 +7,26 @@ export function useQuestionInfo() {
 }
 
 export function QuestionProvider({ children, question }) {
-    // const [currentCorrectAnswer, setCurrentCorrectAnswer] = useState(-2)
-    // const [currentChoice, setCurrentChoice] = useState(-1)
-    // const [currentChoiceState, setCurrentChoiceState] = useState("normal")
+    const [currentChoice, setCurrentChoice] = useState(-1)
+    const [questionState, setQuestionState] = useState("normal")
+
+    const resetQuestionState = () => {
+        setCurrentChoice(-1)
+        setQuestionState("normal")
+    }
+
+    const checkAnswer = () => {
+        const { answer } = question
+        setQuestionState(currentChoice === answer ? "correct" : "incorrect")
+    }
 
     const questionData = {
-        question
+        question,
+        currentChoice,
+        setCurrentChoice,
+        questionState,
+        resetQuestionState,
+        checkAnswer
     }
 
     return (

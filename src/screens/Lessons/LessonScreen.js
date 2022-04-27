@@ -12,6 +12,7 @@ const LessonScreen = () => {
     const {
         currentLessonRef,
         loadLessonData,
+        unloadLessonData,
         lessonData,
         currentStep,
         counter,
@@ -20,6 +21,7 @@ const LessonScreen = () => {
     useFocusEffect(
         useCallback(() => {
             currentLessonRef && loadLessonData()
+            return unloadLessonData
         }, [currentLessonRef])
     )
 

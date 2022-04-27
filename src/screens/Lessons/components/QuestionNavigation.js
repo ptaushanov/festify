@@ -1,13 +1,39 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useQuestionInfo } from "../../../contexts/QuestionContext";
 import { useLessonsInfo } from "../../../contexts/LessonsContext";
 import Navigation from "./Navigation";
 import { useNavigation } from "@react-navigation/native";
 
 const QuestionNavigation = () => {
-    const { question } = useQuestionInfo();
-    const { currentStep, setCurrentStep } = useLessonsInfo()
     const navigation = useNavigation()
+    const { currentStep, setCurrentStep, counter } = useLessonsInfo()
+    const [actionButtonText, setActionButtonText] = useState("Check")
+
+    const {
+        currentChoice,
+        questionState,
+        resetQuestionState,
+        checkAnswer
+    } = useQuestionInfo();
+
+    const setActionTextFromState = (state) => {
+        switch (state) {
+            case "correct":
+                setActionButtonText("Next")
+                break
+            case "incorrect":
+                setActionButtonText("Try again")
+                break
+            case "normal":
+                setActionButtonText("Check")
+                break;
+            default:
+        }
+    }
+
+    useEffect(() => {
+        setActionTextFromState(questionState)
+    }, [questionState])
 
     const handleBackButtonPressed = () => {
         if (currentStep > 0) {
@@ -18,20 +44,38 @@ const QuestionNavigation = () => {
         navigation.goBack()
     }
 
-    const handleActionButtonPressed = () => {
-
+    const goNext = () => {
+        const nextStep = currentStep + 1
+        if (nextStep < counter.stepsCount) {
+            setCurrentStep(nextStep)
+        }
     }
 
-    const checkActionButtonDisabled = () => {
-        // return currentChoice === -1 && actionMode === "Check"
+    const handleActionButtonPressed = () => {
+        switch (questionState) {
+            case "correct":
+                goNext()
+                break
+            case "incorrect":
+                resetQuestionState()
+                break
+            case "normal":
+                checkAnswer()
+                break;
+            default:
+        }
+    }
+
+    const checkActionDisabled = () => {
+        return currentChoice === -1 && questionState === "normal"
     }
 
     return (
         <Navigation
             onBackButtonPress={handleBackButtonPressed}
             onActionButtonPress={handleActionButtonPressed}
-            actionButtonText={"Check"}
-            actionButtonDisabled={false}
+            actionButtonText={actionButtonText}
+            actionButtonDisabled={checkActionDisabled}
         />
     )
 }
