@@ -97,12 +97,6 @@ export function LessonsProvider({ children }) {
         setCurrentStep(0)
     }
 
-    // const checkAnswer = () => {
-    //     const correct = currentCorrectAnswer === currentChoice
-    //     setCurrentChoiceState(correct ? "correct" : "incorrect")
-    //     return correct
-    // }
-
     useFocusEffect(
         useCallback(() => {
             if (auth.currentUser) {
@@ -127,13 +121,7 @@ export function LessonsProvider({ children }) {
         lessonData,
         currentStep,
         setCurrentStep,
-        counter,
-        // currentChoice,
-        // setCurrentChoice,
-        // setCurrentCorrectAnswer,
-        // checkAnswer,
-        // currentChoiceState,
-        // setCurrentChoiceState
+        counter
     }
 
     return (

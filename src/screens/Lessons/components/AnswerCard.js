@@ -1,5 +1,5 @@
 import { StyleSheet, View } from 'react-native'
-import React, { useState, useEffect } from 'react'
+import React, { useState, useLayoutEffect } from 'react'
 import { Surface, Text, TouchableRipple } from 'react-native-paper'
 import { Ionicons } from '@expo/vector-icons';
 
@@ -17,11 +17,11 @@ const AnswerCard = ({ text = "", selectIndex }) => {
         questionState,
     } = useQuestionInfo()
 
-    useEffect(() => {
+    useLayoutEffect(() => {
         setCardState(currentChoice === selectIndex ? "selected" : "normal")
     }, [currentChoice])
 
-    useEffect(() => {
+    useLayoutEffect(() => {
         setCardState(currentChoice === selectIndex ? questionState : "normal")
     }, [questionState])
 

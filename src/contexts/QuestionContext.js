@@ -1,4 +1,4 @@
-import { createContext, useState, useContext } from "react"
+import { createContext, useState, useContext, useLayoutEffect } from "react"
 
 const QuestionContext = createContext()
 
@@ -14,6 +14,10 @@ export function QuestionProvider({ children, question }) {
         setCurrentChoice(-1)
         setQuestionState("normal")
     }
+
+    useLayoutEffect(() => {
+        resetQuestionState()
+    }, [question])
 
     const checkAnswer = () => {
         const { answer } = question
