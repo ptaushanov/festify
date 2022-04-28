@@ -26,6 +26,7 @@ export function LessonsProvider({ children }) {
 
     const [lessonData, setLessonData] = useState(null)
     const [currentStep, setCurrentStep] = useState(0)
+    const [lessonFinished, setLessonFinished] = useState(false)
 
     const [counter, setCounter] = useState({
         pageCount: 0,
@@ -95,6 +96,7 @@ export function LessonsProvider({ children }) {
     const unloadLessonData = () => {
         setLessonData(null)
         setCurrentStep(0)
+        setLessonFinished(false)
     }
 
     useFocusEffect(
@@ -121,7 +123,9 @@ export function LessonsProvider({ children }) {
         lessonData,
         currentStep,
         setCurrentStep,
-        counter
+        counter,
+        lessonFinished,
+        setLessonFinished
     }
 
     return (

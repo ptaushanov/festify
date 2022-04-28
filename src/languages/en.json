@@ -60,5 +60,9 @@
     "lessons:Next": "Next",
     "lessons:Check": "Check",
     "lessons:Try again": "Try again",
-    "lessons:Finish": "Finish"
+    "lessons:Finish": "Finish",
+    "lessons:Congratulations": "Congratulations",
+    "lessons:On learning the holiday": "On learning the holiday",
+    "lessons:Reward": "Reward",
+    "lessons:Continue": "Continue"
 }

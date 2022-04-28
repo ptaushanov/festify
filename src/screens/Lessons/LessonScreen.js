@@ -7,6 +7,7 @@ import { useFocusEffect } from '@react-navigation/native'
 import { ActivityIndicator } from 'react-native-paper'
 import ProgressIndicator from './components/ProgressIndicator'
 import AdaptableContent from './components/AdaptableContent'
+import FinishModal from './components/FinishModal'
 
 const LessonScreen = () => {
     const {
@@ -38,6 +39,7 @@ const LessonScreen = () => {
                         counter={counter}
                         currentStep={currentStep}
                     />
+                    <FinishModal />
                 </View>
             ) :
                 <ActivityIndicator

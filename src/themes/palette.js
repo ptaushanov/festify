@@ -8,6 +8,7 @@ export const palette = {
     info: colors.lightblue["400"],
     logo: colors.red["a700"],
     auth: colors.teal["400"],
+    xp: colors.amber["800"],
     textDisabled: colors.grey["500"],
 }
 

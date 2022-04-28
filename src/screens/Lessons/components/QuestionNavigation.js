@@ -6,7 +6,13 @@ import { useNavigation } from "@react-navigation/native";
 
 const QuestionNavigation = () => {
     const navigation = useNavigation()
-    const { currentStep, setCurrentStep, counter } = useLessonsInfo()
+    const {
+        currentStep,
+        setCurrentStep,
+        counter,
+        setLessonFinished
+    } = useLessonsInfo()
+
     const [actionButtonText, setActionButtonText] = useState("Check")
 
     const {
@@ -54,9 +60,7 @@ const QuestionNavigation = () => {
         if (nextStep < counter.stepsCount) {
             setCurrentStep(nextStep)
         }
-        else {
-            alert("Finished")
-        }
+        else { setLessonFinished(true) }
     }
 
     const handleActionButtonPressed = () => {
