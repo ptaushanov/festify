@@ -9,7 +9,9 @@ import {
     findUnlockedLessonsBySeason,
     findLesson,
     completeLesson as completeLessonService,
-    checkCompletedLesson as checkCompletedLessonService
+    checkCompletedLesson as checkCompletedLessonService,
+    unlockNewLesson as unlockNewLessonService,
+    unlockNexSeason as unlockNewSeasonService
 } from "../services/lessons-services"
 
 const LessonsContext = createContext()
@@ -135,6 +137,42 @@ export function LessonsProvider({ children }) {
         }
     }
 
+    const unlockNewLesson = async () => {
+        try {
+            const nextLessonIndex = currentLessonIndex + 1
+            return await unlockNewLessonService(
+                auth.currentUser.uid,
+                currentSeason,
+                nextLessonIndex,
+            )
+        } catch (error) {
+            console.error(error)
+        }
+    }
+
+    const unlockNewSeason = async () => {
+        try {
+            const nextSeasonIndex = seasons.indexOf(currentSeason) + 1
+            const nextSeason = seasons[nextSeasonIndex]
+
+            if (typeof nextSeason === "string") {
+                return await unlockNewSeasonService(
+                    auth.currentUser.uid,
+                    nextSeason,
+                )
+            }
+        } catch (error) {
+            console.error(error)
+        }
+    }
+
+    const tryUnlockNewLessonOrSeason = () => {
+        const hasNext = !lessonData.last_for_season
+        alert(hasNext)
+        if (hasNext) { unlockNewLesson() }
+        else { unlockNewSeason() }
+    }
+
     useFocusEffect(
         useCallback(() => {
             if (auth.currentUser) {
@@ -167,7 +205,8 @@ export function LessonsProvider({ children }) {
         currentSeason,
         setCurrentSeason,
         completeLesson,
-        checkCompletedLesson
+        checkCompletedLesson,
+        tryUnlockNewLessonOrSeason
     }
 
     return (

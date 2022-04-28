@@ -106,3 +106,45 @@ export const checkCompletedLesson = (userId, season, lessonIndex) => {
             return completed_lessons[season]?.includes(lessonIndex)
         })
 }
+
+export const unlockNewLesson = async (userId, season, lessonIndex) => {
+    const document = await firestore
+        .collection("users")
+        .doc(userId)
+        .get()
+
+    if (!document.exists) { return }
+
+    const { unlocked_lessons } = document.data()
+    const withNewUnlockedLesson = [
+        ...unlocked_lessons[season],
+        lessonIndex
+    ]
+
+    return firestore
+        .collection("users")
+        .doc(userId)
+        .update({
+            [`unlocked_lessons.${season}`]: withNewUnlockedLesson,
+        })
+}
+
+export const unlockNexSeason = async (userId, season) => {
+    const document = await firestore
+        .collection("users")
+        .doc(userId)
+        .get()
+
+    if (!document.exists) { return }
+
+    const { unlocked_seasons } = document.data()
+    const withNewUnlockedSeason = [
+        ...unlocked_seasons,
+        season
+    ]
+
+    return firestore
+        .collection("users")
+        .doc(userId)
+        .update({ unlocked_seasons: withNewUnlockedSeason })
+}

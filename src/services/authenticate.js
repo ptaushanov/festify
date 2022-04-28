@@ -6,9 +6,9 @@ export const signUpUser = (newUser) => {
 
     const unlocked_lessons = {
         spring: [0],
-        summer: [],
-        autumn: [],
-        winter: []
+        summer: [0],
+        autumn: [0],
+        winter: [0]
     }
 
     const completed_lessons = {

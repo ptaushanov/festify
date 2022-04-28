@@ -11,7 +11,8 @@ const QuestionNavigation = () => {
         setCurrentStep,
         counter,
         setLessonFinished,
-        checkCompletedLesson
+        checkCompletedLesson,
+        tryUnlockNewLessonOrSeason
     } = useLessonsInfo()
 
     const [actionButtonText, setActionButtonText] = useState("Check")
@@ -63,6 +64,7 @@ const QuestionNavigation = () => {
             return
         }
         setLessonFinished(true)
+        tryUnlockNewLessonOrSeason()
     }
 
     const goNext = () => {
@@ -70,9 +72,7 @@ const QuestionNavigation = () => {
         if (nextStep < counter.stepsCount) {
             setCurrentStep(nextStep)
         }
-        else {
-            triggerLessonFinish()
-        }
+        else { triggerLessonFinish() }
     }
 
     const handleActionButtonPressed = () => {
