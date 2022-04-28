@@ -28,7 +28,8 @@ export const signUpUser = (newUser) => {
                     username,
                     unlocked_seasons,
                     unlocked_lessons,
-                    completed_lessons
+                    completed_lessons,
+                    xp: 0
                 })
         })
 }

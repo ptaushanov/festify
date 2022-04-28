@@ -72,21 +72,25 @@ export const findLesson = (lessonRef) => {
         })
 }
 
-export const completeLesson = async (userId, season, lessonIndex, xp) => {
-    const document = await firestore.collection("users").doc(userId).get()
-    if (document.exists) {
-        const { completed_lessons } = document.data()
-        const seasonCompletedLessons = completed_lessons[season]
-        if (seasonCompletedLessons) {
-            const withNewCompletedLesson = [
-                ...seasonCompletedLessons,
-                lessonIndex
-            ]
+export const completeLesson = async (userId, season, lessonIndex, gainedXP) => {
+    const document = await firestore
+        .collection("users")
+        .doc(userId)
+        .get()
 
-            await firestore
-                .collection("users")
-                .doc(userId)
-                .update()
-        }
-    }
+    if (!document.exists) { return }
+
+    const { completed_lessons, xp } = document.data()
+    const withNewCompletedLesson = [
+        ...completed_lessons[season],
+        lessonIndex
+    ]
+
+    return firestore
+        .collection("users")
+        .doc(userId)
+        .update({
+            [`completed_lessons.${season}`]: withNewCompletedLesson,
+            xp: xp + gainedXP
+        })
 }

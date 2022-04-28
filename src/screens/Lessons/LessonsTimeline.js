@@ -53,8 +53,8 @@ const LessonsTimeline = ({ route }) => {
             <FlatList
                 style={styles.timeline}
                 data={cards}
-                renderItem={({ item: props }) => (
-                    <TimelineCard expanded={expandedIndex}  {...props} />
+                renderItem={({ item: props, index }) => (
+                    <TimelineCard key={index} expanded={expandedIndex}  {...props} />
                 )}
                 keyExtractor={card => card.expandIndex}
                 ListHeaderComponent={() => (

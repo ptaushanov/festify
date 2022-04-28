@@ -102,11 +102,14 @@ export function LessonsProvider({ children }) {
         setLessonFinished(false)
     }
 
-    const completeLesson = async () => {
-        // TODO: add xp to user xp
-        // TODO: mark lesson as completed
-        await completeLessonService(currentSeason, currentLessonIndex)
-        return
+    const completeLesson = () => {
+        const { xp_reward = 0 } = lessonData
+        return completeLessonService(
+            auth.currentUser.uid,
+            currentSeason,
+            currentLessonIndex,
+            xp_reward
+        ).catch(error => console.error(error))
     }
 
     useFocusEffect(
@@ -140,6 +143,7 @@ export function LessonsProvider({ children }) {
         setCurrentLessonIndex,
         currentSeason,
         setCurrentSeason,
+        completeLesson
     }
 
     return (
