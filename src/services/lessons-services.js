@@ -94,3 +94,15 @@ export const completeLesson = async (userId, season, lessonIndex, gainedXP) => {
             xp: xp + gainedXP
         })
 }
+
+export const checkCompletedLesson = (userId, season, lessonIndex) => {
+    return firestore
+        .collection("users")
+        .doc(userId)
+        .get()
+        .then(doc => {
+            if (!doc.exists) { return false }
+            const { completed_lessons } = doc.data()
+            return completed_lessons[season]?.includes(lessonIndex)
+        })
+}

@@ -8,7 +8,8 @@ import {
     findTimelineDataBySeason,
     findUnlockedLessonsBySeason,
     findLesson,
-    completeLesson as completeLessonService
+    completeLesson as completeLessonService,
+    checkCompletedLesson as checkCompletedLessonService
 } from "../services/lessons-services"
 
 const LessonsContext = createContext()
@@ -63,14 +64,20 @@ export function LessonsProvider({ children }) {
         }
     }
 
-    const getTimelineDataBySeason = (season) => {
-        return findTimelineDataBySeason(season)
-            .catch(error => console.error(error))
+    const getTimelineDataBySeason = async (season) => {
+        try {
+            return await findTimelineDataBySeason(season)
+        } catch (error) {
+            console.error(error)
+        }
     }
 
-    const getUnlockedLessonsBySeason = (season) => {
-        return findUnlockedLessonsBySeason(auth.currentUser.uid, season)
-            .catch(error => console.error(error))
+    const getUnlockedLessonsBySeason = async (season) => {
+        try {
+            return await findUnlockedLessonsBySeason(auth.currentUser.uid, season)
+        } catch (error) {
+            console.error(error)
+        }
     }
 
     const determineCounts = (lessonData) => {
@@ -102,14 +109,30 @@ export function LessonsProvider({ children }) {
         setLessonFinished(false)
     }
 
-    const completeLesson = () => {
+    const completeLesson = async () => {
         const { xp_reward = 0 } = lessonData
-        return completeLessonService(
-            auth.currentUser.uid,
-            currentSeason,
-            currentLessonIndex,
-            xp_reward
-        ).catch(error => console.error(error))
+        try {
+            return await completeLessonService(
+                auth.currentUser.uid,
+                currentSeason,
+                currentLessonIndex,
+                xp_reward
+            )
+        } catch (error) {
+            console.error(error)
+        }
+    }
+
+    const checkCompletedLesson = async () => {
+        try {
+            return await checkCompletedLessonService(
+                auth.currentUser.uid,
+                currentSeason,
+                currentLessonIndex,
+            )
+        } catch (error) {
+            console.error(error)
+        }
     }
 
     useFocusEffect(
@@ -143,7 +166,8 @@ export function LessonsProvider({ children }) {
         setCurrentLessonIndex,
         currentSeason,
         setCurrentSeason,
-        completeLesson
+        completeLesson,
+        checkCompletedLesson
     }
 
     return (

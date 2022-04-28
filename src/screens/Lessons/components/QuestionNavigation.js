@@ -10,7 +10,8 @@ const QuestionNavigation = () => {
         currentStep,
         setCurrentStep,
         counter,
-        setLessonFinished
+        setLessonFinished,
+        checkCompletedLesson
     } = useLessonsInfo()
 
     const [actionButtonText, setActionButtonText] = useState("Check")
@@ -55,12 +56,23 @@ const QuestionNavigation = () => {
         navigation.goBack()
     }
 
+    const triggerLessonFinish = async () => {
+        const completed = await checkCompletedLesson()
+        if (completed) {
+            navigation.goBack()
+            return
+        }
+        setLessonFinished(true)
+    }
+
     const goNext = () => {
         const nextStep = currentStep + 1
         if (nextStep < counter.stepsCount) {
             setCurrentStep(nextStep)
         }
-        else { setLessonFinished(true) }
+        else {
+            triggerLessonFinish()
+        }
     }
 
     const handleActionButtonPressed = () => {
