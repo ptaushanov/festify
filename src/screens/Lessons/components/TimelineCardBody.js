@@ -11,26 +11,27 @@ const TimelineCardBody = ({
   title = "",
   date = "",
   expanded = -1,
-  expandIndex,
   onExpand,
+  lessonIndex,
   lessonRef
 }) => {
   const { colors } = useTheme();
   const navigation = useNavigation();
-  const { setCurrentLessonRef } = useLessonsInfo()
+  const { setCurrentLessonRef, setCurrentLessonIndex } = useLessonsInfo()
 
   const handleExpandCard = () => {
-    if (expanded === expandIndex) {
+    if (expanded === lessonIndex) {
       handlePlayPressed()
       return;
     }
 
-    onExpand(expandIndex)
+    onExpand(lessonIndex)
   }
 
   const handlePlayPressed = () => {
     // Set in a context because params have to be serializable
     setCurrentLessonRef(lessonRef)
+    setCurrentLessonIndex(lessonIndex)
     navigation.navigate("Lesson Main")
   }
 
@@ -47,7 +48,7 @@ const TimelineCardBody = ({
             <Text style={styles.title}>{title}</Text>
             <Text style={styles.date}>{date}</Text>
           </View>
-          {(expanded === expandIndex) && <View>
+          {(expanded === lessonIndex) && <View>
             <TouchableRipple
               onPress={handlePlayPressed}
               style={styles.playButton}

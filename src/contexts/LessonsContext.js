@@ -7,7 +7,8 @@ import {
     updateSeasonsDataBySeasonNames,
     findTimelineDataBySeason,
     findUnlockedLessonsBySeason,
-    findLesson
+    findLesson,
+    completeLesson as completeLessonService
 } from "../services/lessons-services"
 
 const LessonsContext = createContext()
@@ -23,6 +24,8 @@ export function LessonsProvider({ children }) {
 
     const [unlockedSeasons, setUnlockedSeasons] = useState([])
     const [currentLessonRef, setCurrentLessonRef] = useState(null)
+    const [currentSeason, setCurrentSeason] = useState(null)
+    const [currentLessonIndex, setCurrentLessonIndex] = useState(-1)
 
     const [lessonData, setLessonData] = useState(null)
     const [currentStep, setCurrentStep] = useState(0)
@@ -99,6 +102,13 @@ export function LessonsProvider({ children }) {
         setLessonFinished(false)
     }
 
+    const completeLesson = async () => {
+        // TODO: add xp to user xp
+        // TODO: mark lesson as completed
+        await completeLessonService(currentSeason, currentLessonIndex)
+        return
+    }
+
     useFocusEffect(
         useCallback(() => {
             if (auth.currentUser) {
@@ -125,7 +135,11 @@ export function LessonsProvider({ children }) {
         setCurrentStep,
         counter,
         lessonFinished,
-        setLessonFinished
+        setLessonFinished,
+        currentLessonIndex,
+        setCurrentLessonIndex,
+        currentSeason,
+        setCurrentSeason,
     }
 
     return (

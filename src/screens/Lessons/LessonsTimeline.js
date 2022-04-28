@@ -18,7 +18,8 @@ const LessonsTimeline = ({ route }) => {
 
     const {
         getTimelineDataBySeason,
-        getUnlockedLessonsBySeason
+        getUnlockedLessonsBySeason,
+        setCurrentSeason
     } = useLessonsInfo()
 
     const remapHolidays = async (holidays) => {
@@ -31,7 +32,7 @@ const LessonsTimeline = ({ route }) => {
             image: holiday.thumbnail ? { uri: holiday.thumbnail } : noImage,
             lessonRef: holiday.lessonRef,
             locked: !Boolean(unlockedLessons?.includes(index)),
-            expandIndex: index,
+            lessonIndex: index,
             onExpand: setExpandedIndex
         }))
     }
@@ -42,10 +43,10 @@ const LessonsTimeline = ({ route }) => {
                 const { holidays } = await getTimelineDataBySeason(forSeason)
                 const holidaysWithMeta = await remapHolidays(holidays)
                 setCards(holidaysWithMeta)
+                setCurrentSeason(forSeason)
             })()
         }, [forSeason])
     )
-
 
     return (
         <View style={styles.timelineWrapper}>

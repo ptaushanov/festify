@@ -12,7 +12,7 @@ const TimelineCard = ({
     image,
     locked = true,
     expanded = -1,
-    expandIndex,
+    lessonIndex,
     onExpand,
     lessonRef
 }) => {
@@ -27,7 +27,7 @@ const TimelineCard = ({
                     title={title}
                     date={date}
                     expanded={expanded}
-                    expandIndex={expandIndex}
+                    lessonIndex={lessonIndex}
                     onExpand={onExpand}
                     lessonRef={lessonRef}
                 />

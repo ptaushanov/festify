@@ -71,3 +71,22 @@ export const findLesson = (lessonRef) => {
             return doc.data()
         })
 }
+
+export const completeLesson = async (userId, season, lessonIndex, xp) => {
+    const document = await firestore.collection("users").doc(userId).get()
+    if (document.exists) {
+        const { completed_lessons } = document.data()
+        const seasonCompletedLessons = completed_lessons[season]
+        if (seasonCompletedLessons) {
+            const withNewCompletedLesson = [
+                ...seasonCompletedLessons,
+                lessonIndex
+            ]
+
+            await firestore
+                .collection("users")
+                .doc(userId)
+                .update()
+        }
+    }
+}

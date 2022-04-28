@@ -13,13 +13,14 @@ const FinishModal = () => {
     const {
         lessonData,
         lessonFinished,
-        setLessonFinished
+        setLessonFinished,
     } = useLessonsInfo()
 
     const { colors } = useTheme()
     const navigation = useNavigation()
 
     const handleContinuePress = () => {
+        alert(currentSeason)
         navigation.goBack()
     }
 
