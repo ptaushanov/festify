@@ -1,6 +1,5 @@
-import { View } from 'react-native'
+import { View, StyleSheet } from 'react-native'
 import React, { useCallback, useState } from 'react'
-import globalStyles from '../../styles/global'
 import LessonCard from './components/LessonCard'
 import { useFocusEffect } from '@react-navigation/native'
 import { useNavigation } from '@react-navigation/native'
@@ -31,8 +30,7 @@ const HomeScreen = () => {
         const params = {
             forSeason: seasonName,
             title: seasonName.capitalize() + " holidays",
-            appBarTitle: timelineName,
-            jumpToLessonIndex: currentLesson.index
+            appBarTitle: timelineName
         }
         navigation.navigate("LessonsStack", {
             screen: "Season Timeline",
@@ -47,7 +45,7 @@ const HomeScreen = () => {
     }
 
     return (
-        <View style={globalStyles.paddedContainer}>
+        <View style={styles.container}>
             {currentLesson && <LessonCard
                 lessonTitle={currentLesson.name}
                 lessonThumbnail={getLessonThumbnail()}
@@ -56,5 +54,12 @@ const HomeScreen = () => {
         </View>
     )
 }
+
+const styles = StyleSheet.create({
+    container: {
+        padding: 40,
+        flex: 1
+    }
+})
 
 export default HomeScreen

@@ -152,3 +152,15 @@ export const unlockNexSeason = async (userId, season) => {
             current_lesson: { season, index: 0 }
         })
 }
+
+export const findCurrentLesson = async (userId) => {
+    const userDocument = await firestore
+        .collection("users")
+        .doc(userId)
+        .get()
+
+    if (!userDocument.exists) { return null }
+    const { current_lesson } = userDocument.data()
+
+    return current_lesson
+}

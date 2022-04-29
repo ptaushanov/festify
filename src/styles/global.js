@@ -8,18 +8,10 @@ export default StyleSheet.create({
     },
     paddedContainer: {
         padding: 40,
-        marginTop: 20
+        marginTop: 20,
     },
     slimContainer: {
         padding: 20,
         flex: 1
-    },
-    paddedContainer: {
-        padding: 40,
-        flex: 1
-    },
-    borderTrace: {
-        borderColor: "red",
-        borderWidth: 2,
     }
 })

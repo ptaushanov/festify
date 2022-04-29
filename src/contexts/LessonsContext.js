@@ -8,6 +8,7 @@ import {
     findTimelineDataBySeason,
     findUnlockedLessonsBySeason,
     findLesson,
+    findCurrentLesson,
     completeLesson as completeLessonService,
     checkCompletedLesson as checkCompletedLessonService,
     unlockNewLesson as unlockNewLessonService,
@@ -172,6 +173,14 @@ export function LessonsProvider({ children }) {
         else { unlockNewSeason() }
     }
 
+    const getCurrentLesson = async () => {
+        try {
+            return await findCurrentLesson(auth.currentUser.uid)
+        } catch (error) {
+            console.error(error)
+        }
+    }
+
     useFocusEffect(
         useCallback(() => {
             if (auth.currentUser) {
@@ -205,7 +214,8 @@ export function LessonsProvider({ children }) {
         setCurrentSeason,
         completeLesson,
         checkCompletedLesson,
-        tryUnlockNewLessonOrSeason
+        tryUnlockNewLessonOrSeason,
+        getCurrentLesson
     }
 
     return (

@@ -11,13 +11,16 @@ import { ActivityIndicator } from 'react-native-paper'
 import noImage from "../../assets/images/no_image.jpg"
 
 const LessonsTimeline = ({ route }) => {
-    const { forSeason, title, jumpToLessonIndex = -1 } = route.params
+    const { forSeason, title } = route.params
     const [expandedIndex, setExpandedIndex] = useState(-1)
     const [cards, setCards] = useState([])
+    const [jumpToLessonIndex, setJumpToLessonIndex] = useState(-1)
+
     const flatListRef = useRef(null)
     const {
         getTimelineDataBySeason,
         getUnlockedLessonsBySeason,
+        getCurrentLesson,
         setCurrentSeason
     } = useLessonsInfo()
 
@@ -43,6 +46,12 @@ const LessonsTimeline = ({ route }) => {
                 const holidaysWithMeta = await remapHolidays(holidays)
                 setCards(holidaysWithMeta)
                 setCurrentSeason(forSeason)
+
+                const currentLesson = await getCurrentLesson()
+                setJumpToLessonIndex(
+                    forSeason === currentLesson.season ?
+                        currentLesson.index : -1
+                )
             })()
         }, [forSeason])
     )
