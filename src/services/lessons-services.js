@@ -126,6 +126,7 @@ export const unlockNewLesson = async (userId, season, lessonIndex) => {
         .doc(userId)
         .update({
             [`unlocked_lessons.${season}`]: withNewUnlockedLesson,
+            current_lesson: { season, index: lessonIndex }
         })
 }
 
@@ -146,5 +147,20 @@ export const unlockNexSeason = async (userId, season) => {
     return firestore
         .collection("users")
         .doc(userId)
-        .update({ unlocked_seasons: withNewUnlockedSeason })
+        .update({
+            unlocked_seasons: withNewUnlockedSeason,
+            current_lesson: { season, index: 0 }
+        })
 }
+
+export const findCurrentLesson = (userId) => {
+    return firestore
+        .collection("users")
+        .doc(userId)
+        .get()
+        .then(doc => {
+            if (!doc.exists) { return null }
+            const { current_lesson } = doc.data()
+            return current_lesson
+        })
+} 

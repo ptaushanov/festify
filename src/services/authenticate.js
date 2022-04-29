@@ -3,20 +3,9 @@ import { auth, firestore } from "../../firebase.v8";
 export const signUpUser = (newUser) => {
     const { username, email, password } = newUser;
     const unlocked_seasons = ["spring"]
-
-    const unlocked_lessons = {
-        spring: [0],
-        summer: [0],
-        autumn: [0],
-        winter: [0]
-    }
-
-    const completed_lessons = {
-        spring: [],
-        summer: [],
-        autumn: [],
-        winter: []
-    }
+    const unlocked_lessons = { spring: [0], summer: [0], autumn: [0], winter: [0] }
+    const completed_lessons = { spring: [], summer: [], autumn: [], winter: [] }
+    const current_lesson = { season: "spring", index: 0 }
 
     return auth.createUserWithEmailAndPassword(email, password)
         .then(userCredentials => {
@@ -29,6 +18,7 @@ export const signUpUser = (newUser) => {
                     unlocked_seasons,
                     unlocked_lessons,
                     completed_lessons,
+                    current_lesson,
                     xp: 0
                 })
         })
