@@ -127,6 +127,7 @@ const LoginScreen = () => {
                                         style={styles.button}
                                         contentStyle={styles.buttonContent}
                                         color={colors.accent}
+                                        disabled={isSubmitting || isValidating}
                                     >
                                         {i18n.t("auth:Login")}
                                     </Button>

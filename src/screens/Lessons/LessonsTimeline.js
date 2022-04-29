@@ -3,7 +3,6 @@ import React, { useState, useCallback } from 'react'
 
 import TimelineCard from './components/TimelineCard'
 import TimelineTitle from './components/TimelineTitle'
-import TimelineStartPoint from './components/TimelineStartPoint'
 
 import { useLessonsInfo } from '../../contexts/LessonsContext'
 import { useFocusEffect } from '@react-navigation/native'
@@ -61,7 +60,6 @@ const LessonsTimeline = ({ route }) => {
                     cards.length > 0 ?
                         <View>
                             <TimelineTitle title={`lessons:${title}`} />
-                            <TimelineStartPoint />
                         </View> : null
                 )}
                 ListEmptyComponent={() => (

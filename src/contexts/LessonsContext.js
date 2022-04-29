@@ -168,7 +168,6 @@ export function LessonsProvider({ children }) {
 
     const tryUnlockNewLessonOrSeason = () => {
         const hasNext = !lessonData.last_for_season
-        alert(hasNext)
         if (hasNext) { unlockNewLesson() }
         else { unlockNewSeason() }
     }
