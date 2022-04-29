@@ -1,5 +1,5 @@
 import { StyleSheet, View, FlatList } from 'react-native'
-import React, { useState, useCallback } from 'react'
+import React, { useState, useCallback, useRef, useEffect } from 'react'
 
 import TimelineCard from './components/TimelineCard'
 import TimelineTitle from './components/TimelineTitle'
@@ -11,10 +11,10 @@ import { ActivityIndicator } from 'react-native-paper'
 import noImage from "../../assets/images/no_image.jpg"
 
 const LessonsTimeline = ({ route }) => {
-    const { forSeason, title } = route.params
+    const { forSeason, title, jumpToLessonIndex = 5 } = route.params
     const [expandedIndex, setExpandedIndex] = useState(-1)
     const [cards, setCards] = useState([])
-
+    const flatListRef = useRef(null)
     const {
         getTimelineDataBySeason,
         getUnlockedLessonsBySeason,
@@ -47,11 +47,33 @@ const LessonsTimeline = ({ route }) => {
         }, [forSeason])
     )
 
+    useFocusEffect(
+        useCallback(() => {
+            const scrollConditions =
+                jumpToLessonIndex !== -1
+                && flatListRef.current
+                && cards.length > 0
+
+            if (scrollConditions) {
+                flatListRef.current
+                    .scrollToIndex({ animated: true, index: jumpToLessonIndex });
+                setExpandedIndex(jumpToLessonIndex)
+            }
+        }, [cards, flatListRef.current, jumpToLessonIndex])
+    )
+
+    const handleOnScrollToIndexFailed = async (info) => {
+        await new Promise(resolve => setTimeout(resolve, 500));
+        flatListRef.current?.scrollToIndex({ index: info.index, animated: true });
+    }
+
     return (
         <View style={styles.timelineWrapper}>
             <FlatList
                 style={styles.timeline}
                 data={cards}
+                ref={flatListRef}
+                onScrollToIndexFailed={handleOnScrollToIndexFailed}
                 renderItem={({ item: props }) => (
                     <TimelineCard {...props} expanded={expandedIndex} />
                 )}

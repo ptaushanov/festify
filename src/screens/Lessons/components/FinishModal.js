@@ -76,14 +76,14 @@ const styles = StyleSheet.create({
     },
     headline: {
         textAlign: "center",
-        fontSize: 34
+        fontSize: 32
     },
     subheading: {
         textAlign: "center",
         marginVertical: 20,
         lineHeight: 30,
         fontSize: 22,
-        paddingHorizontal: 40
+        paddingHorizontal: 35
     },
     rewardText: {
         fontSize: 28,

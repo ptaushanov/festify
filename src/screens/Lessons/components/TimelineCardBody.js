@@ -32,7 +32,7 @@ const TimelineCardBody = ({
     // Set in a context because params have to be serializable
     setCurrentLessonRef(lessonRef)
     setCurrentLessonIndex(lessonIndex)
-    navigation.navigate("Lesson Main")
+    navigation.navigate("Lesson Screen")
   }
 
   return (

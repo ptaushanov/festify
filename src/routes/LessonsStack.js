@@ -33,7 +33,7 @@ export default function LessonsStack() {
                     component={LessonsTimeline}
                 />
                 <Screen
-                    name="Lesson Main"
+                    name="Lesson Screen"
                     component={LessonScreen}
                     options={{
                         header: () => null
