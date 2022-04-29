@@ -42,13 +42,13 @@ const styles = StyleSheet.create({
     card: {
         flexDirection: "row",
         alignItems: "center",
-        paddingTop: 30,
+        paddingVertical: 15,
     },
     timeline: {
         position: "absolute",
         width: 0,
-        borderLeftWidth: 2,
-        left: 36,
+        borderLeftWidth: 3,
+        left: 34,
         bottom: 0,
         top: 0
     }
