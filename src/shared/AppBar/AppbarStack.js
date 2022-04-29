@@ -11,14 +11,11 @@ const AppbarStack = ({ route }) => {
             <Appbar.BackAction onPress={navigation.goBack} />
             <Appbar.Content
                 title={i18n.t(route.params?.appBarTitle || route.name)}
-                style={styles.content}
             />
         </Appbar.Header>
     );
 };
 
-const styles = StyleSheet.create({
-
-})
+const styles = StyleSheet.create({})
 
 export default AppbarStack
