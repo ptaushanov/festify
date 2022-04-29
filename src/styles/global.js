@@ -14,6 +14,10 @@ export default StyleSheet.create({
         padding: 20,
         flex: 1
     },
+    paddedContainer: {
+        padding: 40,
+        flex: 1
+    },
     borderTrace: {
         borderColor: "red",
         borderWidth: 2,

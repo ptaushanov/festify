@@ -5,7 +5,12 @@ import { Avatar } from 'react-native-paper';
 import { useTheme, Surface, Headline, Subheading, Button } from 'react-native-paper';
 import i18n from 'i18n-js';
 
-const LessonCard = ({ thumbnailSize = 80, lessonThumbnail, onContinuePress }) => {
+const LessonCard = ({
+    thumbnailSize = 80,
+    lessonTitle = "",
+    lessonThumbnail,
+    onContinuePress
+}) => {
     const { colors } = useTheme()
     const themedCircleStyles = { borderColor: colors.surface }
 
@@ -17,7 +22,7 @@ const LessonCard = ({ thumbnailSize = 80, lessonThumbnail, onContinuePress }) =>
                 </View>
             }
             <Headline style={styles.headline}>
-                Test Lesson
+                {lessonTitle}
             </Headline>
             <Subheading style={styles.subheading}>
                 {i18n.t("home:Pick up where you left off")}
@@ -52,7 +57,9 @@ const styles = StyleSheet.create({
         marginTop: -30
     },
     headline: {
-        textAlign: "center"
+        textAlign: "center",
+        fontSize: 20,
+        lineHeight: 25
     },
     subheading: {
         textAlign: "center",

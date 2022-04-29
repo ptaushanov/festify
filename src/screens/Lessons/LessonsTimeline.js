@@ -11,7 +11,7 @@ import { ActivityIndicator } from 'react-native-paper'
 import noImage from "../../assets/images/no_image.jpg"
 
 const LessonsTimeline = ({ route }) => {
-    const { forSeason, title, jumpToLessonIndex = 5 } = route.params
+    const { forSeason, title, jumpToLessonIndex = -1 } = route.params
     const [expandedIndex, setExpandedIndex] = useState(-1)
     const [cards, setCards] = useState([])
     const flatListRef = useRef(null)
