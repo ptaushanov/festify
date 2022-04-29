@@ -65,23 +65,40 @@ const SignUp = () => {
                                 .oneOf([Yup.ref('password'), null], i18n.t("auth:password-confirm"))
                         })}
 
-                        onSubmit={(values, { setErrors, setSubmitting }) => {
+                        onSubmit={async (values, { setErrors, setSubmitting }) => {
                             const { username, email, password } = values
+                            try {
+                                const isDuplicate = await checkDuplicateUsername(username)
+                                if (isDuplicate) {
+                                    setErrors({
+                                        username: i18n.t("auth:username-exists")
+                                    })
+                                    setSubmitting(false)
+                                    return
+                                }
 
-                            checkDuplicateUsername(username)
-                                .then(isDuplicate => {
-                                    if (isDuplicate) {
-                                        setErrors({
-                                            username: i18n.t("auth:username-exists")
-                                        })
-                                        setSubmitting(false)
-                                        return
-                                    }
+                                const newUser = new User(username, email, password)
+                                await signUpUser(newUser)
 
-                                    const newUser = new User(username, email, password)
-                                    signUpUser(newUser)
-                                })
-                                .catch(error => alert(error.message))
+                            } catch (error) {
+                                setSubmitting(false)
+                                if (error.code === "auth/email-already-in-use") {
+                                    setErrors({
+                                        email: i18n.t("auth:email-exists")
+                                    })
+                                } else if (error.code === "auth/invalid-email") {
+                                    setErrors({
+                                        email: i18n.t("auth:email-email")
+                                    })
+                                } else if (error.code === "auth/operation-not-allowed") {
+                                    alert(i18n.t("auth:operation-not-allowed"))
+                                } else if (error.code === "auth/weak-password") {
+                                    setErrors({
+                                        password: i18n.t("auth:week-password")
+                                    })
+                                }
+                                else { console.error(error) }
+                            }
                         }}
                     >{
                             ({ values, touched, errors, handleBlur, handleChange, handleSubmit, isSubmitting, isValidating }) => (

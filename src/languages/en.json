@@ -34,6 +34,9 @@
 
     "auth:password-confirm":  "Passwords do not match",
     "auth:invalid-credentials": "Invalid username or password",
+    "auth:email-exists": "Еmail was used by another user",
+    "auth:operation-not-allowed": "Operation not allowed",
+    "auth:week-password": "Week password",
 
     "profile:General": "General",
     "profile:Dark Mode": "Dark Mode",

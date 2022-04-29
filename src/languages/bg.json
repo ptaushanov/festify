@@ -34,6 +34,9 @@
 
     "auth:password-confirm":  "Паролите не съвпадат",
     "auth:invalid-credentials": "Невалидно потребителско име или парола",
+    "auth:email-exists": "Имейла е използван от друг потребител",
+    "auth:operation-not-allowed": "Операцията не е позволена",
+    "auth:week-password": "Въведената парола е слаба",
 
     "profile:General": "Общи",
     "profile:Dark Mode": "Тъмен режим",
