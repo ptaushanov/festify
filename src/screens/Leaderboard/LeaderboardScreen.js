@@ -1,4 +1,5 @@
-import { StyleSheet, View, FlatList } from 'react-native'
+import { StyleSheet, View } from 'react-native'
+import Animated, { SlideInRight, Layout } from 'react-native-reanimated'
 import React, { useState, useCallback, Fragment } from 'react'
 import globalStyles from '../../styles/global'
 import LeaderboardTitle from './components/LeaderboardTitle'
@@ -55,11 +56,16 @@ const LeaderboardScreen = () => {
                             username={i18n.t("leaderboard:Me")}
                         />
                     </View>
-                    <FlatList
+                    <Animated.FlatList
                         data={users}
                         keyExtractor={(user) => user.place}
                         renderItem={({ item: props }) => (
-                            <LeaderboardCard {...props} />
+                            <Animated.View
+                                entering={SlideInRight.delay(props.place * 100)}
+                                layout={Layout.springify()}
+                            >
+                                <LeaderboardCard {...props} />
+                            </Animated.View>
                         )}
                         style={styles.topUsers}
                         contentContainerStyle={styles.topUsersContainer}
