@@ -24,13 +24,12 @@ export const findUserPlace = (userXP) => {
         })
 }
 
-export const findUsersSorted = () => {
+export const updateUsersSorted = (snapshotHandler, errorHandler) => {
     return firestore
         .collection("users")
         .orderBy("xp", "desc")
         .limit(100)
-        .get()
-        .then(querySnapshot => {
+        .onSnapshot(querySnapshot => {
             const users = []
             let currentPlace = 0
 
@@ -42,6 +41,9 @@ export const findUsersSorted = () => {
                 })
                 currentPlace++
             })
-            return users;
+            snapshotHandler(users);
+        }, (error) => {
+            errorHandler(error)
         })
+
 }

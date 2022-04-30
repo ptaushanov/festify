@@ -10,7 +10,7 @@ import { auth } from '../../../firebase.v8'
 import {
     findUser,
     findUserPlace,
-    findUsersSorted
+    updateUsersSorted
 } from '../../services/leaderboard-services'
 
 import i18n from 'i18n-js'
@@ -29,19 +29,15 @@ const LeaderboardScreen = () => {
         }
     }
 
-    const getUsersSorted = async () => {
-        try {
-            let _users = await findUsersSorted()
-            setUsers(_users)
-        } catch (error) {
-            console.error(error)
-        }
-    }
-
     useFocusEffect(
         useCallback(() => {
             getCurrentUser()
-            getUsersSorted()
+            let unsubscribe = updateUsersSorted(setUsers, console.error)
+            return () => {
+                unsubscribe()
+                setCurrentUser(null)
+                setUsers(null)
+            }
         }, [])
     )
 
@@ -71,10 +67,12 @@ const LeaderboardScreen = () => {
                         contentContainerStyle={styles.topUsersContainer}
                         showsVerticalScrollIndicator={false}
                         showsHorizontalScrollIndicator={false}
-
                     />
                 </Fragment> :
-                <ActivityIndicator size="large" />
+                <ActivityIndicator
+                    size="large"
+                    style={styles.activityIndicator}
+                />
             }
         </View>
     )
@@ -86,10 +84,14 @@ const styles = StyleSheet.create({
     meCard: {
         marginVertical: 30
     },
+    activityIndicator: {
+        flex: 1
+    },
     topUsers: {
 
     },
     topUsersContainer: {
 
-    }
+    },
+
 })

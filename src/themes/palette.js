@@ -10,9 +10,9 @@ export const palette = {
     auth: colors.teal["400"],
     xp: colors.amber["800"],
     textDisabled: colors.grey["500"],
-    gold: colors.yellow["600"],
+    gold: colors.yellow["800"],
     silver: colors.bluegrey["400"],
-    bronze: colors.orange["800"]
+    bronze: colors.deeporange["900"]
 }
 
 export const surfaceMaterials = {
