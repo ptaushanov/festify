@@ -6,7 +6,11 @@ import LeaderboardCard from './components/LeaderboardCard'
 
 import { useFocusEffect } from '@react-navigation/native'
 import { auth } from '../../../firebase.v8'
-import { findCurrentUser } from '../../services/leaderboard-services'
+import {
+    findUser,
+    findUserPlace
+} from '../../services/leaderboard-services'
+
 import i18n from 'i18n-js'
 
 const LeaderboardScreen = () => {
@@ -14,7 +18,8 @@ const LeaderboardScreen = () => {
 
     const getCurrentUser = async () => {
         try {
-            const _currentUser = await findCurrentUser(auth.currentUser.uid)
+            let _currentUser = await findUser(auth.currentUser.uid)
+            _currentUser.place = await findUserPlace(_currentUser.xp)
             setCurrentUser(_currentUser)
         } catch (error) {
             console.error(error)
@@ -27,8 +32,6 @@ const LeaderboardScreen = () => {
         }, [])
     )
 
-    const place = 2
-
     return (
         <View style={globalStyles.slimContainer}>
             <LeaderboardTitle />
@@ -36,7 +39,6 @@ const LeaderboardScreen = () => {
                 {currentUser &&
                     <LeaderboardCard
                         {...currentUser}
-                        place={place}
                         username={i18n.t("leaderboard:Me")}
                     />
                 }

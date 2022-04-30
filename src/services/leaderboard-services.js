@@ -1,6 +1,6 @@
 import { firestore } from "../../firebase.v8";
 
-export const findCurrentUser = (userId) => {
+export const findUser = (userId) => {
     return firestore
         .collection("users")
         .doc(userId)
@@ -12,3 +12,14 @@ export const findCurrentUser = (userId) => {
         })
 }
 
+export const findUserPlace = (userXP) => {
+    return firestore
+        .collection("users")
+        .where("xp", ">=", userXP)
+        .get()
+        .then(querySnapshot => {
+            let place = 0
+            querySnapshot.forEach(() => { place++ })
+            return place
+        })
+}
