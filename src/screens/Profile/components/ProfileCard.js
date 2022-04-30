@@ -5,19 +5,25 @@ import { useNavigation } from '@react-navigation/native'
 
 import StyledAvatar from '../../../shared/StyledAvatar/StyledAvatar'
 import { useProfileInfo } from '../../../contexts/ProfileContext'
+import { useTheme } from 'react-native-paper'
 
 const ProfileCard = () => {
     const navigation = useNavigation()
     const { username, email, avatar } = useProfileInfo();
+    const { colors } = useTheme()
 
     const handleInfoEdit = () => {
         navigation.navigate("Edit Profile")
     }
 
+    const themedStyles = {
+        borderColor: colors.surfaceCard
+    }
+
     return (
         <Surface style={styles.surface}>
             <StyledAvatar
-                style={styles.avatar}
+                style={[styles.avatar, themedStyles]}
                 size={65}
                 image={avatar}
                 username={username}

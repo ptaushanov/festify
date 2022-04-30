@@ -1,5 +1,5 @@
 import { StyleSheet, View, FlatList } from 'react-native'
-import React, { useState, useCallback, useRef, useEffect } from 'react'
+import React, { useState, useCallback, useRef } from 'react'
 
 import TimelineCard from './components/TimelineCard'
 import TimelineTitle from './components/TimelineTitle'

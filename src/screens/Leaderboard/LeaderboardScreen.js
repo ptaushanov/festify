@@ -44,34 +44,38 @@ const LeaderboardScreen = () => {
     return (
         <View style={globalStyles.slimContainer}>
             {currentUser && users ?
-                <Fragment>
-                    <LeaderboardTitle />
-                    <View style={styles.meCard}>
-                        <LeaderboardCard
-                            {...currentUser}
-                            username={i18n.t("leaderboard:Me")}
-                        />
-                    </View>
-                    <Animated.FlatList
-                        data={users}
-                        keyExtractor={(user) => user.place}
-                        renderItem={({ item: props }) => (
-                            <Animated.View
-                                entering={SlideInRight.delay(props.place * 100)}
-                                layout={Layout.springify()}
-                            >
-                                <LeaderboardCard {...props} />
-                            </Animated.View>
-                        )}
-                        style={styles.topUsers}
-                        contentContainerStyle={styles.topUsersContainer}
-                        showsVerticalScrollIndicator={false}
-                        showsHorizontalScrollIndicator={false}
-                    />
-                </Fragment> :
+                <Animated.FlatList
+                    data={users}
+                    keyExtractor={(user) => user.place}
+                    renderItem={({ item: props }) => (
+                        <Animated.View
+                            entering={SlideInRight.delay(props.place * 100)}
+                            layout={Layout.springify()}
+                        >
+                            <LeaderboardCard {...props} />
+                        </Animated.View>
+                    )}
+                    ListHeaderComponent={() => (
+                        <View>
+                            <LeaderboardTitle />
+
+                            <View style={styles.meCard}>
+                                <LeaderboardCard
+                                    {...currentUser}
+                                    username={i18n.t("leaderboard:Me")}
+                                />
+                            </View>
+                        </View>
+                    )}
+                    style={styles.topUsers}
+                    contentContainerStyle={styles.topUsersContainer}
+                    showsVerticalScrollIndicator={false}
+                    showsHorizontalScrollIndicator={false}
+                /> :
                 <ActivityIndicator
                     size="large"
                     style={styles.activityIndicator}
+                    animating={!currentUser || !users}
                 />
             }
         </View>
