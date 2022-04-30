@@ -71,5 +71,8 @@
     "lessons:Start": "Start",
 
     "home:Pick up where you left off": "Pick up where you left off",
-    "home:Continue": "Continue"
+    "home:Continue": "Continue",
+
+    "leaderboard:Current leaderboard": "Current leaderboard",
+    "leaderboard:Me": "Me"
 }

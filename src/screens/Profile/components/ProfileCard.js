@@ -3,7 +3,7 @@ import React from 'react'
 import { Surface, Text, IconButton } from 'react-native-paper'
 import { useNavigation } from '@react-navigation/native'
 
-import StyledAvatar from './StyledAvatar'
+import StyledAvatar from '../../../shared/StyledAvatar/StyledAvatar'
 import { useProfileInfo } from '../../../contexts/ProfileContext'
 
 const ProfileCard = () => {
@@ -18,7 +18,7 @@ const ProfileCard = () => {
         <Surface style={styles.surface}>
             <StyledAvatar
                 style={styles.avatar}
-                size={70}
+                size={65}
                 image={avatar}
                 username={username}
             />

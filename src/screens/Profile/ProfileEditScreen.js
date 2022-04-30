@@ -1,7 +1,7 @@
 import { StyleSheet, View, KeyboardAvoidingView, Keyboard, TouchableWithoutFeedback } from 'react-native'
 import React, { useState, useEffect } from 'react'
 
-import StyledAvatar from './components/StyledAvatar'
+import StyledAvatar from '../../shared/StyledAvatar/StyledAvatar'
 import StyledTextInput from '../../shared/TextInput/StyledTextInput'
 import globalStyles from '../../styles/global'
 import Button from '../../shared/Button/Button'

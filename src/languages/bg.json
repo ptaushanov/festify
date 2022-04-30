@@ -72,5 +72,8 @@
     "lessons:Start": "Начало",
 
     "home:Pick up where you left off": "Продължете откъдето сте спрели",
-    "home:Continue": "Скачай!"
+    "home:Continue": "Скачай!",
+
+    "leaderboard:Current leaderboard": "Настоящо класиране",
+    "leaderboard:Me": "Аз"
 }
