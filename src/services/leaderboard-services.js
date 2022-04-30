@@ -23,3 +23,25 @@ export const findUserPlace = (userXP) => {
             return place
         })
 }
+
+export const findUsersSorted = () => {
+    return firestore
+        .collection("users")
+        .orderBy("xp", "desc")
+        .limit(100)
+        .get()
+        .then(querySnapshot => {
+            const users = []
+            let currentPlace = 0
+
+            querySnapshot.forEach((doc) => {
+                const { xp, username, avatar } = doc.data()
+                users.push({
+                    xp, username, avatar,
+                    place: currentPlace + 1,
+                })
+                currentPlace++
+            })
+            return users;
+        })
+}

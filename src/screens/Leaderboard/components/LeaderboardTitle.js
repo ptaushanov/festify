@@ -1,5 +1,6 @@
-import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
+import { StyleSheet, View } from 'react-native'
+import { Text } from 'react-native-paper'
 import i18n from 'i18n-js'
 
 const LeaderboardTitle = () => {
