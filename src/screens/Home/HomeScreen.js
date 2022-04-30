@@ -1,9 +1,8 @@
 import { View, StyleSheet } from 'react-native'
 import React, { useCallback, useState } from 'react'
 import LessonCard from './components/LessonCard'
-import { useFocusEffect } from '@react-navigation/native'
-import { useNavigation } from '@react-navigation/native'
-
+import { useFocusEffect, useNavigation } from '@react-navigation/native'
+import { ActivityIndicator } from 'react-native-paper'
 import { findCurrentLesson } from '../../services/home-services'
 import noImage from "../../assets/images/no_image.jpg"
 import { auth } from '../../../firebase.v8'
@@ -46,11 +45,16 @@ const HomeScreen = () => {
 
     return (
         <View style={styles.container}>
-            {currentLesson && <LessonCard
+            {currentLesson ? <LessonCard
                 lessonTitle={currentLesson.name}
                 lessonThumbnail={getLessonThumbnail()}
                 onContinuePress={handleContinuePress}
-            />}
+            /> :
+                <ActivityIndicator
+                    style={styles.activityIndicator}
+                    size="large"
+                />
+            }
         </View>
     )
 }
@@ -58,6 +62,9 @@ const HomeScreen = () => {
 const styles = StyleSheet.create({
     container: {
         padding: 40,
+        flex: 1
+    },
+    activityIndicator: {
         flex: 1
     }
 })

@@ -33,7 +33,10 @@ const SeasonsScreen = () => {
     }
 
     return (
-        <ScrollView style={globalStyles.slimContainer}>
+        <ScrollView
+            style={styles.flexContainer}
+            contentContainerStyle={styles.scrollContainer}
+        >
             <LearningPath />
             <View style={styles.cardContainer}>
                 <SeasonCard
@@ -80,5 +83,11 @@ export default SeasonsScreen
 const styles = StyleSheet.create({
     cardContainer: {
         marginVertical: 14
+    },
+    flexContainer: {
+        flex: 1
+    },
+    scrollContainer: {
+        padding: 20
     }
 })
