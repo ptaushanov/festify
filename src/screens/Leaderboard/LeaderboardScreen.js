@@ -1,12 +1,12 @@
-import { StyleSheet, View } from 'react-native'
+import { StyleSheet, View, ActivityIndicator } from 'react-native'
 import Animated, { SlideInRight, Layout } from 'react-native-reanimated'
-import React, { useState, useCallback, Fragment } from 'react'
+import React, { useState, useCallback } from 'react'
 import globalStyles from '../../styles/global'
 import LeaderboardTitle from './components/LeaderboardTitle'
 import LeaderboardCard from './components/LeaderboardCard'
-import { ActivityIndicator } from 'react-native-paper'
 import { useFocusEffect } from '@react-navigation/native'
 import { auth } from '../../../firebase.v8'
+import { useTheme } from 'react-native-paper'
 import {
     findUser,
     findUserPlace,
@@ -18,6 +18,7 @@ import i18n from 'i18n-js'
 const LeaderboardScreen = () => {
     const [currentUser, setCurrentUser] = useState(null)
     const [users, setUsers] = useState(null)
+    const { colors } = useTheme()
 
     const getCurrentUser = async () => {
         try {
@@ -75,6 +76,7 @@ const LeaderboardScreen = () => {
                 <ActivityIndicator
                     size="large"
                     style={styles.activityIndicator}
+                    color={colors.primary}
                     animating={!currentUser || !users}
                 />
             }
@@ -89,7 +91,8 @@ const styles = StyleSheet.create({
         marginVertical: 30
     },
     activityIndicator: {
-        flex: 1
+        flex: 1,
+        transform: [{ scale: 1.5 }]
     },
     topUsers: {
 
