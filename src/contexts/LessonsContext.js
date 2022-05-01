@@ -8,6 +8,7 @@ import {
     findTimelineDataBySeason,
     findUnlockedLessonsBySeason,
     findLesson,
+    findReward,
     findCurrentLesson,
     completeLesson as completeLessonService,
     checkCompletedLesson as checkCompletedLessonService,
@@ -32,6 +33,7 @@ export function LessonsProvider({ children }) {
     const [currentLessonIndex, setCurrentLessonIndex] = useState(-1)
 
     const [lessonData, setLessonData] = useState(null)
+    const [rewardData, setRewardData] = useState(null)
     const [currentStep, setCurrentStep] = useState(0)
     const [lessonFinished, setLessonFinished] = useState(false)
 
@@ -96,9 +98,22 @@ export function LessonsProvider({ children }) {
         }))
     }
 
+    const getLessonReward = async (rewardRef) => {
+        if (!rewardRef) { return }
+        try {
+            const _reward = await findReward(rewardRef)
+            setRewardData(_reward)
+        } catch (error) {
+            console.error(error)
+        }
+    }
+
     const loadLessonData = async () => {
         try {
             const _lessonData = await findLesson(currentLessonRef)
+            const rewardRef = _lessonData.reward
+            await getLessonReward(rewardRef)
+
             setLessonData(_lessonData)
             determineCounts(_lessonData)
         } catch (error) {
@@ -215,7 +230,8 @@ export function LessonsProvider({ children }) {
         completeLesson,
         checkCompletedLesson,
         tryUnlockNewLessonOrSeason,
-        getCurrentLesson
+        getCurrentLesson,
+        rewardData
     }
 
     return (

@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, Modal, StyleSheet } from 'react-native'
+import { View, Modal, StyleSheet, Image } from 'react-native'
 
 import { useLessonsInfo } from '../../../contexts/LessonsContext'
 import Button from '../../../shared/Button/Button'
@@ -8,12 +8,14 @@ import { useTheme, Headline, Text, Subheading } from 'react-native-paper'
 import { AntDesign } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native'
 import i18n from 'i18n-js'
+import noImage from "../../../assets/images/no_image.jpg"
 
 const FinishModal = () => {
     const {
         lessonData,
         lessonFinished,
         completeLesson,
+        rewardData
     } = useLessonsInfo()
 
     const { colors } = useTheme()
@@ -22,6 +24,11 @@ const FinishModal = () => {
     const handleContinuePress = async () => {
         await completeLesson()
         navigation.goBack()
+    }
+
+    const getRewardThumbnail = () => {
+        return rewardData.thumbnail ?
+            { uri: rewardData.thumbnail } : noImage
     }
 
     return (
@@ -49,9 +56,18 @@ const FinishModal = () => {
                             </Text>
                             <AntDesign name="star" size={24} color={colors.xp} />
                         </View>
-                        <View style={styles.additionalReward}>
-                            <Text style={{ fontSize: 30, textAlign: "center" }}>X</Text>
-                        </View>
+                        {rewardData ?
+                            <View style={styles.additionalReward}>
+                                <Image
+                                    source={getRewardThumbnail()}
+                                    style={styles.rewardImage}
+                                    resizeMode="contain"
+                                />
+                                <Text style={styles.additionalRewardText}>
+                                    {rewardData.name}
+                                </Text>
+                            </View> : null
+                        }
                         <Button
                             onPress={handleContinuePress}
                             mode="contained"
@@ -101,6 +117,14 @@ const styles = StyleSheet.create({
         paddingHorizontal: 4
     },
     additionalReward: {
-        marginBottom: 20
+        marginBottom: 20,
+        alignItems: "center"
+    },
+    rewardImage: {
+        width: 120,
+        height: 120,
+    },
+    additionalRewardText: {
+        fontSize: 18
     }
 })

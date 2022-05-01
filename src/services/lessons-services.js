@@ -72,28 +72,45 @@ export const findLesson = (lessonRef) => {
         })
 }
 
-export const completeLesson = async (userId, season, lessonIndex, gainedXP) => {
-    const document = await firestore
-        .collection("users")
-        .doc(userId)
+export const findReward = (rewardRef) => {
+    return rewardRef
         .get()
-
-    if (!document.exists) { return }
-
-    const { completed_lessons, xp } = document.data()
-    const withNewCompletedLesson = [
-        ...completed_lessons[season],
-        lessonIndex
-    ]
-
-    return firestore
-        .collection("users")
-        .doc(userId)
-        .update({
-            [`completed_lessons.${season}`]: withNewCompletedLesson,
-            xp: xp + gainedXP
+        .then(doc => {
+            if (!doc.exists) { return null }
+            return doc.data()
         })
 }
+
+export const completeLesson =
+    async (userId, season, lessonIndex, gainedXP, rewardId = null) => {
+        const document = await firestore
+            .collection("users")
+            .doc(userId)
+            .get()
+
+        if (!document.exists) { return }
+
+        const { completed_lessons, xp, collected_rewards } = document.data()
+        const withNewCompletedLesson = [
+            ...completed_lessons[season],
+            lessonIndex
+        ]
+
+        const updatedData = {
+            [`completed_lessons.${season}`]: withNewCompletedLesson,
+            xp: xp + gainedXP,
+        }
+
+        if (rewardId) {
+            const withNewReward = [...collected_rewards, rewardId]
+            updatedData.collected_rewards = withNewReward
+        }
+
+        return firestore
+            .collection("users")
+            .doc(userId)
+            .update(updatedData)
+    }
 
 export const checkCompletedLesson = (userId, season, lessonIndex) => {
     return firestore

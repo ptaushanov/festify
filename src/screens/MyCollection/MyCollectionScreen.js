@@ -32,10 +32,7 @@ const MyCollectionScreen = () => {
     useFocusEffect(
         useCallback(() => {
             getRewards()
-
-            return () => {
-                setRewards(null)
-            }
+            return () => { setRewards(null) }
         }, [])
     )
 
