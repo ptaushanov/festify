@@ -16,9 +16,13 @@ export const palette = {
 }
 
 export const surfaceMaterials = {
-    input: {
+    onSurfaceInput: {
         light: colors.grey["100"],
-        dark: colors.grey["900"]
+        dark: colors.grey["850"]
+    },
+    surfaceInput: {
+        light: colors.grey["50"],
+        dark: colors.grey["850"]
     },
     surfacePicker: {
         light: colors.grey["50"],

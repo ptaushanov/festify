@@ -83,7 +83,7 @@ const ProfileEditScreen = () => {
                             username={username}
                             image={newAvatar || avatar}
                             size={70}
-                            style={styles.avatar}
+                            style={[styles.avatar, { borderColor: colors.surfaceCard }]}
                         />
                         <Button
                             mode="contained"
@@ -156,8 +156,8 @@ const styles = StyleSheet.create({
         marginHorizontal: 10,
     },
     input: {
-        borderWidth: 2,
         paddingVertical: 8,
+        elevation: 1
     },
     label: {
         paddingLeft: 5,

@@ -1,4 +1,4 @@
-import { StyleSheet, Keyboard, View, TouchableWithoutFeedback, TextInput, Image } from 'react-native'
+import { StyleSheet, Keyboard, View, TouchableWithoutFeedback, Image } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import globalStyles from '../../styles/global'
 import { palette } from '../../themes/palette'
@@ -27,6 +27,7 @@ const LoginScreen = () => {
             setGeneralError(null)
         }
     }
+
 
     useEffect(() => {
         if (hasLoggedIn) {
@@ -98,6 +99,7 @@ const LoginScreen = () => {
                                         style={styles.input}
                                         error={touched.email && Boolean(errors.email)}
                                         helperText={touched.email && errors.email}
+                                        darken
                                     />
                                     <StyledTextInput
                                         placeholder={i18n.t("auth:Password")}
@@ -109,6 +111,7 @@ const LoginScreen = () => {
                                         error={touched.password && Boolean(errors.password)}
                                         helperText={touched.password && errors.password}
                                         secureTextEntry
+                                        darken
                                     />
                                     <Text
                                         style={{

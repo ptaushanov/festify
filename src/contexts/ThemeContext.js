@@ -19,8 +19,10 @@ export function ThemeProvider({ children }) {
         switch (theme) {
             case 'default':
                 setCurrentTheme(DefaultTheme)
+                break;
             case 'dark':
                 setCurrentTheme(DarkTheme)
+                break
         }
     }
 
