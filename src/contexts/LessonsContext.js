@@ -123,6 +123,7 @@ export function LessonsProvider({ children }) {
 
     const unloadLessonData = () => {
         setLessonData(null)
+        setRewardData(null)
         setCurrentStep(0)
         setLessonFinished(false)
     }
@@ -134,7 +135,8 @@ export function LessonsProvider({ children }) {
                 auth.currentUser.uid,
                 currentSeason,
                 currentLessonIndex,
-                xp_reward
+                xp_reward,
+                rewardData?.id
             )
         } catch (error) {
             console.error(error)

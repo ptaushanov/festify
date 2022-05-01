@@ -77,7 +77,7 @@ export const findReward = (rewardRef) => {
         .get()
         .then(doc => {
             if (!doc.exists) { return null }
-            return doc.data()
+            return { ...doc.data(), id: doc.id }
         })
 }
 
