@@ -6,6 +6,17 @@ export const signUpUser = (newUser) => {
     const unlocked_lessons = { spring: [0], summer: [0], autumn: [0], winter: [0] }
     const completed_lessons = { spring: [], summer: [], autumn: [], winter: [] }
     const current_lesson = { season: "spring", index: 0 }
+    const collected_rewards = []
+
+    const userData = {
+        username,
+        unlocked_seasons,
+        unlocked_lessons,
+        completed_lessons,
+        current_lesson,
+        collected_rewards,
+        xp: 0
+    }
 
     return auth.createUserWithEmailAndPassword(email, password)
         .then(userCredentials => {
@@ -13,14 +24,7 @@ export const signUpUser = (newUser) => {
             return firestore
                 .collection("users")
                 .doc(uid)
-                .set({
-                    username,
-                    unlocked_seasons,
-                    unlocked_lessons,
-                    completed_lessons,
-                    current_lesson,
-                    xp: 0
-                })
+                .set(userData)
         })
 }
 

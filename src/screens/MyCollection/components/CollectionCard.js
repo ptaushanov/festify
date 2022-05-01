@@ -2,6 +2,8 @@ import { StyleSheet, Dimensions } from 'react-native'
 import { Card, Subheading, Surface, Text } from 'react-native-paper'
 import React from 'react'
 
+import noImage from "../../../assets/images/no_image.jpg"
+
 const CollectionCard = ({ collected = false, name, thumbnail }) => {
     const dimensions = Dimensions.get("window")
     const cardStyles = { ...styles.card, width: (dimensions.width / 2) - 55 }
@@ -9,13 +11,11 @@ const CollectionCard = ({ collected = false, name, thumbnail }) => {
     if (collected) {
         return (
             <Card style={cardStyles}>
-                {thumbnail && (
-                    <Card.Cover
-                        style={styles.image}
-                        resizeMode="stretch"
-                        source={thumbnail}
-                    />
-                )}
+                <Card.Cover
+                    style={styles.image}
+                    resizeMode="stretch"
+                    source={thumbnail ? { uri: thumbnail } : noImage}
+                />
                 <Surface style={styles.cardContent}>
                     <Subheading style={styles.rewardName}>
                         {name}

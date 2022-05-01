@@ -1,18 +1,43 @@
-import { StyleSheet, View, FlatList } from 'react-native'
-import React, { useState } from 'react'
+import { StyleSheet, FlatList } from 'react-native'
+import React, { useState, useCallback } from 'react'
 import CollectionTitle from './components/CollectionTitle'
 import CollectionCard from './components/CollectionCard'
-import placeholder from "../../assets/images/placeholder.jpg"
+
+import { useFocusEffect } from '@react-navigation/native'
+import { findRewards, findUserRewards } from '../../services/rewards-services'
+import { auth } from '../../../firebase.v8'
 
 const MyCollectionScreen = () => {
-    const [rewards, setRewards] = useState([
-        { id: 1, name: "Овча глава от Аврамовград", thumbnail: placeholder, collected: true },
-        { id: 2, name: "My Reward 1", thumbnail: placeholder, collected: true },
-        { id: 3, name: "My Reward 1", thumbnail: placeholder, collected: true },
-        { id: 4, name: "My Reward 1", thumbnail: placeholder },
-        { id: 5, name: "My Reward 1", thumbnail: placeholder },
-        { id: 6, name: "My Reward 1", thumbnail: placeholder }
-    ])
+    const [rewards, setRewards] = useState([])
+
+    const remapRewards = (allRewards, userRewards) => {
+        return allRewards.map(reward => ({
+            ...reward,
+            collected: userRewards.includes(reward.id)
+        }))
+    }
+
+    const getRewards = async () => {
+        try {
+            const userRewards = await findUserRewards(auth.currentUser.uid)
+            const allRewards = await findRewards()
+            const remappedRewards = remapRewards(allRewards, userRewards)
+
+            setRewards(remappedRewards)
+        } catch (error) {
+            console.error(error)
+        }
+    }
+
+    useFocusEffect(
+        useCallback(() => {
+            getRewards()
+
+            return () => {
+                setRewards(null)
+            }
+        }, [])
+    )
 
     return (
         <FlatList
