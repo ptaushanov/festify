@@ -1,13 +1,12 @@
 import { StyleSheet, View } from 'react-native'
 import Animated, { SlideInRight, Layout } from 'react-native-reanimated'
 import React, { useState, useCallback } from 'react'
-import globalStyles from '../../styles/global'
 import LeaderboardTitle from './components/LeaderboardTitle'
 import LeaderboardCard from './components/LeaderboardCard'
 import { useFocusEffect } from '@react-navigation/native'
 import { auth } from '../../../firebase.v8'
 import {
-    findUser,
+    updateUser,
     findUserPlace,
     updateUsersSorted
 } from '../../services/leaderboard-services'
@@ -18,9 +17,9 @@ const LeaderboardScreen = () => {
     const [currentUser, setCurrentUser] = useState(null)
     const [users, setUsers] = useState([])
 
-    const getCurrentUser = async () => {
+    const updateCurrentUser = async (userData) => {
         try {
-            let _currentUser = await findUser(auth.currentUser.uid)
+            const _currentUser = { ...userData }
             _currentUser.place = await findUserPlace(_currentUser.xp)
             setCurrentUser(_currentUser)
         } catch (error) {
@@ -30,10 +29,13 @@ const LeaderboardScreen = () => {
 
     useFocusEffect(
         useCallback(() => {
-            getCurrentUser()
-            let unsubscribe = updateUsersSorted(setUsers, console.error)
+            const unsubscribeUser =
+                updateUser(auth.currentUser.uid, updateCurrentUser, console.error)
+            let unsubscribeUsers = updateUsersSorted(setUsers, console.error)
+
             return () => {
-                unsubscribe()
+                unsubscribeUser()
+                unsubscribeUsers()
                 setCurrentUser(null)
                 setUsers(null)
             }
@@ -41,7 +43,7 @@ const LeaderboardScreen = () => {
     )
 
     return (
-        <View style={globalStyles.slimContainer}>
+        <View style={styles.container}>
             <Animated.FlatList
                 data={users}
                 keyExtractor={(user) => user.place}
@@ -66,7 +68,6 @@ const LeaderboardScreen = () => {
                             </View>
                         </View>) : null
                 )}
-                style={styles.topUsers}
                 contentContainerStyle={styles.topUsersContainer}
                 showsVerticalScrollIndicator={false}
                 showsHorizontalScrollIndicator={false}
@@ -78,17 +79,18 @@ const LeaderboardScreen = () => {
 export default LeaderboardScreen
 
 const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        paddingHorizontal: 20,
+    },
     meCard: {
         marginVertical: 30
     },
     activityIndicator: {
         flex: 1,
     },
-    topUsers: {
-
-    },
     topUsersContainer: {
-
+        paddingVertical: 20
     },
 
 })

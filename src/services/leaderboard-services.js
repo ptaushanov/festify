@@ -1,14 +1,14 @@
 import { firestore } from "../../firebase.v8";
 
-export const findUser = (userId) => {
+export const updateUser = (userId, snapshotHandler, errorHandler) => {
     return firestore
         .collection("users")
         .doc(userId)
-        .get()
-        .then(doc => {
-            if (!doc.exists) { return null }
-            const { xp, username, avatar } = doc.data()
-            return { xp, username, avatar }
+        .onSnapshot(querySnapshot => {
+            const { xp, username, avatar } = querySnapshot.data()
+            snapshotHandler({ xp, username, avatar })
+        }, (error) => {
+            errorHandler(error)
         })
 }
 
@@ -18,9 +18,7 @@ export const findUserPlace = (userXP) => {
         .where("xp", ">=", userXP)
         .get()
         .then(querySnapshot => {
-            let place = 0
-            querySnapshot.forEach(() => { place++ })
-            return place
+            return querySnapshot.docs.reduce(acc => acc + 1, 0)
         })
 }
 
