@@ -7,3 +7,4 @@ export { default as LessonsTimeline } from "./Lessons/LessonsTimeline"
 export { default as LessonScreen } from "./Lessons/LessonScreen"
 export { default as ProfileScreen } from "./Profile/ProfileScreen"
 export { default as ProfileEditScreen } from './Profile/ProfileEditScreen'
+export { default as MyCollectionScreen } from './MyCollection/MyCollectionScreen'

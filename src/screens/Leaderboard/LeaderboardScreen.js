@@ -30,33 +30,31 @@ const LeaderboardScreen = () => {
 
     useFocusEffect(
         useCallback(() => {
-            setTimeout(() => {
-                getCurrentUser()
-                let unsubscribe = updateUsersSorted(setUsers, console.error)
-                return () => {
-                    unsubscribe()
-                    setCurrentUser(null)
-                    setUsers(null)
-                }
-            }, 5000)
+            getCurrentUser()
+            let unsubscribe = updateUsersSorted(setUsers, console.error)
+            return () => {
+                unsubscribe()
+                setCurrentUser(null)
+                setUsers(null)
+            }
         }, [])
     )
 
     return (
         <View style={globalStyles.slimContainer}>
-            {currentUser ?
-                <Animated.FlatList
-                    data={users}
-                    keyExtractor={(user) => user.place}
-                    renderItem={({ item: props }) => (
-                        <Animated.View
-                            entering={SlideInRight.delay(props.place * 100)}
-                            layout={Layout.springify()}
-                        >
-                            <LeaderboardCard {...props} />
-                        </Animated.View>
-                    )}
-                    ListHeaderComponent={() => (
+            <Animated.FlatList
+                data={users}
+                keyExtractor={(user) => user.place}
+                renderItem={({ item: props }) => (
+                    <Animated.View
+                        entering={SlideInRight.delay(props.place * 100)}
+                        layout={Layout.springify()}
+                    >
+                        <LeaderboardCard {...props} />
+                    </Animated.View>
+                )}
+                ListHeaderComponent={() => (
+                    currentUser ? (
                         <View>
                             <LeaderboardTitle />
 
@@ -66,14 +64,13 @@ const LeaderboardScreen = () => {
                                     username={i18n.t("leaderboard:Me")}
                                 />
                             </View>
-                        </View>
-                    )}
-                    style={styles.topUsers}
-                    contentContainerStyle={styles.topUsersContainer}
-                    showsVerticalScrollIndicator={false}
-                    showsHorizontalScrollIndicator={false}
-                /> : null
-            }
+                        </View>) : null
+                )}
+                style={styles.topUsers}
+                contentContainerStyle={styles.topUsersContainer}
+                showsVerticalScrollIndicator={false}
+                showsHorizontalScrollIndicator={false}
+            />
         </View>
     )
 }

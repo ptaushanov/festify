@@ -8,6 +8,7 @@
     "Summer Timeline": "Summer Timeline",
     "Autumn Timeline": "Autumn Timeline",
     "Winter Timeline": "Winter Timeline",
+    "My Collection": "My Collection",
 
     "auth:Sign Up": "Sign up",
     "auth:SignUp": "Sign up",
@@ -40,7 +41,7 @@
 
     "profile:General": "General",
     "profile:Dark Mode": "Dark Mode",
-    "profile:My Awards": "My Awards",
+    "profile:My Rewards": "My Awards",
     "profile:Logout": "Logout",
     "change-profile:Change picture": "Change picture",
     "change-profile:Username": "Username",
@@ -75,4 +76,5 @@
 
     "leaderboard:Current leaderboard": "Current leaderboard",
     "leaderboard:Me": "Me"
+
 }

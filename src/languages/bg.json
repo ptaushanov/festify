@@ -8,6 +8,7 @@
     "Summer Timeline": "Лятна времева линия",
     "Autumn Timeline": "Есенна времева линия",
     "Winter Timeline": "Зимна времева линия",
+    "My Collection": "Моята колекция",
 
     "auth:Sign Up": "Регистрация",
     "auth:SignUp": "Регистрация",
@@ -40,7 +41,7 @@
 
     "profile:General": "Общи",
     "profile:Dark Mode": "Тъмен режим",
-    "profile:My Awards": "Моите награди",
+    "profile:My Rewards": "Моите награди",
     "profile:Logout": "Излез от профила",
 
     "change-profile:Change picture": "Сменете снимката",
@@ -76,4 +77,5 @@
 
     "leaderboard:Current leaderboard": "Настоящо класиране",
     "leaderboard:Me": "Аз"
+
 }

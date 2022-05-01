@@ -21,6 +21,10 @@ const ProfileList = () => {
             .catch(error => alert(error.message))
     }
 
+    const handleNavigateToRewards = () => {
+        navigation.navigate("My Collection")
+    }
+
     return (
         <List.Section style={styles.section} title={i18n.t("profile:General")} titleStyle={styles.title}>
             <Surface style={styles.surface}>
@@ -36,9 +40,9 @@ const ProfileList = () => {
 
                 <List.Item
                     style={styles.container}
-                    title={i18n.t("profile:My Awards")}
+                    title={i18n.t("profile:My Rewards")}
                     left={(props) => <List.Icon {...props} icon={"trophy-award"} />}
-                    onPress={() => { }}
+                    onPress={handleNavigateToRewards}
                 />
 
                 <Divider style={styles.divider} />

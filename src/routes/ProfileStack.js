@@ -1,5 +1,5 @@
 import { createStackNavigator } from '@react-navigation/stack';
-import { ProfileScreen, ProfileEditScreen } from "../screens"
+import { ProfileScreen, ProfileEditScreen, MyCollectionScreen } from "../screens"
 import AppbarStack from '../shared/AppBar/AppbarStack';
 import AppbarMain from '../shared/AppBar/AppbarMain';
 import { ProfileProvider } from "../contexts/ProfileContext"
@@ -30,9 +30,15 @@ export default function ProfileStack() {
                 />
 
                 <Screen
+                    name="My Collection"
+                    component={MyCollectionScreen}
+                />
+
+                <Screen
                     name="Edit Profile"
                     component={ProfileEditScreen}
                 />
+
             </Navigator>
         </ProfileProvider>
 
