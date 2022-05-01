@@ -1,4 +1,4 @@
-import { StyleSheet, View, ActivityIndicator } from 'react-native'
+import { StyleSheet, View } from 'react-native'
 import Animated, { SlideInRight, Layout } from 'react-native-reanimated'
 import React, { useState, useCallback } from 'react'
 import globalStyles from '../../styles/global'
@@ -6,7 +6,6 @@ import LeaderboardTitle from './components/LeaderboardTitle'
 import LeaderboardCard from './components/LeaderboardCard'
 import { useFocusEffect } from '@react-navigation/native'
 import { auth } from '../../../firebase.v8'
-import { useTheme } from 'react-native-paper'
 import {
     findUser,
     findUserPlace,
@@ -17,8 +16,7 @@ import i18n from 'i18n-js'
 
 const LeaderboardScreen = () => {
     const [currentUser, setCurrentUser] = useState(null)
-    const [users, setUsers] = useState(null)
-    const { colors } = useTheme()
+    const [users, setUsers] = useState([])
 
     const getCurrentUser = async () => {
         try {
@@ -32,19 +30,21 @@ const LeaderboardScreen = () => {
 
     useFocusEffect(
         useCallback(() => {
-            getCurrentUser()
-            let unsubscribe = updateUsersSorted(setUsers, console.error)
-            return () => {
-                unsubscribe()
-                setCurrentUser(null)
-                setUsers(null)
-            }
+            setTimeout(() => {
+                getCurrentUser()
+                let unsubscribe = updateUsersSorted(setUsers, console.error)
+                return () => {
+                    unsubscribe()
+                    setCurrentUser(null)
+                    setUsers(null)
+                }
+            }, 5000)
         }, [])
     )
 
     return (
         <View style={globalStyles.slimContainer}>
-            {currentUser && users ?
+            {currentUser ?
                 <Animated.FlatList
                     data={users}
                     keyExtractor={(user) => user.place}
@@ -72,13 +72,7 @@ const LeaderboardScreen = () => {
                     contentContainerStyle={styles.topUsersContainer}
                     showsVerticalScrollIndicator={false}
                     showsHorizontalScrollIndicator={false}
-                /> :
-                <ActivityIndicator
-                    size="large"
-                    style={styles.activityIndicator}
-                    color={colors.primary}
-                    animating={!currentUser || !users}
-                />
+                /> : null
             }
         </View>
     )
@@ -92,7 +86,6 @@ const styles = StyleSheet.create({
     },
     activityIndicator: {
         flex: 1,
-        transform: [{ scale: 1.5 }]
     },
     topUsers: {
 
