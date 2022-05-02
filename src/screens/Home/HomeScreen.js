@@ -1,5 +1,5 @@
 import { View, StyleSheet } from 'react-native'
-import React, { useCallback, useState, useEffect } from 'react'
+import React, { useCallback, useState } from 'react'
 import LessonCard from './components/LessonCard'
 import { useFocusEffect, useNavigation } from '@react-navigation/native'
 import { ActivityIndicator } from 'react-native-paper'
@@ -18,10 +18,6 @@ const HomeScreen = () => {
     const [dailyReward, setDailyReward] = useState(false)
     const [rewardAmount, setRewardAmount] = useState(0)
     const navigation = useNavigation()
-
-    useEffect(() => {
-        setDailyReward(false)
-    }, [rewardAmount])
 
     const getCurrentLesson = async () => {
         try {
@@ -47,6 +43,9 @@ const HomeScreen = () => {
             const gainedXP = 10 + Math.round(Math.random() * 9) * 10
             claimRewardService(auth.currentUser.uid, gainedXP)
             setRewardAmount(gainedXP)
+            setTimeout(() => {
+                setDailyReward(false)
+            }, 2000)
         } catch (error) {
             console.error(error)
         }

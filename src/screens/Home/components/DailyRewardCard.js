@@ -11,7 +11,7 @@ const DailyRewardCard = ({ onRewardClaim, rewardAmount = 0 }) => {
     return (
         <Animated.View
             entering={ZoomIn.springify().springify().damping(10)}
-            exiting={BounceOut.delay(2000)}
+            exiting={BounceOut}
         >
             <TouchableRipple
                 borderless
