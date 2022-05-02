@@ -156,7 +156,6 @@ const styles = StyleSheet.create({
         marginHorizontal: 10,
     },
     input: {
-        paddingVertical: 8,
         elevation: 1
     },
     label: {

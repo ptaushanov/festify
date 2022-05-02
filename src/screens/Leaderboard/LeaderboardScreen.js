@@ -49,24 +49,27 @@ const LeaderboardScreen = () => {
                 keyExtractor={(user) => user.place}
                 renderItem={({ item: props }) => (
                     <Animated.View
-                        entering={SlideInRight.delay(props.place * 100)}
+                        entering={SlideInRight.delay((props.place + 2) * 100)}
                         layout={Layout.springify()}
                     >
                         <LeaderboardCard {...props} />
                     </Animated.View>
                 )}
                 ListHeaderComponent={() => (
-                    currentUser ? (
-                        <View>
-                            <LeaderboardTitle />
-
-                            <View style={styles.meCard}>
+                    <View>
+                        <LeaderboardTitle />
+                        {currentUser ? (
+                            <Animated.View
+                                entering={SlideInRight}
+                                style={styles.meCard}
+                            >
                                 <LeaderboardCard
                                     {...currentUser}
                                     username={i18n.t("leaderboard:Me")}
                                 />
-                            </View>
-                        </View>) : null
+                            </Animated.View>
+                        ) : null}
+                    </View>
                 )}
                 contentContainerStyle={styles.topUsersContainer}
                 showsVerticalScrollIndicator={false}

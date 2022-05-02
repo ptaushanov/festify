@@ -41,9 +41,14 @@ const MyCollectionScreen = () => {
             key="#"
             data={rewards}
             keyExtractor={(reward) => reward.id}
-            renderItem={({ item: props }) => (
+            renderItem={({ item: props, index }) => (
                 <Animated.View
-                    entering={ZoomIn.randomDelay()}
+                    entering={
+                        ZoomIn
+                            .delay(index * 100)
+                            .springify()
+                            .damping(10)
+                    }
                     layout={Layout.springify()}
                 >
                     <CollectionCard {...props} />
