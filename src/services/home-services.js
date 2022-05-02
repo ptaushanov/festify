@@ -1,5 +1,14 @@
 import { firestore } from "../../firebase.v8";
 
+const getNowNoTime = () => {
+    const now = new Date()
+    return new Date(
+        now.getFullYear(),
+        now.getMonth(),
+        now.getDate()
+    )
+}
+
 export const findCurrentLesson = async (userId) => {
     const userDocument = await firestore
         .collection("users")
@@ -21,4 +30,37 @@ export const findCurrentLesson = async (userId) => {
         ...holidays[current_lesson.index],
         ...current_lesson
     }
-} 
+}
+
+export const claimReward = async (userId, gainedXP) => {
+    const doc = await firestore
+        .collection("users")
+        .doc(userId)
+        .get()
+
+    if (!doc.exists) { return }
+    const { xp } = doc.data()
+
+    return firestore
+        .collection("users")
+        .doc(userId)
+        .update({
+            last_reward_claim: getNowNoTime().valueOf(),
+            xp: xp + gainedXP
+        })
+}
+
+export const checkDailyReward = (userId) => {
+    return firestore
+        .collection("users")
+        .doc(userId)
+        .get()
+        .then(doc => {
+            if (!doc.exists) { return false }
+            const { last_reward_claim } = doc.data()
+            const lastClaimDate = new Date(last_reward_claim)
+
+            const nowNoTime = getNowNoTime()
+            return lastClaimDate.getTime() < nowNoTime.getTime()
+        })
+}

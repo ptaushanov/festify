@@ -15,7 +15,7 @@
     "auth:Login": "Login",
     "auth:Username": "Username",
     "auth:Email": "Email",
-    "auth:Password": "Password", 
+    "auth:Password": "Password",
     "auth:Confirm Password": "Confirm Password",
 
     "auth:username-trim": "The username cannot include leading and trailing spaces",
@@ -33,7 +33,7 @@
     "auth:password-max": "The password cannot exceed {0} characters",
     "auth:password-required": "The password is required",
 
-    "auth:password-confirm":  "Passwords do not match",
+    "auth:password-confirm": "Passwords do not match",
     "auth:invalid-credentials": "Invalid username or password",
     "auth:email-exists": "Еmail was used by another user",
     "auth:operation-not-allowed": "Operation not allowed",
@@ -73,6 +73,7 @@
 
     "home:Pick up where you left off": "Pick up where you left off",
     "home:Continue": "Continue",
+    "home:Daily Reward": "Daily Reward",
 
     "leaderboard:Current leaderboard": "Current leaderboard",
     "leaderboard:Me": "Me"

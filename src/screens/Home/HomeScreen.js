@@ -1,24 +1,65 @@
 import { View, StyleSheet } from 'react-native'
-import React, { useCallback, useState } from 'react'
+import React, { useCallback, useState, useEffect } from 'react'
 import LessonCard from './components/LessonCard'
 import { useFocusEffect, useNavigation } from '@react-navigation/native'
 import { ActivityIndicator } from 'react-native-paper'
-import { findCurrentLesson } from '../../services/home-services'
 import noImage from "../../assets/images/no_image.jpg"
 import { auth } from '../../../firebase.v8'
 
+import {
+    findCurrentLesson,
+    claimReward as claimRewardService,
+    checkDailyReward
+} from '../../services/home-services'
+import DailyRewardCard from './components/DailyRewardCard'
+
 const HomeScreen = () => {
     const [currentLesson, setCurrentLesson] = useState(null)
+    const [dailyReward, setDailyReward] = useState(false)
+    const [rewardAmount, setRewardAmount] = useState(0)
     const navigation = useNavigation()
 
+    useEffect(() => {
+        setDailyReward(false)
+    }, [rewardAmount])
+
     const getCurrentLesson = async () => {
-        const _currentLesson = await findCurrentLesson(auth.currentUser.uid)
-        setCurrentLesson(_currentLesson)
+        try {
+            const _currentLesson = await findCurrentLesson(auth.currentUser.uid)
+            setCurrentLesson(_currentLesson)
+        } catch (error) {
+            console.error(error)
+        }
+    }
+
+    const getDailyReward = async () => {
+        setRewardAmount(0)
+        try {
+            const hasReward = await checkDailyReward(auth.currentUser.uid)
+            hasReward && setDailyReward(true)
+        } catch (error) {
+            console.error(error)
+        }
+    }
+
+    const claimReward = async () => {
+        try {
+            const gainedXP = 10 + Math.round(Math.random() * 9) * 10
+            claimRewardService(auth.currentUser.uid, gainedXP)
+            setRewardAmount(gainedXP)
+        } catch (error) {
+            console.error(error)
+        }
+    }
+
+    const runSequential = async () => {
+        await getCurrentLesson()
+        await getDailyReward()
     }
 
     useFocusEffect(
         useCallback(() => {
-            getCurrentLesson()
+            runSequential()
         }, [auth.currentUser])
     )
 
@@ -45,16 +86,26 @@ const HomeScreen = () => {
 
     return (
         <View style={styles.container}>
-            {currentLesson ? <LessonCard
-                lessonTitle={currentLesson.name}
-                lessonThumbnail={getLessonThumbnail()}
-                onContinuePress={handleContinuePress}
-            /> :
+            {currentLesson ?
+                <View>
+                    <LessonCard
+                        lessonTitle={currentLesson.name}
+                        lessonThumbnail={getLessonThumbnail()}
+                        onContinuePress={handleContinuePress}
+                    />
+                    {dailyReward &&
+                        <DailyRewardCard
+                            onRewardClaim={claimReward}
+                            rewardAmount={rewardAmount}
+                        />
+                    }
+                </View> :
                 <ActivityIndicator
                     style={styles.activityIndicator}
                     size="large"
                 />
             }
+
         </View>
     )
 }

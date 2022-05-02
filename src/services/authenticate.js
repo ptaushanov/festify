@@ -15,6 +15,7 @@ export const signUpUser = (newUser) => {
         completed_lessons,
         current_lesson,
         collected_rewards,
+        last_reward_claim: 0,
         xp: 0
     }
 

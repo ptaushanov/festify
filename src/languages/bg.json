@@ -15,7 +15,7 @@
     "auth:Login": "Вход",
     "auth:Username": "Потребителско име",
     "auth:Email": "Имейл",
-    "auth:Password": "Парола", 
+    "auth:Password": "Парола",
     "auth:Confirm Password": "Потвърдете паролата",
 
     "auth:username-trim": "Потребителското име не трябва да започва или завършва с интервал",
@@ -33,7 +33,7 @@
     "auth:password-max": "Паролата не трябва да превишава {0} символа",
     "auth:password-required": "Паролата е задължителна",
 
-    "auth:password-confirm":  "Паролите не съвпадат",
+    "auth:password-confirm": "Паролите не съвпадат",
     "auth:invalid-credentials": "Невалидно потребителско име или парола",
     "auth:email-exists": "Имейла е използван от друг потребител",
     "auth:operation-not-allowed": "Операцията не е позволена",
@@ -73,7 +73,8 @@
     "lessons:Start": "Начало",
 
     "home:Pick up where you left off": "Продължете откъдето сте спрели",
-    "home:Continue": "Скачай!",
+    "home:Continue": "Скачай",
+    "home:Daily Reward": "Eжедневна награда",
 
     "leaderboard:Current leaderboard": "Настоящо класиране",
     "leaderboard:Me": "Аз"

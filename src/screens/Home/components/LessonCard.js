@@ -44,7 +44,7 @@ export default LessonCard
 const styles = StyleSheet.create({
     surface: {
         marginVertical: 20,
-        borderRadius: 6,
+        borderRadius: 10,
         elevation: 2,
         justifyContent: "center",
         alignItems: "center",
