@@ -12,35 +12,30 @@ export function ThemeProvider({ children }) {
     const [darkMode, setDarkMode] = useState(false)
     const [currentTheme, setCurrentTheme] = useState(DefaultTheme)
 
-    useEffect(() => { getTheme() }, [])
-
     useEffect(() => {
         darkMode ? setCurrentTheme(DarkTheme) : setCurrentTheme(DefaultTheme)
     }, [darkMode])
-
-    useEffect(() => {
-    }, [currentTheme])
 
     const isFirstRun = useRef(true);
     useEffect(() => {
         if (isFirstRun.current) {
             isFirstRun.current = false;
         }
-        else {
-            saveCurrentTheme(currentTheme)
-        }
+        else { saveCurrentTheme(currentTheme) }
     }, [currentTheme])
+
+    useEffect(() => { getTheme() }, [])
 
     const changeTheme = (theme) => {
         switch (theme) {
             case 'default':
-                setCurrentTheme(DefaultTheme)
+                setDarkMode(false)
                 break;
             case 'dark':
-                setCurrentTheme(DarkTheme)
+                setDarkMode(true)
                 break
             default:
-                setCurrentTheme(DefaultTheme)
+                setDarkMode(false)
         }
     }
 
