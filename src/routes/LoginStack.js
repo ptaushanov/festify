@@ -1,5 +1,5 @@
 import { createStackNavigator } from '@react-navigation/stack';
-import { LoginScreen, SugnUpScreen } from "../screens"
+import { LoginScreen, SignUpScreen } from "../screens"
 import BottomNavigation from './BottomNavigation';
 import AppbarSignUp from '../screens/Signup/AppbarSignUp';
 
@@ -12,7 +12,7 @@ export default function LoginStack() {
         >
             <Screen
                 name="SignUp"
-                component={SugnUpScreen}
+                component={SignUpScreen}
                 options={{
                     headerMode: "screen",
                     header: () => {

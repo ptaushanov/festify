@@ -1,7 +1,7 @@
 export { default as HomeScreen } from "./Home/HomeScreen"
 export { default as LeaderboardScreen } from "./Leaderboard/LeaderboardScreen"
 export { default as LoginScreen } from "./Login/LoginScreen"
-export { default as SugnUpScreen } from "./Signup/SignUp"
+export { default as SignUpScreen } from "./Signup/SignUp"
 export { default as SeasonsScreen } from "./Lessons/SeasonsScreen"
 export { default as LessonsTimeline } from "./Lessons/LessonsTimeline"
 export { default as LessonScreen } from "./Lessons/LessonScreen"
