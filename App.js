@@ -7,8 +7,6 @@ import i18n from 'i18n-js';
 import { useFonts } from 'expo-font';
 import addExtensions from './extensions';
 
-import AppLoading from 'expo-app-loading';
-
 import { LogBox } from 'react-native';
 LogBox.ignoreLogs(['Setting a timer', 'AsyncStorage has been']);
 
@@ -28,7 +26,7 @@ export default function App() {
   })
 
   if (!fontsLoaded) {
-    return <AppLoading />;
+    return null;
   }
 
   return (
