@@ -1,7 +1,7 @@
 import { createContext, useState, useContext, useCallback } from "react"
 import { useFocusEffect } from "@react-navigation/native"
 
-import { auth } from "../../firebase.v8"
+import { auth } from "../../firebase.v9"
 import {
     updateUnlockedSeasons,
     updateSeasonsDataBySeasonNames,

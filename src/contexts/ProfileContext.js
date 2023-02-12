@@ -1,5 +1,5 @@
 import { createContext, useState, useEffect, useContext } from "react"
-import { auth } from "../../firebase.v8"
+import { auth } from "../../firebase.v9"
 import {
     getUsername,
     getProfilePictureURL,

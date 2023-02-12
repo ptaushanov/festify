@@ -1,4 +1,4 @@
-import { firestore } from "../../firebase.v8";
+import { firestore } from "../../firebase.v9";
 
 export const findRewards = () => {
     return firestore

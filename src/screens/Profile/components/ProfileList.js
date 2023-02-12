@@ -5,7 +5,7 @@ import i18n from 'i18n-js';
 import { Ionicons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/core'
 import { useTheme } from '../../../contexts/ThemeContext';
-import { auth } from '../../../../firebase.v8';
+import { auth } from '../../../../firebase.v9';
 
 
 const ProfileList = () => {

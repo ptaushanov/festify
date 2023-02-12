@@ -1,4 +1,4 @@
-import { auth, firestore } from "../../firebase.v8";
+import { auth, firestore } from "../../firebase.v9";
 
 export const signUpUser = (newUser) => {
     const { username, email, password } = newUser;

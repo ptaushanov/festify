@@ -1,4 +1,4 @@
-import { auth } from "../../../firebase.v8";
+import { auth } from "../../../firebase.v9";
 import { useState, useEffect } from "react";
 
 function useAuth() {

@@ -1,4 +1,4 @@
-import { storage, firestore } from "../../firebase.v8";
+import { storage, firestore } from "../../firebase.v9";
 
 export const getProfilePictureURL = (userId) => {
     return firestore

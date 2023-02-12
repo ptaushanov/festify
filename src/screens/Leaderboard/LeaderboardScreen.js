@@ -4,7 +4,7 @@ import React, { useState, useCallback } from 'react'
 import LeaderboardTitle from './components/LeaderboardTitle'
 import LeaderboardCard from './components/LeaderboardCard'
 import { useFocusEffect } from '@react-navigation/native'
-import { auth } from '../../../firebase.v8'
+import { auth } from '../../../firebase.v9'
 import {
     updateUser,
     findUserPlace,

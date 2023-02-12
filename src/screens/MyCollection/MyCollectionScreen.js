@@ -5,7 +5,7 @@ import CollectionCard from './components/CollectionCard'
 import Animated, { Layout, ZoomIn } from 'react-native-reanimated'
 import { useFocusEffect } from '@react-navigation/native'
 import { findRewards, findUserRewards } from '../../services/rewards-services'
-import { auth } from '../../../firebase.v8'
+import { auth } from '../../../firebase.v9'
 
 const MyCollectionScreen = () => {
     const [rewards, setRewards] = useState([])

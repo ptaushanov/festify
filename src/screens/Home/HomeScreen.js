@@ -4,7 +4,7 @@ import LessonCard from './components/LessonCard'
 import { useFocusEffect, useNavigation } from '@react-navigation/native'
 import { ActivityIndicator } from 'react-native-paper'
 import noImage from "../../assets/images/no_image.jpg"
-import { auth } from '../../../firebase.v8'
+import { auth } from '../../../firebase.v9'
 
 import {
     findCurrentLesson,

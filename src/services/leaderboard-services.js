@@ -1,4 +1,4 @@
-import { firestore } from "../../firebase.v8";
+import { firestore } from "../../firebase.v9";
 
 export const updateUser = (userId, snapshotHandler, errorHandler) => {
     return firestore
