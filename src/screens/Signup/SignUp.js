@@ -1,4 +1,4 @@
-import { StyleSheet, View, TouchableWithoutFeedback, Keyboard } from 'react-native'
+import { StyleSheet, View, TouchableWithoutFeedback, Keyboard, Platform } from 'react-native'
 import React from 'react'
 import { useTheme, Surface, Button, Text } from 'react-native-paper'
 import globalStyles from '../../styles/global'
@@ -16,10 +16,18 @@ const SignUp = () => {
     const navigation = useNavigation()
 
     const handleLoginPressed = () => { navigation.navigate("Login") }
+    const handleTWFPress = () => {
+        switch (Platform.OS) {
+            case "android":
+            case "ios":
+                Keyboard.dismiss()
+                break;
+        }
+    }
 
     return (
         <TouchableWithoutFeedback
-            onPress={Keyboard.dismiss}
+            onPress={handleTWFPress}
         >
             <View
                 style={[

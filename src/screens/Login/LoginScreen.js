@@ -13,6 +13,7 @@ import i18n from 'i18n-js'
 import { Formik } from 'formik'
 import * as Yup from "yup"
 
+import { Platform } from 'react-native'
 import StyledTextInput from '../../shared/TextInput/StyledTextInput'
 
 const LoginScreen = () => {
@@ -38,8 +39,18 @@ const LoginScreen = () => {
         navigation.navigate("SignUp")
     }
 
+    const handleTWFPress = () => {
+        switch (Platform.OS) {
+            case "android":
+            case "ios":
+                Keyboard.dismiss()
+                break;
+        }
+    }
+
     return (
-        <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+        // delete onPress
+        <TouchableWithoutFeedback onPress={handleTWFPress}>
             <View style={[
                 globalStyles.container,
                 styles.container,

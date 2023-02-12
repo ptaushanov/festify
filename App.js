@@ -3,6 +3,7 @@ import ThemeWrapper from './src/shared/ThemeWrapper/ThemeWrapper';
 import { ThemeProvider } from './src/contexts/ThemeContext';
 import * as languages from "./src/languages"
 import * as Localization from 'expo-localization';
+import { registerRootComponent } from 'expo';
 import i18n from 'i18n-js';
 import { useFonts } from 'expo-font';
 import addExtensions from './extensions';
@@ -48,3 +49,5 @@ export default function App() {
     </View >
   );
 }
+
+registerRootComponent(App)

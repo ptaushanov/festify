@@ -1,6 +1,10 @@
-import { StyleSheet, TextInput, View } from 'react-native'
+import { StyleSheet, TextInput as TextInputMobile, View, Platform } from 'react-native'
+import { TextInput as TextInputWeb } from 'react-native-web'
 import React from 'react'
 import { Text, useTheme } from 'react-native-paper'
+
+const isMobile = Platform.OS === 'ios' || Platform.OS === 'android'
+const TextInput = isMobile ? TextInputMobile : TextInputWeb
 
 const StyledTextInput = ({
     error = false,
