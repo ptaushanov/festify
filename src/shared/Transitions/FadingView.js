@@ -1,4 +1,4 @@
-import { Animated } from 'react-native'
+import { Animated, Platform } from 'react-native'
 import React, { useRef, useEffect } from 'react'
 
 const FadingView = ({
@@ -11,6 +11,7 @@ const FadingView = ({
     onAnimationEnd
 }) => {
     const fadeAnim = useRef(new Animated.Value(0)).current
+    const isMobile = Platform.OS === 'ios' || Platform.OS === 'android'
 
     useEffect(() => {
         if (visible) {
@@ -20,7 +21,7 @@ const FadingView = ({
                     {
                         toValue: 1,
                         duration: fadeInDuration,
-                        useNativeDriver: true
+                        useNativeDriver: isMobile
                     }
                 ),
                 Animated.delay(pauseDuration),
@@ -29,7 +30,7 @@ const FadingView = ({
                     {
                         toValue: 0,
                         duration: fadeoutDuration,
-                        useNativeDriver: true
+                        useNativeDriver: isMobile
                     }
                 )
             ]).start((({ finished }) => {
