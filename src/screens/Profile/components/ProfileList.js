@@ -9,7 +9,6 @@ import { auth } from '../../../../firebase.v9';
 
 
 const ProfileList = () => {
-
     const navigation = useNavigation()
     const { toggleTheme, darkMode } = useTheme()
 
@@ -33,7 +32,7 @@ const ProfileList = () => {
                     style={styles.container}
                     title={i18n.t("profile:Dark Mode")}
                     left={(props) => <List.Icon {...props} icon={(props) => <Ionicons name="moon" {...props} style={styles.darkIcon} />} />}
-                    right={(props) => <Switch {...props} onChange={toggleTheme} value={darkMode} />}
+                    right={(props) => <Switch {...props} onValueChange={toggleTheme} value={darkMode} />}
                 />
 
                 <Divider style={styles.divider} />
