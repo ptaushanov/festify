@@ -11,6 +11,8 @@ export default function BottomNavigation() {
             shifting={true}
             sceneAnimationEnabled={false}
             backBehavior="firstRoute"
+            compact
+
         >
             <Screen
                 name="HomeStack"
