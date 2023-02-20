@@ -10,33 +10,32 @@ const ImagePicker = ({ isOpen, setOpen, setImage }) => {
     const { colors } = useTheme()
     const sheetRef = React.useRef(null);
 
+    const runAfterSelectAction = (result) => {
+        if (!result.canceled) {
+            const [image] = result.assets
+            console.log(image)
+            setImage(image.uri)
+        }
+        sheetRef.current.snapTo(2)
+    }
+
     const handlePickFromCamera = async () => {
-        let image = await ExpoImagePicker.launchCameraAsync({
+        const result = await ExpoImagePicker.launchCameraAsync({
             allowsEditing: true,
             aspect: [1, 1],
             quality: 1,
         });
-
-        if (!image.cancelled) {
-            setImage(image.uri);
-        }
-
-        sheetRef.current.snapTo(2)
+        runAfterSelectAction(result)
     }
 
     const handlePickFromGallery = async () => {
-        let image = await ExpoImagePicker.launchImageLibraryAsync({
+        const result = await ExpoImagePicker.launchImageLibraryAsync({
             mediaTypes: ExpoImagePicker.MediaTypeOptions.Images,
             allowsEditing: true,
             aspect: [1, 1],
             quality: 1,
         });
-
-        if (!image.cancelled) {
-            setImage(image.uri);
-        }
-
-        sheetRef.current.snapTo(2)
+        runAfterSelectAction(result)
     }
 
     const renderContent = () => (
