@@ -1,5 +1,5 @@
 import { StyleSheet, ImageBackground } from 'react-native'
-import { Card, Surface, TouchableRipple } from 'react-native-paper'
+import { Card, Surface, TouchableRipple, Text } from 'react-native-paper'
 import { MaterialIcons } from "@expo/vector-icons"
 import React from 'react'
 

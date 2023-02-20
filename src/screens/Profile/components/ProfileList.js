@@ -31,8 +31,9 @@ const ProfileList = () => {
                 <List.Item
                     style={styles.container}
                     title={i18n.t("profile:Dark Mode")}
-                    left={(props) => <List.Icon {...props} icon={(props) => <Ionicons name="moon" {...props} style={styles.darkIcon} />} />}
-                    right={(props) => <Switch {...props} onValueChange={toggleTheme} value={darkMode} />}
+                    onPress={() => null}
+                    left={(props) => <List.Icon {...props} icon={(props) => <Ionicons name="moon" {...props} />} />}
+                    right={(props) => <Switch {...props} onValueChange={toggleTheme} value={darkMode} style={styles.switch} />}
                 />
 
                 <Divider style={styles.divider} />
@@ -52,7 +53,6 @@ const ProfileList = () => {
                     left={(props) => <List.Icon {...props} icon={"logout"} />}
                     onPress={handleSignOut}
                 />
-
             </Surface>
         </List.Section>
 
@@ -82,8 +82,8 @@ const styles = StyleSheet.create({
     title: {
         paddingLeft: 20
     },
-    darkIcon: {
-        paddingTop: 10
+    switch: {
+        height: 20,
+        alignSelf: "center"
     }
-
 })
