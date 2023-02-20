@@ -2,7 +2,7 @@ import { StyleSheet, View } from 'react-native'
 import React from 'react'
 import { Avatar } from 'react-native-paper';
 
-import { useTheme, Surface, Headline, Subheading, Button } from 'react-native-paper';
+import { useTheme, Surface, Button, Text } from 'react-native-paper';
 import i18n from 'i18n-js';
 
 const LessonCard = ({
@@ -21,12 +21,12 @@ const LessonCard = ({
                     <Avatar.Image size={thumbnailSize} source={lessonThumbnail} />
                 </View>
             }
-            <Headline style={styles.headline}>
+            <Text variant="headlineSmall" style={styles.headline}>
                 {lessonTitle}
-            </Headline>
-            <Subheading style={styles.subheading}>
+            </Text>
+            <Text variant="titleMedium" style={styles.subheading}>
                 {i18n.t("home:Pick up where you left off")}
-            </Subheading>
+            </Text>
             <Button
                 mode="contained"
                 style={styles.buttonContainer}

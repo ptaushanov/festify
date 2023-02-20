@@ -1,5 +1,5 @@
 import { StyleSheet, ImageBackground } from 'react-native'
-import { Card, Title, Paragraph, Surface, TouchableRipple } from 'react-native-paper'
+import { Card, Surface, TouchableRipple } from 'react-native-paper'
 import { MaterialIcons } from "@expo/vector-icons"
 import React from 'react'
 
@@ -23,12 +23,12 @@ const SeasonCard = ({ title = "", subtitle = "", image, onCardPress, locked = tr
                         styles.cardContent,
                         { backgroundColor: locked ? 'rgba(0,0,0, 0.65)' : 'rgba(0,0,0, 0.35)' }
                     ]}>
-                        <Title style={styles.text}>
+                        <Text variant="titleLarge" style={styles.text}>
                             {title}
-                        </Title>
-                        <Paragraph style={[styles.text, styles.paragraph]}>
+                        </Text>
+                        <Text variant="bodyMedium" style={[styles.text, styles.paragraph]}>
                             {subtitle}
-                        </Paragraph>
+                        </Text>
                         {locked && <MaterialIcons
                             name="lock"
                             size={25}

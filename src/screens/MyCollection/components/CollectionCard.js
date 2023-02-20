@@ -1,5 +1,5 @@
 import { StyleSheet, Dimensions } from 'react-native'
-import { Card, Subheading, Surface, Text } from 'react-native-paper'
+import { Card, Surface, Text } from 'react-native-paper'
 import React from 'react'
 
 import noImage from "../../../assets/images/no_image.jpg"
@@ -17,9 +17,9 @@ const CollectionCard = ({ collected = false, name, thumbnail }) => {
                     source={thumbnail ? { uri: thumbnail } : noImage}
                 />
                 <Surface style={styles.cardContent}>
-                    <Subheading style={styles.rewardName}>
+                    <Text variant="titleMedium" style={styles.rewardName}>
                         {name}
-                    </Subheading>
+                    </Text>
                 </Surface>
             </Card>
         )

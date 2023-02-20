@@ -4,7 +4,7 @@ import { View, Modal, StyleSheet, Image } from 'react-native'
 import { useLessonsInfo } from '../../../contexts/LessonsContext'
 import Button from '../../../shared/Button/Button'
 import globalStyles from '../../../styles/global'
-import { useTheme, Headline, Text, Subheading } from 'react-native-paper'
+import { useTheme, Text } from 'react-native-paper'
 import { AntDesign } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native'
 import i18n from 'i18n-js'
@@ -40,13 +40,13 @@ const FinishModal = () => {
                     { backgroundColor: colors.surface, borderColor: colors.primary }
                 ]}>
                     <View>
-                        <Headline style={styles.headline}>
+                        <Text variant="headlineSmall" style={styles.headline}>
                             🎉 {i18n.t("lessons:Congratulations")} 🎉
-                        </Headline>
-                        <Subheading style={styles.subheading}>
+                        </Text>
+                        <Text variant="titleMedium" style={styles.subheading}>
                             {i18n.t("lessons:On learning the holiday") +
                                 " " + lessonData.holiday_name}
-                        </Subheading>
+                        </Text>
                         <Text style={styles.rewardText}>
                             {i18n.t("lessons:Reward")}
                         </Text>
