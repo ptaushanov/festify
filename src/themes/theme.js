@@ -11,6 +11,7 @@ import {
 } from '@react-navigation/native';
 
 import { palette, surfaceMaterials, customMaterials } from "./palette"
+import { Platform } from 'react-native';
 
 const {
     LightTheme: AdaptedNavigationDefaultTheme,
@@ -20,44 +21,13 @@ const {
     reactNavigationDark: NavigationDarkTheme
 })
 
-const fontConfig = {
-    ios: {
-        regular: {
-            fontFamily: 'sans-serif',
-            fontWeight: 'normal',
-        },
-        medium: {
-            fontFamily: 'sans-serif-medium',
-            fontWeight: 'normal',
-        },
-        light: {
-            fontFamily: 'sans-serif-light',
-            fontWeight: 'normal',
-        },
-        thin: {
-            fontFamily: 'sans-serif-thin',
-            fontWeight: 'normal',
-        },
-    },
-    android: {
-        regular: {
-            fontFamily: 'sans-serif',
-            fontWeight: 'normal',
-        },
-        medium: {
-            fontFamily: 'sans-serif-medium',
-            fontWeight: 'normal',
-        },
-        light: {
-            fontFamily: 'sans-serif-light',
-            fontWeight: 'normal',
-        },
-        thin: {
-            fontFamily: 'sans-serif-thin',
-            fontWeight: 'normal',
-        },
-    }
-}
+const selectedFontFamily = Platform.select({
+    web: 'Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif',
+    ios: 'System',
+    default: 'sans-serif', // and 'sans-serif-medium' for `fontWeight:"500"`
+})
+
+const fontConfig = { fontFamily: selectedFontFamily }
 
 export const DefaultTheme = {
     ...AdaptedNavigationDefaultTheme,
@@ -80,7 +50,7 @@ export const DefaultTheme = {
 export const DarkTheme = {
     ...MD3DarkTheme,
     ...AdaptedNavigationDarkTheme,
-    fonts: configureFonts(fontConfig),
+    fonts: configureFonts({ config: fontConfig }),
     roundness: 6,
     version: 3,
     colors: {
