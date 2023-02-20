@@ -23,12 +23,12 @@ const ProfileEditScreen = () => {
     const [notificationVisible, setNotificationVisible] = useState(false)
 
     const { colors } = useTheme()
+    const { username, email, avatar, updateProfile, saveAvatar } = useProfileInfo()
 
     useEffect(() => {
         setNewUsername(username)
     }, [username])
 
-    const { username, email, avatar, updateProfile, saveAvatar } = useProfileInfo()
     const handleUsernameChanged = (uname) => { setNewUsername(uname) }
 
     const verifyUsernameNotDuplicate = async (newUsername) => {

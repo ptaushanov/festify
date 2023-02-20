@@ -13,7 +13,6 @@ const ImagePicker = ({ isOpen, setOpen, setImage }) => {
     const runAfterSelectAction = (result) => {
         if (!result.canceled) {
             const [image] = result.assets
-            console.log(image)
             setImage(image.uri)
         }
         sheetRef.current.snapTo(2)

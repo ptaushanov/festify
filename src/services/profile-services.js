@@ -31,7 +31,7 @@ export const storeProfilePicture = async (uri, userId) => {
         .ref(`images/users/${userId}/${filename}`)
         .put(blob)
         .then(snapshot => {
-            blob.close()
+            URL.revokeObjectURL(blob);
             return snapshot.ref.getDownloadURL()
         })
 }
