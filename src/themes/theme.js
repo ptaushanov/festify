@@ -1,15 +1,24 @@
 import {
     configureFonts,
-    DefaultTheme as NavigationDefaultTheme,
-    DarkTheme as NavigationDarkTheme
+    MD3LightTheme,
+    MD3DarkTheme,
+    adaptNavigationTheme
 } from 'react-native-paper';
 
 import {
-    DefaultTheme as PaperDefaultTheme,
-    DarkTheme as PaperDarkTheme
+    DefaultTheme as NavigationDefaultTheme,
+    DarkTheme as NavigationDarkTheme
 } from '@react-navigation/native';
 
 import { palette, surfaceMaterials, customMaterials } from "./palette"
+
+const {
+    LightTheme: AdaptedNavigationDefaultTheme,
+    DarkTheme: AdaptedNavigationDarkTheme
+} = adaptNavigationTheme({
+    reactNavigationLight: NavigationDefaultTheme,
+    reactNavigationDark: NavigationDarkTheme
+})
 
 const fontConfig = {
     ios: {
@@ -51,37 +60,37 @@ const fontConfig = {
 }
 
 export const DefaultTheme = {
-    ...NavigationDefaultTheme,
-    ...PaperDefaultTheme,
+    ...AdaptedNavigationDefaultTheme,
+    ...MD3LightTheme,
     fonts: configureFonts(fontConfig),
     roundness: 6,
     colors: {
-        ...NavigationDefaultTheme.colors,
-        ...PaperDefaultTheme.colors,
+        ...AdaptedNavigationDefaultTheme.colors,
+        ...MD3LightTheme.colors,
         ...palette,
         onSurfaceInput: surfaceMaterials.onSurfaceInput.light,
         surfaceInput: surfaceMaterials.surfaceInput.light,
         surfacePicker: surfaceMaterials.surfacePicker.light,
         surfaceCard: surfaceMaterials.surfaceCard.light,
-        textReverse: PaperDarkTheme.colors.text,
+        textReverse: MD3DarkTheme.colors.text,
         divider: customMaterials.divider.light
     },
 };
 
 export const DarkTheme = {
-    ...PaperDarkTheme,
-    ...NavigationDarkTheme,
+    ...MD3DarkTheme,
+    ...AdaptedNavigationDarkTheme,
     fonts: configureFonts(fontConfig),
     roundness: 6,
     colors: {
-        ...PaperDarkTheme.colors,
-        ...NavigationDarkTheme.colors,
+        ...MD3DarkTheme.colors,
+        ...AdaptedNavigationDarkTheme.colors,
         ...palette,
         onSurfaceInput: surfaceMaterials.onSurfaceInput.dark,
         surfaceInput: surfaceMaterials.surfaceInput.dark,
         surfacePicker: surfaceMaterials.surfacePicker.dark,
         surfaceCard: surfaceMaterials.surfaceCard.dark,
-        textReverse: PaperDefaultTheme.colors.text,
+        textReverse: MD3LightTheme.colors.text,
         divider: customMaterials.divider.dark
     },
 };
