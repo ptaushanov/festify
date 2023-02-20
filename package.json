@@ -3,12 +3,10 @@
   "version": "1.0.0",
   "main": "node_modules/expo/AppEntry.js",
   "scripts": {
-    "prestart": "set NODE_OPTIONS=--openssl-legacy-provider",
-    "preweb": "set NODE_OPTIONS=--openssl-legacy-provider",
-    "start": "npx expo start",
-    "android": "npx expo start --android",
-    "ios": "npx expo start --ios",
-    "web": "npx expo start --web",
+    "start": "npx cross-env NODE_OPTIONS=--openssl-legacy-provider expo start",
+    "android": "npx cross-env NODE_OPTIONS=--openssl-legacy-provider expo start --android",
+    "ios": "npx cross-env NODE_OPTIONS=--openssl-legacy-provider expo start --ios",
+    "web": "npx cross-env NODE_OPTIONS=--openssl-legacy-provider expo start --web",
     "eject": "npx expo eject",
     "publish": "npx expo-cli publish"
   },
