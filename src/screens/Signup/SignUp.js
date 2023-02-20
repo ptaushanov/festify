@@ -161,7 +161,7 @@ const SignUp = () => {
                                             onPress={handleLoginPressed}
                                             style={styles.button}
                                             contentStyle={styles.buttonContent}
-                                            color={colors.accent}
+                                            buttonColor={colors.accent}
                                         >
                                             {i18n.t("auth:Login")}
                                         </Button>
@@ -170,7 +170,7 @@ const SignUp = () => {
                                             onPress={handleSubmit}
                                             style={[styles.button, styles.buttonRight]}
                                             contentStyle={styles.buttonContent}
-                                            color={colors.accent}
+                                            buttonColor={colors.accent}
                                             disabled={isSubmitting || isValidating}
                                         >
                                             {i18n.t("auth:Sign Up")}

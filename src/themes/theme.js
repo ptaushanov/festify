@@ -82,6 +82,7 @@ export const DarkTheme = {
     ...AdaptedNavigationDarkTheme,
     fonts: configureFonts(fontConfig),
     roundness: 6,
+    version: 3,
     colors: {
         ...MD3DarkTheme.colors,
         ...AdaptedNavigationDarkTheme.colors,
