@@ -24,7 +24,7 @@ const PillNotification = ({
             onAnimationEnd={onAnimationEnd}
         >
             <View style={[styles.pill, {
-                backgroundColor: colors.surfacePicker,
+                backgroundColor: colors.inverseOnSurface,
                 borderColor: colors.primary
             }]}>
                 <Text style={[styles.text, { color: colors.primary }]}>

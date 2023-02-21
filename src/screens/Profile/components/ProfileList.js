@@ -25,8 +25,8 @@ const ProfileList = () => {
     }
 
     return (
-        <List.Section style={styles.section} title={i18n.t("profile:General")} titleStyle={styles.title}>
-            <Surface style={styles.surface}>
+        <Surface elevation={1} style={styles.surface}>
+            <List.Section title={i18n.t("profile:General")} titleStyle={styles.title}>
                 <Divider style={styles.divider} />
                 <List.Item
                     style={styles.container}
@@ -53,8 +53,8 @@ const ProfileList = () => {
                     left={(props) => <List.Icon {...props} icon={"logout"} />}
                     onPress={handleSignOut}
                 />
-            </Surface>
-        </List.Section>
+            </List.Section>
+        </Surface>
 
 
     )
@@ -63,12 +63,9 @@ const ProfileList = () => {
 export default ProfileList
 
 const styles = StyleSheet.create({
-    section: {
-        marginTop: 40
-
-    },
     surface: {
-        elevation: 1
+        marginTop: 60,
+        borderRadius: 16
     },
     listItem: {
         padding: 0,

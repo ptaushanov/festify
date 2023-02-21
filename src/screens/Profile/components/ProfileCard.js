@@ -24,10 +24,10 @@ const ProfileCard = () => {
         <Surface style={styles.surface} elevation={2}>
             <StyledAvatar
                 style={[styles.avatar, themedStyles]}
-                size={65}
+                size={70}
                 image={avatar}
                 username={username}
-                borderWidth={5}
+                borderWidth={6}
             />
             <IconButton
                 icon="circle-edit-outline"
@@ -49,12 +49,12 @@ export default ProfileCard
 const styles = StyleSheet.create({
     surface: {
         flexDirection: "row",
-        paddingHorizontal: 15,
-        paddingVertical: 20,
-        borderRadius: 10,
+        paddingHorizontal: 20,
+        paddingVertical: 25,
+        borderRadius: 6
     },
     avatar: {
-        marginTop: -40,
+        marginTop: -45,
     },
     infoContainer: {
         flex: 1,

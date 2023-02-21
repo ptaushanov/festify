@@ -1,7 +1,7 @@
 import { StyleSheet, View } from 'react-native'
 import React, { useEffect } from 'react'
 import BottomSheet from 'reanimated-bottom-sheet';
-import { useTheme, Text, TouchableRipple, Divider } from 'react-native-paper';
+import { useTheme, Text, TouchableRipple, Divider, Surface } from 'react-native-paper';
 import { MaterialIcons } from "@expo/vector-icons"
 import i18n from 'i18n-js';
 import * as ExpoImagePicker from "expo-image-picker"
@@ -40,7 +40,7 @@ const ImagePicker = ({ isOpen, setOpen, setImage }) => {
     const renderContent = () => (
         <View style={[
             styles.content,
-            { backgroundColor: colors.surfacePicker }
+            { backgroundColor: colors.inverseOnSurface }
         ]}>
             <View style={[
                 styles.bar,

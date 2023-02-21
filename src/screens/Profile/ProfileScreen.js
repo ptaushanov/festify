@@ -9,10 +9,10 @@ import globalStyles from '../../styles/global'
 const ProfileScreen = () => {
     return (
         <View>
-            <View style={globalStyles.paddedContainer}>
+            <View style={globalStyles.uniformContainer}>
                 <ProfileCard />
+                <ProfileList />
             </View>
-            <ProfileList />
         </View>
     )
 }

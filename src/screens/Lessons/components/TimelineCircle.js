@@ -9,7 +9,7 @@ const TimelineCircle = ({ size = 80, image, locked = true }) => {
     const { colors } = useTheme()
 
     return (
-        <View style={[styles.circle, { borderColor: colors.surfaceVariant }]} >
+        <View style={[styles.circle, { borderColor: colors.elevation.level4 }]} >
             {image && <Avatar.Image size={size} source={image} />}
             {locked &&
                 <View style={styles.lockContainer}>

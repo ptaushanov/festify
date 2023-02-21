@@ -82,7 +82,7 @@ const ProfileEditScreen = () => {
                         <StyledAvatar
                             username={username}
                             image={newAvatar || avatar}
-                            size={75}
+                            size={80}
                             borderWidth={6}
                             style={[styles.avatar, { borderColor: colors.onPrimary }]}
                         />
