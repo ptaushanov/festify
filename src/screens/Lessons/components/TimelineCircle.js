@@ -33,7 +33,8 @@ const styles = StyleSheet.create({
     circle: {
         borderRadius: 100,
         borderWidth: 6,
-        elevation: 3
+        elevation: 3,
+        zIndex: 2
     },
     lockContainer: {
         backgroundColor: 'rgba(0,0,0, 0.35)',
