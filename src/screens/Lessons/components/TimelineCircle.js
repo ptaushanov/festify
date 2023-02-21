@@ -9,17 +9,14 @@ const TimelineCircle = ({ size = 80, image, locked = true }) => {
     const { colors } = useTheme()
 
     return (
-        <View style={[
-            styles.circle,
-            { borderColor: colors.surfaceCard }
-        ]}>
+        <View style={[styles.circle, { borderColor: colors.surfaceVariant }]} >
             {image && <Avatar.Image size={size} source={image} />}
             {locked &&
                 <View style={styles.lockContainer}>
                     <MaterialIcons
                         name="lock"
                         size={25}
-                        style={{ color: colors.surface }}
+                        style={{ color: colors.inverseOnSurface }}
                     />
                 </View>
             }
@@ -33,7 +30,6 @@ const styles = StyleSheet.create({
     circle: {
         borderRadius: 100,
         borderWidth: 6,
-        elevation: 3,
         zIndex: 2
     },
     lockContainer: {
@@ -46,6 +42,6 @@ const styles = StyleSheet.create({
         top: 0,
         bottom: 0,
         left: 0,
-        right: 0,
+        right: 0
     }
 })

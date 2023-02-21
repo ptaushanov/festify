@@ -15,11 +15,11 @@ const LessonCard = ({
     const themedCircleStyles = { borderColor: colors.surface }
 
     return (
-        <Surface style={styles.surface}>
+        <Surface style={styles.surface} elevation={1}>
             {lessonThumbnail &&
-                <View style={[styles.thumbnail, themedCircleStyles]}>
+                <Surface style={[styles.thumbnail, themedCircleStyles]}>
                     <Avatar.Image size={thumbnailSize} source={lessonThumbnail} />
-                </View>
+                </Surface>
             }
             <Text variant="headlineSmall" style={styles.headline}>
                 {lessonTitle}
@@ -44,17 +44,16 @@ export default LessonCard
 const styles = StyleSheet.create({
     surface: {
         marginVertical: 20,
-        borderRadius: 10,
-        elevation: 2,
+        borderRadius: 16,
         justifyContent: "center",
         alignItems: "center",
         paddingHorizontal: 20
     },
     thumbnail: {
         borderRadius: 100,
-        borderWidth: 4,
-        elevation: 2,
-        marginTop: -30
+        borderWidth: 6,
+        marginTop: -30,
+        marginBottom: 5
     },
     headline: {
         textAlign: "center",

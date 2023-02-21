@@ -19,7 +19,7 @@ const DailyRewardCard = ({ onRewardClaim, rewardAmount = 0 }) => {
                 style={styles.ripple}
                 onPress={onRewardClaim}
             >
-                <Surface style={styles.surface}>
+                <Surface style={styles.surface} elevation={2}>
                     {rewardAmount > 0 ? (
                         <Text style={[styles.reward, { color: colors.xp }]}>
                             {rewardAmount} XP
@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
     surface: {
         paddingVertical: 20,
         paddingHorizontal: 20,
-        borderRadius: 10,
+        borderRadius: 16,
         justifyContent: "center",
         alignItems: "center",
     },
@@ -49,8 +49,7 @@ const styles = StyleSheet.create({
         paddingVertical: 8,
     },
     ripple: {
-        borderRadius: 10,
-        elevation: 2
+        borderRadius: 16
     },
     reward: {
         fontSize: 26,

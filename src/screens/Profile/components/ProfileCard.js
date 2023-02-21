@@ -17,16 +17,17 @@ const ProfileCard = () => {
     }
 
     const themedStyles = {
-        borderColor: colors.surfaceCard
+        borderColor: colors.onPrimary
     }
 
     return (
-        <Surface style={styles.surface}>
+        <Surface style={styles.surface} elevation={2}>
             <StyledAvatar
                 style={[styles.avatar, themedStyles]}
                 size={65}
                 image={avatar}
                 username={username}
+                borderWidth={5}
             />
             <IconButton
                 icon="circle-edit-outline"
@@ -51,7 +52,6 @@ const styles = StyleSheet.create({
         paddingHorizontal: 15,
         paddingVertical: 20,
         borderRadius: 10,
-        elevation: 2,
     },
     avatar: {
         marginTop: -40,

@@ -19,10 +19,7 @@ const LeaderboardCard = ({
     ]
 
     return (
-        <Surface style={[
-            styles.surfaceContainer,
-            { backgroundColor: colors.surfaceCard }
-        ]}>
+        <Surface style={styles.surfaceContainer} elevation={1}>
             <View style={styles.content}>
                 <StyledAvatar
                     size={50}
@@ -58,8 +55,7 @@ const styles = StyleSheet.create({
     surfaceContainer: {
         paddingHorizontal: 20,
         paddingVertical: 8,
-        elevation: 2,
-        borderRadius: 8,
+        borderRadius: 10,
         marginVertical: 5
     },
     content: {

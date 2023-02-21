@@ -9,7 +9,7 @@ import { useQuestionInfo } from '../../../contexts/QuestionContext';
 const AnswerCard = ({ text = "", selectIndex }) => {
     const [cardState, setCardState] = useState("normal")
     const { colors } = useTheme()
-    const themedStyle = { backgroundColor: colors.surfaceCard }
+    const themedStyle = {}
 
     const {
         currentChoice,
@@ -61,10 +61,10 @@ const AnswerCard = ({ text = "", selectIndex }) => {
     const handleChoiceSelect = () => { setCurrentChoice(selectIndex) }
 
     return (
-        <Surface style={[
-            styles.cardSurface,
-            themedStyle
-        ]}>
+        <Surface
+            elevation={1}
+            style={[styles.cardSurface, themedStyle]}
+        >
             <TouchableRipple
                 onPress={checkCardDisabled() ? null : handleChoiceSelect}
                 borderless
@@ -91,7 +91,6 @@ export default AnswerCard
 
 const styles = StyleSheet.create({
     cardSurface: {
-        elevation: 2,
         borderRadius: 6,
         marginVertical: 6,
     },
