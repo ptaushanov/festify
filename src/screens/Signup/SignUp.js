@@ -161,7 +161,7 @@ const SignUp = () => {
                                             onPress={handleLoginPressed}
                                             style={styles.button}
                                             contentStyle={styles.buttonContent}
-                                            buttonColor={colors.accent}
+                                            textColor={colors.accent}
                                         >
                                             {i18n.t("auth:Login")}
                                         </Button>

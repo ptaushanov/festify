@@ -11,6 +11,8 @@ import {
 } from '@react-navigation/native';
 
 import { palette, surfaceMaterials, customMaterials } from "./palette"
+import { PaletteLight, PaletteDark } from './dynamicPalette';
+
 import { Platform } from 'react-native';
 
 const {
@@ -24,7 +26,7 @@ const {
 const selectedFontFamily = Platform.select({
     web: 'Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif',
     ios: 'System',
-    default: 'sans-serif', // and 'sans-serif-medium' for `fontWeight:"500"`
+    default: 'sans-serif'
 })
 
 const fontConfig = { fontFamily: selectedFontFamily }
@@ -38,6 +40,7 @@ export const DefaultTheme = {
         ...AdaptedNavigationDefaultTheme.colors,
         ...MD3LightTheme.colors,
         ...palette,
+        ...PaletteLight.colors,
         onSurfaceInput: surfaceMaterials.onSurfaceInput.light,
         surfaceInput: surfaceMaterials.surfaceInput.light,
         surfacePicker: surfaceMaterials.surfacePicker.light,
@@ -57,6 +60,7 @@ export const DarkTheme = {
         ...MD3DarkTheme.colors,
         ...AdaptedNavigationDarkTheme.colors,
         ...palette,
+        ...PaletteDark.colors,
         onSurfaceInput: surfaceMaterials.onSurfaceInput.dark,
         surfaceInput: surfaceMaterials.surfaceInput.dark,
         surfacePicker: surfaceMaterials.surfacePicker.dark,

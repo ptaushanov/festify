@@ -150,7 +150,7 @@ const LoginScreen = () => {
                                         onPress={handleSignUpPressed}
                                         style={styles.button}
                                         contentStyle={styles.buttonContent}
-                                        buttonColor={colors.accent}
+                                        textColor={colors.accent}
                                         disabled={isSubmitting || isValidating}
                                     >
                                         {i18n.t("auth:Sign Up")}
