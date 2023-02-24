@@ -1,10 +1,21 @@
 import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs"
 import { HomeStack, LessonsStack, LeaderboardStack, ProfileStack } from "../routes"
+import { Ionicons } from '@expo/vector-icons';
 
 const { Navigator, Screen } = createMaterialBottomTabNavigator()
 import i18n from 'i18n-js';
 
 export default function BottomNavigation() {
+    const btnIconSize = 24;
+
+    const generateIcon = (size, icon, iconOutline) => ({ focused, color }) => (
+        <Ionicons
+            name={focused ? icon : iconOutline}
+            size={size}
+            color={color}
+        />
+    )
+
     return (
         <Navigator
             initialRouteName="HomeStack"
@@ -18,7 +29,7 @@ export default function BottomNavigation() {
                 name="HomeStack"
                 component={HomeStack}
                 options={{
-                    tabBarIcon: "home",
+                    tabBarIcon: generateIcon(btnIconSize, "home", "home-outline"),
                     title: i18n.t("Home")
                 }}
             />
@@ -27,7 +38,7 @@ export default function BottomNavigation() {
                 name="LessonsStack"
                 component={LessonsStack}
                 options={{
-                    tabBarIcon: "book",
+                    tabBarIcon: generateIcon(btnIconSize, "book", "book-outline"),
                     title: i18n.t("Lessons")
                 }}
             />
@@ -36,7 +47,7 @@ export default function BottomNavigation() {
                 name="LeaderboardStack"
                 component={LeaderboardStack}
                 options={{
-                    tabBarIcon: "trophy",
+                    tabBarIcon: generateIcon(btnIconSize, "trophy", "trophy-outline"),
                     title: i18n.t("Leaderboard")
                 }}
             />
@@ -45,7 +56,7 @@ export default function BottomNavigation() {
                 name="ProfileStack"
                 component={ProfileStack}
                 options={{
-                    tabBarIcon: "account",
+                    tabBarIcon: generateIcon(btnIconSize, "person", "person-outline"),
                     title: i18n.t("Profile")
                 }}
             />

@@ -36,6 +36,7 @@ export const DefaultTheme = {
     ...MD3LightTheme,
     fonts: configureFonts(fontConfig),
     roundness: 6,
+    version: 3,
     colors: {
         ...AdaptedNavigationDefaultTheme.colors,
         ...MD3LightTheme.colors,
