@@ -7,10 +7,10 @@ import { useNavigation } from '@react-navigation/core'
 import { useTheme } from '../../../contexts/ThemeContext';
 import { auth } from '../../../../firebase.v9';
 
-
-const ProfileList = () => {
+const ProfileList = ({ listOptions }) => {
     const navigation = useNavigation()
     const { toggleTheme, darkMode } = useTheme()
+    const { setLPickerOpen } = listOptions;
 
     const handleSignOut = () => {
         auth.signOut()
@@ -24,16 +24,43 @@ const ProfileList = () => {
         navigation.navigate("My Collection")
     }
 
+    const handleOpenLanguageDialog = () => setLPickerOpen(true)
+
     return (
         <Surface elevation={1} style={styles.surface}>
             <List.Section title={i18n.t("profile:General")} titleStyle={styles.title}>
                 <Divider style={styles.divider} />
+
                 <List.Item
                     style={styles.container}
                     title={i18n.t("profile:Dark Mode")}
                     onPress={() => null}
-                    left={(props) => <List.Icon {...props} icon={(props) => <Ionicons name="moon" {...props} />} />}
-                    right={(props) => <Switch {...props} onValueChange={toggleTheme} value={darkMode} style={styles.switch} />}
+                    left={(props) => (
+                        <List.Icon {...props} icon={(props) => (
+                            <Ionicons name="moon-outline" {...props} />
+                        )} />
+                    )}
+                    right={(props) => (
+                        <Switch
+                            {...props}
+                            onValueChange={toggleTheme}
+                            value={darkMode}
+                            style={styles.switch}
+                        />
+                    )}
+                />
+
+                <Divider style={styles.divider} />
+
+                <List.Item
+                    style={styles.container}
+                    title={i18n.t("profile:Language")}
+                    onPress={handleOpenLanguageDialog}
+                    left={(props) => (
+                        <List.Icon {...props} icon={(props) => (
+                            <Ionicons name="language-outline" {...props} />
+                        )} />
+                    )}
                 />
 
                 <Divider style={styles.divider} />
@@ -41,7 +68,11 @@ const ProfileList = () => {
                 <List.Item
                     style={styles.container}
                     title={i18n.t("profile:My Rewards")}
-                    left={(props) => <List.Icon {...props} icon={"trophy-award"} />}
+                    left={(props) => (
+                        <List.Icon {...props} icon={(props) => (
+                            <Ionicons name="star-outline" {...props} />
+                        )} />
+                    )}
                     onPress={handleNavigateToRewards}
                 />
 
@@ -50,7 +81,11 @@ const ProfileList = () => {
                 <List.Item
                     style={styles.container}
                     title={i18n.t("profile:Logout")}
-                    left={(props) => <List.Icon {...props} icon={"logout"} />}
+                    left={(props) => (
+                        <List.Icon {...props} icon={(props) => (
+                            <Ionicons name="log-out-outline" {...props} />
+                        )} />
+                    )}
                     onPress={handleSignOut}
                 />
             </List.Section>

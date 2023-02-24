@@ -43,6 +43,9 @@
     "profile:Dark Mode": "Dark Mode",
     "profile:My Rewards": "My Awards",
     "profile:Logout": "Logout",
+    "profile:Language": "Language",
+    "profile:Select language": "Select language",
+
     "change-profile:Change picture": "Change picture",
     "change-profile:Username": "Username",
     "change-profile:Email": "Email",
