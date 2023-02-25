@@ -56,7 +56,7 @@ const styles = StyleSheet.create({
         borderRadius: 10,
     },
     cardContent: {
-        paddingVertical: 18,
+        paddingVertical: 20,
         borderRadius: 10,
     },
     cardImage: {

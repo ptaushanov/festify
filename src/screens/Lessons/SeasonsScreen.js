@@ -82,10 +82,10 @@ export default SeasonsScreen
 
 const styles = StyleSheet.create({
     cardContainer: {
-        marginVertical: 14
+        marginVertical: 14,
     },
     flexContainer: {
-        flex: 1
+        flex: 1,
     },
     scrollContainer: {
         padding: 20

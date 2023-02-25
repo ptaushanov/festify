@@ -2,7 +2,7 @@ import { StyleSheet, View } from 'react-native'
 import React from 'react'
 import StyledAvatar from '../../../shared/StyledAvatar/StyledAvatar'
 import { Surface, useTheme, Text } from 'react-native-paper'
-import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { Ionicons } from '@expo/vector-icons';
 
 const LeaderboardCard = ({
     avatar,
@@ -36,8 +36,8 @@ const LeaderboardCard = ({
                 </View>
                 <View style={styles.contentPlace}>
                     {place && place < 4
-                        ? <MaterialCommunityIcons
-                            name="medal"
+                        ? <Ionicons
+                            name="ribbon"
                             size={24}
                             color={medalColors[place - 1]}
                         /> : null
