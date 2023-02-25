@@ -2,8 +2,10 @@ import React from 'react'
 import { StyleSheet } from 'react-native'
 import { Dialog, Portal, List } from "react-native-paper"
 import i18n from 'i18n-js'
+import { useLanguage } from '../../../contexts/LanguageContext'
 
 const LanguagePicker = ({ open, setOpen, onLanguageChange }) => {
+    const { systemLocale } = useLanguage()
     const hideDialog = () => setOpen(false)
     const handleOnPress = (locale) => () => {
         onLanguageChange(locale)
@@ -17,12 +19,17 @@ const LanguagePicker = ({ open, setOpen, onLanguageChange }) => {
                 <Dialog.Content>
                     <List.Item
                         titleStyle={styles.listItem}
-                        title="🇺🇸  English (US)"
+                        title={`🌐  ${i18n.t("profile:System")} (${systemLocale})`}
+                        onPress={handleOnPress("system")}
+                    />
+                    <List.Item
+                        titleStyle={styles.listItem}
+                        title="🇺🇸  English (en-US)"
                         onPress={handleOnPress("en-US")}
                     />
                     <List.Item
                         titleStyle={styles.listItem}
-                        title="🇧🇬  Български (BG)"
+                        title="🇧🇬  Български (bg-BG)"
                         onPress={handleOnPress("bg")}
                     />
                 </Dialog.Content>

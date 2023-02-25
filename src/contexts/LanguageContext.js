@@ -1,7 +1,4 @@
-import {
-    createContext, useState, useEffect,
-    useContext, useRef
-} from "react"
+import { createContext, useState, useEffect, useContext, useRef } from "react"
 import i18n from 'i18n-js';
 import * as languages from "../languages"
 import { locale as systemLocale } from 'expo-localization';
@@ -58,7 +55,7 @@ export function LanguageProvider({ children }) {
         }
     }
 
-    const languageProviderData = { currentLocale, changeLocale }
+    const languageProviderData = { currentLocale, changeLocale, systemLocale }
 
     if (!isTranslationLoaded) return null;
 
