@@ -2,6 +2,7 @@ import { StyleSheet, TextInput as TextInputMobile, View, Platform } from 'react-
 import { TextInput as TextInputWeb } from 'react-native-web'
 import React from 'react'
 import { Text, useTheme } from 'react-native-paper'
+import { useTheme as useThemeCustom } from '../../contexts/ThemeContext'
 
 const isMobile = Platform.OS === 'ios' || Platform.OS === 'android'
 const TextInput = isMobile ? TextInputMobile : TextInputWeb
@@ -12,14 +13,14 @@ const StyledTextInput = ({
     helperTextStyles = {},
     style,
     disabled = false,
-    darken = false,
     ...otherProps
 }) => {
     const { colors } = useTheme();
+    const { darkMode } = useThemeCustom();
 
     const inputThemeStyle = {
-        backgroundColor: darken ? colors.onSurfaceInput : colors.surfaceInput,
-        color: disabled ? colors.textDisabled : colors.text,
+        backgroundColor: darkMode ? colors.backdrop : colors.surfaceVariant,
+        color: disabled ? colors.outlineVariant : colors.onSurfaceVariant,
     }
 
     return (

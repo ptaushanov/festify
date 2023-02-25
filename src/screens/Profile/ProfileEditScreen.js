@@ -97,7 +97,7 @@ const ProfileEditScreen = () => {
                             {i18n.t("change-profile:Username")}
                         </Text>
                         <StyledTextInput
-                            style={[styles.input, { borderColor: colors.primary }]}
+                            style={{ borderColor: colors.primary }}
                             value={newUsername}
                             onChangeText={handleUsernameChanged}
                             onBlur={handleUsernameValidation}
@@ -110,7 +110,7 @@ const ProfileEditScreen = () => {
                         </Text>
                         <StyledTextInput
                             disabled
-                            style={[styles.input, { borderColor: colors.primary }]}
+                            style={{ borderColor: colors.primary }}
                             value={email}
                         />
                     </View>
@@ -155,9 +155,6 @@ const styles = StyleSheet.create({
     inputContainer: {
         marginTop: 30,
         marginHorizontal: 10,
-    },
-    input: {
-        elevation: 1
     },
     label: {
         paddingLeft: 5,

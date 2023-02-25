@@ -120,7 +120,6 @@ const SignUp = () => {
                                             style={styles.input}
                                             error={touched.username && Boolean(errors.username)}
                                             helperText={touched.username && errors.username}
-                                            darken
                                         />
                                         <StyledTextInput
                                             placeholder={i18n.t("auth:Email")}
@@ -130,7 +129,6 @@ const SignUp = () => {
                                             style={styles.input}
                                             error={touched.email && Boolean(errors.email)}
                                             helperText={touched.email && errors.email}
-                                            darken
                                         />
                                         <StyledTextInput
                                             placeholder={i18n.t("auth:Password")}
@@ -141,7 +139,6 @@ const SignUp = () => {
                                             error={touched.password && Boolean(errors.password)}
                                             helperText={touched.password && errors.password}
                                             secureTextEntry
-                                            darken
                                         />
                                         <StyledTextInput
                                             placeholder={i18n.t("auth:Confirm Password")}
@@ -152,7 +149,6 @@ const SignUp = () => {
                                             error={touched.confirmPassword && Boolean(errors.confirmPassword)}
                                             helperText={touched.confirmPassword && errors.confirmPassword}
                                             secureTextEntry
-                                            darken
                                         />
                                     </View>
                                     <View style={styles.buttonContainer}>

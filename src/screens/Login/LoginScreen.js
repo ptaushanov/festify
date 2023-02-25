@@ -109,7 +109,6 @@ const LoginScreen = () => {
                                         style={styles.input}
                                         error={touched.email && Boolean(errors.email)}
                                         helperText={touched.email && errors.email}
-                                        darken
                                     />
                                     <StyledTextInput
                                         placeholder={i18n.t("auth:Password")}
@@ -121,7 +120,6 @@ const LoginScreen = () => {
                                         error={touched.password && Boolean(errors.password)}
                                         helperText={touched.password && errors.password}
                                         secureTextEntry
-                                        darken
                                     />
                                     <Text
                                         style={{
