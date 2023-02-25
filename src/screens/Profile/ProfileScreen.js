@@ -6,18 +6,13 @@ import ProfileList from './components/ProfileList'
 import LanguagePicker from './components/LanguagePicker'
 
 import globalStyles from '../../styles/global'
-import i18n from 'i18n-js'
 import { useLanguage } from '../../contexts/LanguageContext'
 
 const ProfileScreen = () => {
     const [lPickerOpen, setLPickerOpen] = useState(false)
-    const { setLocale } = useLanguage()
     const listOptions = { setLPickerOpen }
-
-    const handleLanguageChange = (newLocale) => {
-        setLocale(newLocale)
-        i18n.locale = newLocale
-    }
+    const { changeLocale } = useLanguage()
+    const handleLanguageChange = (newLocale) => changeLocale(newLocale)
 
     return (
         <View>

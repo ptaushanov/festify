@@ -19,12 +19,11 @@ export function ThemeProvider({ children }) {
     const isFirstRun = useRef(true);
     useEffect(() => {
         if (isFirstRun.current) {
-            isFirstRun.current = false;
+            isFirstRun.current = false
+            getTheme()
         }
-        else { saveCurrentTheme(currentTheme) }
+        else { saveCurrentTheme() }
     }, [currentTheme])
-
-    useEffect(() => { getTheme() }, [])
 
     const changeTheme = (theme) => {
         switch (theme) {
