@@ -8,8 +8,7 @@ import addExtensions from './extensions';
 import * as SplashScreen from 'expo-splash-screen';
 
 import { useCallback } from 'react';
-import { LogBox, View } from 'react-native';
-LogBox.ignoreLogs(['Setting a timer', 'AsyncStorage has been']);
+import { View } from 'react-native';
 
 // Adding custom language feature extensions
 addExtensions();
