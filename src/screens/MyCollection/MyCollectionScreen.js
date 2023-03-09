@@ -1,8 +1,7 @@
-import { StyleSheet } from 'react-native'
+import { StyleSheet, FlatList } from 'react-native'
 import React, { useState, useCallback } from 'react'
 import CollectionTitle from './components/CollectionTitle'
 import CollectionCard from './components/CollectionCard'
-import Animated, { Layout, ZoomIn } from 'react-native-reanimated'
 import { useFocusEffect } from '@react-navigation/native'
 import { findRewards, findUserRewards } from '../../services/rewards-services'
 import { auth } from '../../../firebase.v9'
@@ -37,22 +36,12 @@ const MyCollectionScreen = () => {
     )
 
     return (
-        <Animated.FlatList
+        <FlatList
             key="#"
             data={rewards}
             keyExtractor={(reward) => reward.id}
             renderItem={({ item: props, index }) => (
-                <Animated.View
-                    entering={
-                        ZoomIn
-                            .delay(index * 100)
-                            .springify()
-                            .damping(10)
-                    }
-                    layout={Layout.springify()}
-                >
-                    <CollectionCard {...props} />
-                </Animated.View>
+                <CollectionCard {...props} />
             )}
             ListHeaderComponent={() => (
                 <CollectionTitle />

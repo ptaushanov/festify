@@ -10,17 +10,19 @@ const CollectionCard = ({ collected = false, name, thumbnail }) => {
 
     if (collected) {
         return (
-            <Card style={cardStyles}>
+            <Card style={cardStyles} elevation={2}>
                 <Card.Cover
                     style={styles.image}
+                    borderBottomLeftRadius={0}
+                    borderBottomRightRadius={0}
                     resizeMode="stretch"
                     source={thumbnail ? { uri: thumbnail } : noImage}
                 />
-                <Surface style={styles.cardContent}>
+                <Card.Content style={styles.cardContent}>
                     <Text variant="titleMedium" style={styles.rewardName}>
                         {name}
                     </Text>
-                </Surface>
+                </Card.Content>
             </Card>
         )
     }
@@ -39,9 +41,10 @@ export default CollectionCard
 const styles = StyleSheet.create({
     image: {
         height: 100,
+        borderBottomLeftRadius: 0,
+        borderBottomRightRadius: 0
     },
     card: {
-        elevation: 3,
         marginVertical: 10,
     },
     cardUnknown: {
