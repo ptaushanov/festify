@@ -8,7 +8,7 @@ const LeaderboardCard = ({
     avatar,
     username = "",
     xp = 0,
-    place = 0
+    place = 0,
 }) => {
     const { colors } = useTheme();
 
@@ -55,8 +55,8 @@ const styles = StyleSheet.create({
     surfaceContainer: {
         paddingHorizontal: 20,
         paddingVertical: 8,
-        borderRadius: 10,
-        marginVertical: 5
+        borderRadius: 14,
+        margin: 5,
     },
     content: {
         flexDirection: "row"
