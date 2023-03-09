@@ -48,7 +48,7 @@ const LeaderboardScreen = () => {
                 data={users}
                 keyExtractor={(user) => user.place}
                 renderItem={({ item: props, index }) => (
-                    <SlidingView delay={index * 200} direction="right">
+                    <SlidingView delay={index * 200} direction={"right"}>
                         <LeaderboardCard {...props} />
                     </SlidingView>
                 )}
@@ -59,10 +59,12 @@ const LeaderboardScreen = () => {
                             <View
                                 style={styles.meCard}
                             >
-                                <LeaderboardCard
-                                    {...currentUser}
-                                    username={i18n.t("leaderboard:Me")}
-                                />
+                                <SlidingView>
+                                    <LeaderboardCard
+                                        {...currentUser}
+                                        username={i18n.t("leaderboard:Me")}
+                                    />
+                                </SlidingView>
                             </View>
                         ) : null}
                     </View>
