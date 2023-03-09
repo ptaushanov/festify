@@ -1,5 +1,5 @@
 import { StyleSheet, Dimensions } from 'react-native'
-import { Card, Surface, Text } from 'react-native-paper'
+import { Card, Text } from 'react-native-paper'
 import React from 'react'
 
 import noImage from "../../../assets/images/no_image.jpg"
@@ -15,11 +15,11 @@ const CollectionCard = ({ collected = false, name, thumbnail }) => {
                     style={styles.image}
                     borderBottomLeftRadius={0}
                     borderBottomRightRadius={0}
-                    resizeMode="stretch"
+                    resizeMode="cover"
                     source={thumbnail ? { uri: thumbnail } : noImage}
                 />
                 <Card.Content style={styles.cardContent}>
-                    <Text variant="titleMedium" style={styles.rewardName}>
+                    <Text variant="titleSmall" style={styles.rewardName}>
                         {name}
                     </Text>
                 </Card.Content>
@@ -30,7 +30,7 @@ const CollectionCard = ({ collected = false, name, thumbnail }) => {
     return (
         <Card style={[cardStyles, styles.cardUnknown]}>
             <Card.Content style={styles.cardUnknownContent}>
-                <Text style={styles.unknownText}>?</Text>
+                <Text variant="headlineMedium">?</Text>
             </Card.Content>
         </Card>
     )
@@ -45,10 +45,12 @@ const styles = StyleSheet.create({
         borderBottomRightRadius: 0
     },
     card: {
+        flex: 1,
         marginVertical: 10,
     },
     cardUnknown: {
-        aspectRatio: 1 / 1
+        flex: 1,
+        justifyContent: "space-around"
     },
     cardContent: {
         paddingVertical: 10,
@@ -58,15 +60,11 @@ const styles = StyleSheet.create({
     },
     rewardName: {
         textAlign: "center",
-        flexWrap: "wrap"
+        flexWrap: "wrap",
     },
     cardUnknownContent: {
-        flex: 1,
+        aspectRatio: 1 / 1,
         alignItems: "center",
-        justifyContent: "center"
-    },
-    unknownText: {
-        fontSize: 35,
-
+        justifyContent: "center",
     }
 })

@@ -2,6 +2,7 @@ import { StyleSheet, FlatList } from 'react-native'
 import React, { useState, useCallback } from 'react'
 import CollectionTitle from './components/CollectionTitle'
 import CollectionCard from './components/CollectionCard'
+import BounceView from '../../shared/Transitions/BounceView'
 import { useFocusEffect } from '@react-navigation/native'
 import { findRewards, findUserRewards } from '../../services/rewards-services'
 import { auth } from '../../../firebase.v9'
@@ -37,11 +38,12 @@ const MyCollectionScreen = () => {
 
     return (
         <FlatList
-            key="#"
             data={rewards}
             keyExtractor={(reward) => reward.id}
             renderItem={({ item: props, index }) => (
-                <CollectionCard {...props} />
+                <BounceView delay={index * 100}>
+                    <CollectionCard {...props} />
+                </BounceView>
             )}
             ListHeaderComponent={() => (
                 <CollectionTitle />
@@ -60,7 +62,7 @@ export default MyCollectionScreen
 
 const styles = StyleSheet.create({
     collection: {
-        flex: 1
+        flex: 1,
     },
     collectionContainer: {
         padding: 20,
