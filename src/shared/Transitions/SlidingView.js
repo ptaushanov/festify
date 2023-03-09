@@ -17,12 +17,8 @@ const SlidingView = ({ delay = 0, direction = "left", children }) => {
     const springConfig = useSpring({
         position: startValue,
         delay: delay,
-        from: {
-            position: startValue
-        },
-        to: {
-            position: 0
-        },
+        from: { position: startValue },
+        to: { position: 0 },
         config: {
             mass: 1,
             tension: 100,

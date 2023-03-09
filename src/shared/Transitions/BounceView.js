@@ -5,12 +5,8 @@ const BounceView = ({ delay = 0, children }) => {
     const springConfig = useSpring({
         scale: 1,
         delay: delay,
-        from: {
-            scale: 0
-        },
-        to: {
-            scale: 1
-        },
+        from: { scale: 0 },
+        to: { scale: 1 },
         config: {
             mass: 1,
             tension: 200,
