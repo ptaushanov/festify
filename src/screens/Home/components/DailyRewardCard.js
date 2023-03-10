@@ -1,7 +1,7 @@
 import { StyleSheet } from 'react-native'
 import React from 'react'
 import { useTheme, Surface, Text, TouchableRipple } from 'react-native-paper'
-import Animated, { ZoomIn, BounceOut } from 'react-native-reanimated'
+import BounceTransition from "../../../shared/Transitions/BounceTransition"
 import { AntDesign } from '@expo/vector-icons';
 import i18n from 'i18n-js'
 
@@ -9,10 +9,7 @@ const DailyRewardCard = ({ onRewardClaim, rewardAmount = 0 }) => {
     const { colors } = useTheme()
 
     return (
-        <Animated.View
-            entering={ZoomIn.springify().springify().damping(10)}
-            exiting={BounceOut}
-        >
+        <BounceTransition>
             <TouchableRipple
                 borderless
                 centered
@@ -30,7 +27,7 @@ const DailyRewardCard = ({ onRewardClaim, rewardAmount = 0 }) => {
                     <Text style={styles.text}>{i18n.t("home:Daily Reward")}</Text>
                 </Surface>
             </TouchableRipple>
-        </Animated.View>
+        </BounceTransition>
     )
 }
 

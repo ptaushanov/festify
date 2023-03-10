@@ -1,26 +1,33 @@
-import { StyleSheet, Dimensions } from 'react-native'
-import { Card, Surface, Text } from 'react-native-paper'
+import { StyleSheet, Dimensions, Image } from 'react-native'
+import { Card, Text } from 'react-native-paper'
 import React from 'react'
 
 import noImage from "../../../assets/images/no_image.jpg"
 
 const CollectionCard = ({ collected = false, name, thumbnail }) => {
     const dimensions = Dimensions.get("window")
-    const cardStyles = { ...styles.card, width: (dimensions.width / 2) - 55 }
+    const calculatedWidth = dimensions.width / 2 - 55
+    const cardStyles = { ...styles.card, width: calculatedWidth, minHeight: calculatedWidth }
 
     if (collected) {
         return (
-            <Card style={cardStyles}>
-                <Card.Cover
+            <Card
+                style={cardStyles}
+                contentStyle={styles.contentContainer}
+                elevation={2}
+            >
+                <Image
                     style={styles.image}
-                    resizeMode="stretch"
+                    borderTopLeftRadius={18}
+                    borderTopRightRadius={18}
+                    resizeMode="cover"
                     source={thumbnail ? { uri: thumbnail } : noImage}
                 />
-                <Surface style={styles.cardContent}>
-                    <Text variant="titleMedium" style={styles.rewardName}>
+                <Card.Content style={styles.cardContent}>
+                    <Text variant="titleSmall" style={styles.rewardName}>
                         {name}
                     </Text>
-                </Surface>
+                </Card.Content>
             </Card>
         )
     }
@@ -28,7 +35,7 @@ const CollectionCard = ({ collected = false, name, thumbnail }) => {
     return (
         <Card style={[cardStyles, styles.cardUnknown]}>
             <Card.Content style={styles.cardUnknownContent}>
-                <Text style={styles.unknownText}>?</Text>
+                <Text variant="headlineMedium">?</Text>
             </Card.Content>
         </Card>
     )
@@ -38,32 +45,35 @@ export default CollectionCard
 
 const styles = StyleSheet.create({
     image: {
-        height: 100,
+        flex: 3,
+        minHeight: 100,
+        borderTopLeftRadius: 18,
+        borderTopRightRadius: 18,
     },
     card: {
-        elevation: 3,
+        flex: 1,
         marginVertical: 10,
     },
     cardUnknown: {
-        aspectRatio: 1 / 1
+        flex: 1,
+        justifyContent: "space-around"
     },
     cardContent: {
+        flex: 1,
         paddingVertical: 10,
         paddingHorizontal: 16,
-        borderBottomLeftRadius: 6,
-        borderBottomRightRadius: 6,
+        justifyContent: "center"
     },
     rewardName: {
         textAlign: "center",
-        flexWrap: "wrap"
+        flexWrap: "wrap",
     },
     cardUnknownContent: {
-        flex: 1,
+        aspectRatio: 1 / 1,
         alignItems: "center",
-        justifyContent: "center"
+        justifyContent: "center",
     },
-    unknownText: {
-        fontSize: 35,
-
+    contentContainer: {
+        flex: 1,
     }
 })

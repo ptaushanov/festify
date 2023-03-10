@@ -1,8 +1,8 @@
-import { StyleSheet, View } from 'react-native'
-import Animated, { SlideInRight, Layout } from 'react-native-reanimated'
+import { StyleSheet, View, FlatList } from 'react-native'
 import React, { useState, useCallback } from 'react'
 import LeaderboardTitle from './components/LeaderboardTitle'
 import LeaderboardCard from './components/LeaderboardCard'
+import SlidingView from '../../shared/Transitions/SlidingView'
 import { useFocusEffect } from '@react-navigation/native'
 import { auth } from '../../../firebase.v9'
 import {
@@ -44,30 +44,28 @@ const LeaderboardScreen = () => {
 
     return (
         <View style={styles.container}>
-            <Animated.FlatList
+            <FlatList
                 data={users}
                 keyExtractor={(user) => user.place}
-                renderItem={({ item: props }) => (
-                    <Animated.View
-                        entering={SlideInRight.delay((props.place + 2) * 100)}
-                        layout={Layout.springify()}
-                    >
+                renderItem={({ item: props, index }) => (
+                    <SlidingView delay={index * 200} direction={"right"}>
                         <LeaderboardCard {...props} />
-                    </Animated.View>
+                    </SlidingView>
                 )}
                 ListHeaderComponent={() => (
                     <View>
                         <LeaderboardTitle />
                         {currentUser ? (
-                            <Animated.View
-                                entering={SlideInRight}
+                            <View
                                 style={styles.meCard}
                             >
-                                <LeaderboardCard
-                                    {...currentUser}
-                                    username={i18n.t("leaderboard:Me")}
-                                />
-                            </Animated.View>
+                                <SlidingView>
+                                    <LeaderboardCard
+                                        {...currentUser}
+                                        username={i18n.t("leaderboard:Me")}
+                                    />
+                                </SlidingView>
+                            </View>
                         ) : null}
                     </View>
                 )}
@@ -84,7 +82,7 @@ export default LeaderboardScreen
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        paddingHorizontal: 20,
+        paddingHorizontal: 15,
     },
     meCard: {
         marginVertical: 30
