@@ -228,9 +228,7 @@ const { ids, styles } = StyleSheet.create({
         borderTopLeftRadius: 30,
         borderTopRightRadius: 30,
         elevation: 4,
-        "@media only screen and (max-width: 640px)": {
-            width: "100%"
-        },
+        width: "100%",
         "@media only screen and (min-width: 640px)": {
             flex: 1,
             marginHorizontal: 80,
