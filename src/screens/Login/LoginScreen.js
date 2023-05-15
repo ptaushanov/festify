@@ -102,7 +102,7 @@ const LoginScreen = () => {
                 >{
                         ({ values, touched, errors, handleBlur, handleChange, handleSubmit, isSubmitting, isValidating }) => (
                             <Surface style={styles.surface} dataSet={{ media: ids.surface }}>
-                                <Text style={styles.title} variant="headlineLarge" dataSet={{ media: ids.title }}>
+                                <Text style={styles.title} variant="headlineMedium" dataSet={{ media: ids.title }}>
                                     {i18n.t("auth:Login")}
                                 </Text>
 
@@ -205,8 +205,8 @@ const { ids, styles } = StyleSheet.create({
         width: 100,
         height: 100,
         "@media only screen and (min-width: 640px)": {
-            width: 150,
-            height: 150,
+            width: 130,
+            height: 130,
         }
     },
     logoText: {
