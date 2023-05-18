@@ -1,4 +1,5 @@
-import { StyleSheet, View, FlatList } from 'react-native'
+import { View, FlatList } from 'react-native'
+import StyleSheet from "react-native-media-query"
 import React, { useState, useCallback, useRef } from 'react'
 
 import TimelineCard from './components/TimelineCard'
@@ -77,9 +78,10 @@ const LessonsTimeline = ({ route }) => {
     }
 
     return (
-        <View style={styles.timelineWrapper}>
+        <View style={styles.timelineWrapper} dataSet={{ media: ids.timelineWrapper }}>
             <FlatList
                 style={styles.timeline}
+                dataSet={{ media: ids.timeline }}
                 data={cards}
                 ref={flatListRef}
                 onScrollToIndexFailed={handleOnScrollToIndexFailed}
@@ -106,9 +108,12 @@ const LessonsTimeline = ({ route }) => {
 
 export default LessonsTimeline
 
-const styles = StyleSheet.create({
+const { styles, ids } = StyleSheet.create({
     timelineWrapper: {
         flex: 1,
+        "@media only screen and (min-width: 640px)": {
+            alignItems: "center"
+        }
     },
     timelineContainer: {
         paddingBottom: 20,
@@ -116,6 +121,10 @@ const styles = StyleSheet.create({
     },
     timeline: {
         flex: 1,
+        "@media only screen and (min-width: 640px)": {
+            flex: "auto",
+            width: "max-content"
+        }
     },
     indicator: {
         marginTop: "80%"
