@@ -15,6 +15,7 @@ export default LessonTitle
 const styles = StyleSheet.create({
     title: {
         fontSize: 30,
-        paddingVertical: 10
+        paddingVertical: 10,
+        paddingLeft: 10,
     }
 })

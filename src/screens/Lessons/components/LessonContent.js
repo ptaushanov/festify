@@ -76,7 +76,7 @@ const { styles, ids } = StyleSheet.create({
             minWidth: "49%",
             height: "50vh",
             maxHeight: "50vh",
-            paddingHorizontal: 20
+            paddingHorizontal: 10
         }
     },
     image: {
@@ -94,6 +94,7 @@ const { styles, ids } = StyleSheet.create({
         "@media only screen and (min-width: 640px)": {
             fontSize: 18,
             lineHeight: 25,
+            paddingHorizontal: 10
         }
     }
 })
