@@ -16,7 +16,7 @@ const LessonContent = ({ title, content }) => {
                 )
             case "image":
                 return (
-                    <View key={index} style={styles.imageContainer}>
+                    <View key={index} style={styles.imageContainer} dataSet={{ media: ids.imageContainer }}>
                         <Image
                             source={{ uri: item.value }}
                             resizeMode="contain"
@@ -63,23 +63,27 @@ const { styles, ids } = StyleSheet.create({
             flexDirection: 'row',
             flexWrap: 'wrap',
             justifyContent: 'flex-start',
-            gap: 20
+            alignItems: 'center',
         }
     },
     imageContainer: {
         flex: 1,
-        width: "100%",
-        maxHeight: "50vh",
+        minWidth: "49%",
         marginVertical: 10,
+        "@media only screen and (min-width: 640px)": {
+            height: "50vh",
+            maxHeight: "50vh"
+        }
     },
     image: {
-        flex: 1,
         borderRadius: 4,
         width: '100%',
         height: '100%',
     },
     text: {
         flex: 1,
+        minWidth: "51%",
+        paddingHorizontal: 20,
         fontSize: 16,
         lineHeight: 20,
         paddingVertical: 10,
