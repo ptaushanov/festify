@@ -67,18 +67,11 @@ const { styles, ids } = StyleSheet.create({
         }
     },
     imageContainer: {
-        flex: 1,
-        minWidth: "49%",
         marginVertical: 10,
-        ...Platform.select({
-            ios: {
-                height: Math.round(Dimensions.get("window").width * 9 / 16)
-            },
-            android: {
-                height: Math.round(Dimensions.get("window").width * 9 / 16)
-            }
-        }),
+        height: Math.round(Dimensions.get("window").width * 9 / 16),
         "@media only screen and (min-width: 640px)": {
+            flex: 1,
+            minWidth: "49%",
             height: "50vh",
             maxHeight: "50vh",
             paddingHorizontal: 20
