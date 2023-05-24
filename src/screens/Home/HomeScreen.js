@@ -115,7 +115,7 @@ const { styles, ids } = StyleSheet.create({
         padding: 40,
         flex: 1,
         "@media only screen and (min-width: 640px)": {
-            width: "60%",
+            width: "50%",
             alignSelf: "center",
         }
     },

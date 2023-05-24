@@ -1,4 +1,5 @@
-import { StyleSheet, View, FlatList } from 'react-native'
+import { View, FlatList } from 'react-native'
+import StyleSheet from "react-native-media-query"
 import React, { useState, useCallback } from 'react'
 import LeaderboardTitle from './components/LeaderboardTitle'
 import LeaderboardCard from './components/LeaderboardCard'
@@ -43,7 +44,7 @@ const LeaderboardScreen = () => {
     )
 
     return (
-        <View style={styles.container}>
+        <View style={styles.container} dataSet={{ media: ids.container }}>
             <FlatList
                 data={users}
                 keyExtractor={(user) => user.place}
@@ -79,10 +80,14 @@ const LeaderboardScreen = () => {
 
 export default LeaderboardScreen
 
-const styles = StyleSheet.create({
+const { styles, ids } = StyleSheet.create({
     container: {
         flex: 1,
         paddingHorizontal: 15,
+        "@media only screen and (min-width: 640px)": {
+            width: "60%",
+            alignSelf: "center",
+        }
     },
     meCard: {
         marginVertical: 30
