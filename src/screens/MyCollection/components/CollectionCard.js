@@ -1,4 +1,6 @@
-import { StyleSheet, Dimensions, Image, Platform } from 'react-native'
+import { Dimensions, Image, Platform } from 'react-native'
+import StyleSheet from "react-native-media-query"
+
 import { Card, Text } from 'react-native-paper'
 import React from 'react'
 
@@ -9,6 +11,7 @@ const CollectionCard = ({ collected = false, name, thumbnail }) => {
         return (
             <Card
                 style={styles.card}
+                dataSet={{ media: ids.card }}
                 contentStyle={styles.contentContainer}
                 elevation={2}
             >
@@ -29,7 +32,7 @@ const CollectionCard = ({ collected = false, name, thumbnail }) => {
     }
 
     return (
-        <Card style={[styles.card, styles.cardUnknown]}>
+        <Card style={[styles.card, styles.cardUnknown]} dataSet={{ media: ids.card }}>
             <Card.Content style={styles.cardUnknownContent}>
                 <Text variant="headlineMedium">?</Text>
             </Card.Content>
@@ -39,7 +42,7 @@ const CollectionCard = ({ collected = false, name, thumbnail }) => {
 
 export default CollectionCard
 
-const styles = StyleSheet.create({
+const { styles, ids } = StyleSheet.create({
     image: {
         flex: 3,
         minHeight: 100,
@@ -59,10 +62,14 @@ const styles = StyleSheet.create({
                 minHeight: Dimensions.get("window").width / 2 - 55
             },
             web: {
-                width: "30vh",
-                minHeight: "30vh"
+                width: "12vw",
+                minHeight: "12vw"
             }
-        })
+        }),
+        "@media only screen and (max-width: 640px)": {
+            width: "calc(50vw - 55px)",
+            minHeight: "calc(50vw - 55px)"
+        }
     },
     cardUnknown: {
         flex: 1,

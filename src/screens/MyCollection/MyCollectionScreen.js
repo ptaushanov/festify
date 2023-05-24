@@ -1,4 +1,4 @@
-import { FlatList, Platform } from 'react-native'
+import { Dimensions, FlatList, Platform } from 'react-native'
 import StyleSheet from "react-native-media-query"
 
 import React, { useState, useCallback } from 'react'
@@ -56,7 +56,9 @@ const MyCollectionScreen = () => {
             showsHorizontalScrollIndicator={false}
             style={styles.collection}
             dataSet={{ media: ids.collection }}
-            numColumns={Platform.OS === "web" ? 6 : 2}
+            numColumns={
+                Platform.OS === "web" && Dimensions.get("window").width > 640 ? 6 : 2
+            }
         />
     )
 }
