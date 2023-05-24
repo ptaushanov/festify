@@ -10,7 +10,7 @@ const LessonContent = ({ title, content }) => {
         switch (item.type) {
             case "text":
                 return (
-                    <Text key={index} style={styles.text}>
+                    <Text key={index} style={styles.text} dataSet={{ media: ids.text }}>
                         {item.value}
                     </Text>
                 )
@@ -72,7 +72,8 @@ const { styles, ids } = StyleSheet.create({
         marginVertical: 10,
         "@media only screen and (min-width: 640px)": {
             height: "50vh",
-            maxHeight: "50vh"
+            maxHeight: "50vh",
+            paddingHorizontal: 20
         }
     },
     image: {
@@ -83,10 +84,13 @@ const { styles, ids } = StyleSheet.create({
     text: {
         flex: 1,
         minWidth: "51%",
-        paddingHorizontal: 20,
         fontSize: 16,
         lineHeight: 20,
         paddingVertical: 10,
         textAlign: "justify",
+        "@media only screen and (min-width: 640px)": {
+            fontSize: 18,
+            lineHeight: 25,
+        }
     }
 })
