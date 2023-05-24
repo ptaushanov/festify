@@ -1,4 +1,5 @@
-import { StyleSheet, View } from 'react-native'
+import { View } from 'react-native'
+import StyleSheet from "react-native-media-query"
 import React from 'react'
 
 import { useTheme } from 'react-native-paper'
@@ -18,7 +19,7 @@ const ProgressIndicator = ({ steps, currentStep }) => {
         ))
 
     return (
-        <View style={styles.stepContainer}>
+        <View style={styles.stepContainer} dataSet={{ media: ids.stepContainer }} >
             {stepMarkers}
         </View>
     )
@@ -26,12 +27,15 @@ const ProgressIndicator = ({ steps, currentStep }) => {
 
 export default ProgressIndicator
 
-const styles = StyleSheet.create({
+const { styles, ids } = StyleSheet.create({
     stepContainer: {
         marginTop: 30,
         paddingHorizontal: 20,
         paddingVertical: 20,
-        flexDirection: "row"
+        flexDirection: "row",
+        "@media only screen and (min-width: 640px)": {
+            paddingHorizontal: "10%"
+        }
     },
     step: {
         flex: 1,

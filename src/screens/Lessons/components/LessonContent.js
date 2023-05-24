@@ -68,7 +68,9 @@ const { styles, ids } = StyleSheet.create({
     },
     imageContainer: {
         marginVertical: 10,
-        height: Math.round(Dimensions.get("window").width * 9 / 16),
+        height: Platform.OS == "web" ?
+            "30vh" :
+            Math.round(Dimensions.get("window").width * 9 / 16),
         "@media only screen and (min-width: 640px)": {
             flex: 1,
             minWidth: "49%",
