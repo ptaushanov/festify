@@ -1,6 +1,6 @@
 import React from 'react'
 import StyleSheet from "react-native-media-query"
-import { View, Image, ScrollView } from 'react-native'
+import { View, Image, ScrollView, Dimensions, Platform } from 'react-native'
 import { Text } from 'react-native-paper'
 
 import LessonTitle from './LessonTitle'
@@ -70,6 +70,14 @@ const { styles, ids } = StyleSheet.create({
         flex: 1,
         minWidth: "49%",
         marginVertical: 10,
+        ...Platform.select({
+            ios: {
+                height: Math.round(Dimensions.get("window").width * 9 / 16)
+            },
+            android: {
+                height: Math.round(Dimensions.get("window").width * 9 / 16)
+            }
+        }),
         "@media only screen and (min-width: 640px)": {
             height: "50vh",
             maxHeight: "50vh",
