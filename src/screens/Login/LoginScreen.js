@@ -231,7 +231,7 @@ const { ids, styles } = StyleSheet.create({
         width: "100%",
         "@media only screen and (min-width: 640px)": {
             flex: 1,
-            marginHorizontal: 80,
+            marginRight: 140,
             maxWidth: 500,
             borderRadius: 30,
             paddingBottom: 30
