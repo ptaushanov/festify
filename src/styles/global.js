@@ -10,10 +10,6 @@ export default StyleSheet.create({
         padding: 40,
         marginTop: 20,
     },
-    uniformContainer: {
-        padding: 25,
-        marginTop: 20,
-    },
     slimContainer: {
         padding: 20,
         flex: 1
