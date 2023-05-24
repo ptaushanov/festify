@@ -1,4 +1,4 @@
-import { StyleSheet, View } from 'react-native'
+import { StyleSheet, View, Platform } from 'react-native'
 import React, { useEffect } from 'react'
 import BottomSheet from 'reanimated-bottom-sheet';
 import { useTheme, Text, TouchableRipple, Divider, Surface } from 'react-native-paper';
@@ -15,7 +15,8 @@ const ImagePicker = ({ isOpen, setOpen, setImage }) => {
             const [image] = result.assets
             setImage(image.uri)
         }
-        sheetRef.current.snapTo(2)
+        if (Platform.OS !== "web")
+            sheetRef.current.snapTo(2)
     }
 
     const handlePickFromCamera = async () => {
@@ -78,11 +79,17 @@ const ImagePicker = ({ isOpen, setOpen, setImage }) => {
     );
 
     useEffect(() => {
-        isOpen && sheetRef.current.snapTo(0)
+        if (isOpen && Platform.OS === "web") {
+            handlePickFromGallery()
+            handleImagePickerClose()
+        }
+        else if (isOpen)
+            sheetRef.current.snapTo(0)
     }, [isOpen])
 
     const handleImagePickerClose = () => setOpen(false)
 
+    if (Platform.OS === "web") return null
     return (
         <BottomSheet
             ref={sheetRef}

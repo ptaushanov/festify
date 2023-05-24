@@ -2,7 +2,7 @@ import React from 'react'
 import { Dialog, Portal, List } from "react-native-paper"
 import i18n from 'i18n-js'
 import { useLanguage } from '../../../contexts/LanguageContext'
-import { Platform, StyleSheet } from 'react-native'
+import { Dimensions, Platform, StyleSheet } from 'react-native'
 
 const LanguagePicker = ({ open, setOpen, onLanguageChange }) => {
     const { systemLocale } = useLanguage()
@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
         borderRadius: 20,
         ...Platform.select({
             web: {
-                width: "50%",
+                width: Dimensions.get("window").width < 640 ? "100%" : "50%",
                 alignSelf: "center",
             }
         })
