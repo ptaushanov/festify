@@ -1,8 +1,8 @@
 import React from 'react'
-import { StyleSheet } from 'react-native'
 import { Dialog, Portal, List } from "react-native-paper"
 import i18n from 'i18n-js'
 import { useLanguage } from '../../../contexts/LanguageContext'
+import { Dimensions, Platform, StyleSheet } from 'react-native'
 
 const LanguagePicker = ({ open, setOpen, onLanguageChange }) => {
     const { systemLocale } = useLanguage()
@@ -40,7 +40,13 @@ const LanguagePicker = ({ open, setOpen, onLanguageChange }) => {
 
 const styles = StyleSheet.create({
     dialog: {
-        borderRadius: 20
+        borderRadius: 20,
+        ...Platform.select({
+            web: {
+                width: Dimensions.get("window").width < 640 ? "100%" : "50%",
+                alignSelf: "center",
+            }
+        })
     },
     listItem: {
         fontSize: 18

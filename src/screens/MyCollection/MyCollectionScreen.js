@@ -1,4 +1,6 @@
-import { StyleSheet, FlatList } from 'react-native'
+import { Dimensions, FlatList, Platform } from 'react-native'
+import StyleSheet from "react-native-media-query"
+
 import React, { useState, useCallback } from 'react'
 import CollectionTitle from './components/CollectionTitle'
 import CollectionCard from './components/CollectionCard'
@@ -53,16 +55,22 @@ const MyCollectionScreen = () => {
             showsVerticalScrollIndicator={false}
             showsHorizontalScrollIndicator={false}
             style={styles.collection}
-            numColumns={2}
+            dataSet={{ media: ids.collection }}
+            numColumns={
+                Platform.OS === "web" && Dimensions.get("window").width > 640 ? 6 : 2
+            }
         />
     )
 }
 
 export default MyCollectionScreen
 
-const styles = StyleSheet.create({
+const { styles, ids } = StyleSheet.create({
     collection: {
         flex: 1,
+        "@media only screen and (min-width: 640px)": {
+            paddingHorizontal: 80,
+        }
     },
     collectionContainer: {
         padding: 20,

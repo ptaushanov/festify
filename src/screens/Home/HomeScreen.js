@@ -1,4 +1,5 @@
-import { View, StyleSheet } from 'react-native'
+import { View } from 'react-native'
+import StyleSheet from "react-native-media-query"
 import React, { useCallback, useState } from 'react'
 import LessonCard from './components/LessonCard'
 import { useFocusEffect, useNavigation } from '@react-navigation/native'
@@ -84,7 +85,7 @@ const HomeScreen = () => {
     }
 
     return (
-        <View style={styles.container}>
+        <View style={styles.container} dataSet={{ media: ids.container }}>
             {currentLesson ?
                 <View>
                     <LessonCard
@@ -109,10 +110,14 @@ const HomeScreen = () => {
     )
 }
 
-const styles = StyleSheet.create({
+const { styles, ids } = StyleSheet.create({
     container: {
         padding: 40,
-        flex: 1
+        flex: 1,
+        "@media only screen and (min-width: 640px)": {
+            width: "50%",
+            alignSelf: "center",
+        }
     },
     activityIndicator: {
         flex: 1

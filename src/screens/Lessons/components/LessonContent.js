@@ -1,5 +1,6 @@
-import { StyleSheet, View, Image, ScrollView, Dimensions } from 'react-native'
 import React from 'react'
+import StyleSheet from "react-native-media-query"
+import { View, Image, ScrollView, Dimensions, Platform } from 'react-native'
 import { Text } from 'react-native-paper'
 
 import LessonTitle from './LessonTitle'
@@ -9,22 +10,19 @@ const LessonContent = ({ title, content }) => {
         switch (item.type) {
             case "text":
                 return (
-                    <Text key={index} style={styles.text}>
+                    <Text key={index} style={styles.text} dataSet={{ media: ids.text }}>
                         {item.value}
                     </Text>
                 )
             case "image":
-                const dimensions = Dimensions.get("window")
                 return (
-                    <Image
-                        key={index}
-                        source={{ uri: item.value }}
-                        resizeMode="contain"
-                        style={[
-                            styles.image,
-                            { height: Math.round(dimensions.width * 9 / 16) }
-                        ]}
-                    />
+                    <View key={index} style={styles.imageContainer} dataSet={{ media: ids.imageContainer }}>
+                        <Image
+                            source={{ uri: item.value }}
+                            resizeMode="contain"
+                            style={styles.image}
+                        />
+                    </View>
                 )
         }
     }
@@ -34,11 +32,14 @@ const LessonContent = ({ title, content }) => {
             showsVerticalScrollIndicator={false}
             showsHorizontalScrollIndicator={false}
         >
-            <View style={styles.contentContainer}>
+            <View style={styles.lessonContainer} dataSet={{ media: ids.lessonContainer }}>
                 {title && <LessonTitle title={title} />}
-                {content && content.map((item, index) => (
-                    constructComponent(item, index)
-                ))}
+
+                <View style={styles.contentContainer} dataSet={{ media: ids.contentContainer }}>
+                    {content && content.map((item, index) => (
+                        constructComponent(item, index)
+                    ))}
+                </View>
             </View>
         </ScrollView>
     )
@@ -46,20 +47,54 @@ const LessonContent = ({ title, content }) => {
 
 export default LessonContent
 
-const styles = StyleSheet.create({
-    contentContainer: {
+const { styles, ids } = StyleSheet.create({
+    lessonContainer: {
         paddingHorizontal: 30,
         paddingTop: 10,
-        flex: 1
+        flex: 1,
+        "@media only screen and (min-width: 640px)": {
+            paddingHorizontal: "10%",
+        }
+    },
+    contentContainer: {
+        flex: 1,
+        flexDirection: 'column',
+        "@media only screen and (min-width: 640px)": {
+            flexDirection: 'row',
+            flexWrap: 'wrap',
+            justifyContent: 'flex-start',
+            alignItems: 'center',
+        }
+    },
+    imageContainer: {
+        marginVertical: 10,
+        height: Platform.OS == "web" ?
+            "30vh" :
+            Math.round(Dimensions.get("window").width * 9 / 16),
+        "@media only screen and (min-width: 640px)": {
+            flex: 1,
+            minWidth: "49%",
+            height: "50vh",
+            maxHeight: "50vh",
+            paddingHorizontal: 10
+        }
     },
     image: {
         borderRadius: 4,
-        marginVertical: 10,
+        width: '100%',
+        height: '100%',
     },
     text: {
+        flex: 1,
+        minWidth: "51%",
         fontSize: 16,
         lineHeight: 20,
         paddingVertical: 10,
         textAlign: "justify",
+        "@media only screen and (min-width: 640px)": {
+            fontSize: 18,
+            lineHeight: 25,
+            paddingHorizontal: 10
+        }
     }
 })

@@ -1,4 +1,5 @@
-import { StyleSheet, Keyboard, View, TouchableWithoutFeedback, Image } from 'react-native'
+import { Keyboard, View, TouchableWithoutFeedback, Image } from 'react-native'
+import StyleSheet from "react-native-media-query"
 import React, { useEffect, useState } from 'react'
 import globalStyles from '../../styles/global'
 import { palette } from '../../themes/palette'
@@ -55,10 +56,12 @@ const LoginScreen = () => {
                 globalStyles.container,
                 styles.container,
                 { backgroundColor: colors.auth }
-            ]}>
-                <View>
-                    <Image source={logo} style={styles.logo} />
-                    <Text style={styles.logoText}>Festify</Text>
+            ]} dataSet={{ media: ids.container }}>
+                <View style={styles.logoView} dataSet={{ media: ids.logoView }}>
+                    <Image source={logo} style={styles.logo} dataSet={{ media: ids.logo }} />
+                    <Text style={styles.logoText} dataSet={{ media: ids.logoText }}>
+                        Festify
+                    </Text>
                 </View>
                 <Formik
                     initialValues={{
@@ -98,7 +101,11 @@ const LoginScreen = () => {
                     }}
                 >{
                         ({ values, touched, errors, handleBlur, handleChange, handleSubmit, isSubmitting, isValidating }) => (
-                            <Surface style={styles.surface}>
+                            <Surface style={styles.surface} dataSet={{ media: ids.surface }}>
+                                <Text style={styles.title} variant="headlineMedium" dataSet={{ media: ids.title }}>
+                                    {i18n.t("auth:Login")}
+                                </Text>
+
                                 <View style={styles.inputContainer}>
                                     <StyledTextInput
                                         placeholder={i18n.t("auth:Email")}
@@ -164,9 +171,13 @@ const LoginScreen = () => {
 
 export default LoginScreen
 
-const styles = StyleSheet.create({
+const { ids, styles } = StyleSheet.create({
     container: {
+        flexDirection: "column",
         justifyContent: "flex-end",
+        "@media only screen and (min-width: 640px)": {
+            flexDirection: "row"
+        }
     },
     inputContainer: {
         width: "80%",
@@ -193,23 +204,52 @@ const styles = StyleSheet.create({
         alignSelf: "center",
         width: 100,
         height: 100,
+        "@media only screen and (min-width: 640px)": {
+            width: 130,
+            height: 130,
+        }
     },
     logoText: {
         fontSize: 45,
         fontFamily: "PacificoRegular",
         color: palette.logo,
         alignSelf: "center",
-        marginBottom: 60
+        marginBottom: 60,
+        "@media only screen and (min-width: 640px)": {
+            fontSize: 70,
+            marginBottom: 0
+        }
     },
     surface: {
         justifyContent: "center",
         alignItems: "center",
-        width: "100%",
         paddingHorizontal: 20,
         paddingVertical: 40,
         borderTopLeftRadius: 30,
         borderTopRightRadius: 30,
-        elevation: 4
+        elevation: 4,
+        width: "100%",
+        "@media only screen and (min-width: 640px)": {
+            flex: 1,
+            marginRight: 140,
+            maxWidth: 500,
+            borderRadius: 30,
+            paddingBottom: 30
+        }
+    },
+    logoView: {
+        "@media only screen and (min-width: 640px)": {
+            flex: 1,
+            marginHorizontal: 80
+        }
+    },
+    title: {
+        display: "none",
+        marginBottom: 20,
+        width: "80%",
+        "@media only screen and (min-width: 640px)": {
+            display: "flex"
+        }
     }
 
 })

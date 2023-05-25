@@ -1,9 +1,9 @@
-import { StyleSheet, View, KeyboardAvoidingView, Keyboard, TouchableWithoutFeedback } from 'react-native'
+import { View, KeyboardAvoidingView, Keyboard, TouchableWithoutFeedback } from 'react-native'
 import React, { useState, useEffect } from 'react'
+import StyleSheet from "react-native-media-query"
 
 import StyledAvatar from '../../shared/StyledAvatar/StyledAvatar'
 import StyledTextInput from '../../shared/TextInput/StyledTextInput'
-import globalStyles from '../../styles/global'
 import Button from '../../shared/Button/Button'
 import { useTheme, Text } from 'react-native-paper'
 import { useProfileInfo } from '../../contexts/ProfileContext'
@@ -75,8 +75,9 @@ const ProfileEditScreen = () => {
         >
             <>
                 <KeyboardAvoidingView
-                    style={globalStyles.slimContainer}
+                    style={styles.container}
                     behavior='height'
+                    dataSet={{ media: ids.container }}
                 >
                     <View style={styles.profilePictureContainer}>
                         <StyledAvatar
@@ -143,7 +144,15 @@ const ProfileEditScreen = () => {
 
 export default ProfileEditScreen
 
-const styles = StyleSheet.create({
+const { styles, ids } = StyleSheet.create({
+    container: {
+        padding: 20,
+        flex: 1,
+        "@media only screen and (min-width: 640px)": {
+            width: "60%",
+            alignSelf: "center",
+        }
+    },
     profilePictureContainer: {
         flexDirection: "row",
         marginHorizontal: 20,
@@ -166,5 +175,4 @@ const styles = StyleSheet.create({
         justifyContent: 'flex-end',
         marginTop: 100,
     },
-
 })

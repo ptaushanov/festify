@@ -1,4 +1,5 @@
-import { StyleSheet, View, TouchableWithoutFeedback, Keyboard, Platform } from 'react-native'
+import { View, TouchableWithoutFeedback, Keyboard, Platform } from 'react-native'
+import StyleSheet from "react-native-media-query"
 import React from 'react'
 import { useTheme, Surface, Button, Text } from 'react-native-paper'
 import globalStyles from '../../styles/global'
@@ -36,8 +37,8 @@ const SignUp = () => {
                     { backgroundColor: colors.auth }
                 ]}>
 
-                <Surface style={styles.surface}>
-                    <Text style={styles.title}>
+                <Surface style={styles.surface} dataSet={{ media: ids.surface }}>
+                    <Text style={styles.title} variant="headlineSmall" dataSet={{ media: ids.title }}>
                         {i18n.t("auth:Sign Up")}
                     </Text>
                     <Formik
@@ -184,7 +185,7 @@ const SignUp = () => {
 
 export default SignUp
 
-const styles = StyleSheet.create({
+const { styles, ids } = StyleSheet.create({
     container: {
         padding: 30
     },
@@ -193,12 +194,19 @@ const styles = StyleSheet.create({
         padding: 30,
         paddingHorizontal: 40,
         borderRadius: 15,
-        elevation: 3
+        elevation: 3,
+        "@media only screen and (min-width: 640px)": {
+            width: "50%",
+            maxWidth: 600,
+            paddingVertical: 40
+        }
     },
     title: {
-        fontSize: 22,
         fontWeight: "bold",
         paddingLeft: 5,
+        "@media only screen and (min-width: 640px)": {
+            marginBottom: 5
+        }
     },
     inputContainer: {
         marginVertical: 10

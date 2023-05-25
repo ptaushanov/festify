@@ -1,4 +1,5 @@
-import { StyleSheet, View } from 'react-native'
+import { View } from 'react-native'
+import StyleSheet from "react-native-media-query"
 import React from 'react'
 
 import QuestionTitle from './QuestionTitle'
@@ -9,7 +10,7 @@ const LessonQuestion = () => {
     const { question } = useQuestionInfo()
 
     return (
-        <View style={styles.questionContainer}>
+        <View style={styles.questionContainer} dataSet={{ media: ids.questionContainer }}>
             <QuestionTitle title={question.title} />
             <View style={styles.answerContainer}>
                 {question.choices.map((choice, index) => (
@@ -26,11 +27,14 @@ const LessonQuestion = () => {
 
 export default LessonQuestion
 
-const styles = StyleSheet.create({
+const { styles, ids } = StyleSheet.create({
     questionContainer: {
         flex: 1,
         paddingHorizontal: 30,
-        justifyContent: "space-between"
+        justifyContent: "space-between",
+        "@media only screen and (min-width: 640px)": {
+            paddingHorizontal: "10%"
+        }
     },
     answerContainer: {
         marginBottom: 30

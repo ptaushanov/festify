@@ -1,11 +1,11 @@
 import { View } from 'react-native'
+import StyleSheet from "react-native-media-query"
 import React, { useState } from 'react'
 
 import ProfileCard from './components/ProfileCard'
 import ProfileList from './components/ProfileList'
 import LanguagePicker from './components/LanguagePicker'
 
-import globalStyles from '../../styles/global'
 import { useLanguage } from '../../contexts/LanguageContext'
 
 const ProfileScreen = () => {
@@ -21,7 +21,7 @@ const ProfileScreen = () => {
                 setOpen={setLPickerOpen}
                 onLanguageChange={handleLanguageChange}
             />
-            <View style={globalStyles.uniformContainer}>
+            <View style={styles.profileContainer} dataSet={{ media: ids.profileContainer }}>
                 <ProfileCard />
                 <ProfileList listOptions={listOptions} />
             </View>
@@ -30,3 +30,14 @@ const ProfileScreen = () => {
 }
 
 export default ProfileScreen
+
+const { styles, ids } = StyleSheet.create({
+    profileContainer: {
+        padding: 25,
+        marginTop: 20,
+        "@media only screen and (min-width: 640px)": {
+            width: "60%",
+            alignSelf: "center",
+        }
+    }
+})
