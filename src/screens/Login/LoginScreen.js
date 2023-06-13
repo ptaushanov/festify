@@ -94,9 +94,9 @@ const LoginScreen = () => {
                         logInUser(user)
                             .catch(error => {
                                 setSubmitting(false)
-                                if (error.name = "FirebaseAuthInvalidCredentialsException") {
+                                if (error.name = "FirebaseAuthInvalidCredentialsException")
                                     setGeneralError(i18n.t("auth:invalid-credentials"))
-                                }
+                                else setGeneralError(i18n.t("auth:unknown-error"))
                             })
                     }}
                 >{

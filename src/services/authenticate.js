@@ -30,21 +30,25 @@ export const signUpUser = async (newUser) => {
         .set(userData)
 }
 
-export const logInUser = (newUser) => {
+export const logInUser = async (newUser) => {
     const { email, password } = newUser;
 
-    return auth.signInWithEmailAndPassword(email, password)
-        .then(userCredentials => {
-            const user = userCredentials.user
-        })
+    const userCredentials = await auth.signInWithEmailAndPassword(email, password);
+    const user = userCredentials.user;
+
+    const userDoc = await firestore
+        .collection("users")
+        .doc(user.uid)
+        .get()
+
+    if (!userDoc.exists) throw new Error("User not found")
+    return user
 }
 
-export const checkDuplicateUsername = (username) => {
-    return firestore
+export const checkDuplicateUsername = async (username) => {
+    const querySnapshot = await firestore
         .collection("users")
         .where("username", "==", username)
-        .get()
-        .then(querySnapshot => {
-            return !querySnapshot.empty
-        })
+        .get();
+    return !querySnapshot.empty;
 }
