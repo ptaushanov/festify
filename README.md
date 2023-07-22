@@ -1,4 +1,4 @@
-# 🌸 Festify - Multiplatform Educational App for the Bulgarian holydays 🌸
+# 🌸 Multiplatform Educational App for the Bulgarian holydays 🌸
 
 **Festify** is an educational multiplatform app that uses gamification elements
 to engage and motivate students in their learning of Bulgarian holidays. It is
@@ -8,6 +8,12 @@ points and unlock new lessons as they progress, and offers communication
 channels for teachers to engage with their students.
 
 ## 📱 Screenshots 📱
+
+<div style="display: flex; justify-content: center;">
+  <img src="https://github.com/ptaushanov/festify/assets/33032001/98aee307-8ae2-4687-9d52-1428703820f8" width="250" />  
+  <img src="https://github.com/ptaushanov/festify/assets/33032001/a4511648-26e5-45ca-a50a-acae2b196f6e" width="600"/>
+</div>
+
 
 ## 🛠️ Build with 🛠️
 
@@ -26,8 +32,8 @@ channels for teachers to engage with their students.
 
 ### Prerequisites
 
-Node.js and npm are required to run the project. You can download them from
-[here](https://nodejs.org/en/). Also, you need to have a Firebase project with
+**Node.js** and **npm** are required to run the project. You can download them from
+[here](https://nodejs.org/en/). Also, you need to have a **Firebase** project with
 Firestore, Authentication and Cloud Storage enabled. You can create a new
 project from [here](https://console.firebase.google.com/).
 
