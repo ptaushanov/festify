@@ -1,4 +1,4 @@
-# 🌸 Multiplatform Educational App for the Bulgarian holydays 🌸
+# 🌸 Educational App for the Bulgarian holydays 🌸
 
 **Festify** is an educational multiplatform app that uses gamification elements
 to engage and motivate students in their learning of Bulgarian holidays. It is
