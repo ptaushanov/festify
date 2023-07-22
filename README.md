@@ -8,12 +8,7 @@ points and unlock new lessons as they progress, and offers communication
 channels for teachers to engage with their students.
 
 ## 📱 Screenshots 📱
-
-<div style="display: flex; justify-content: center;">
-  <img src="https://github.com/ptaushanov/festify/assets/33032001/98aee307-8ae2-4687-9d52-1428703820f8" width="250" />  
-  <img src="https://github.com/ptaushanov/festify/assets/33032001/a4511648-26e5-45ca-a50a-acae2b196f6e" width="600"/>
-</div>
-
+<img src="https://github.com/ptaushanov/festify/assets/33032001/a4511648-26e5-45ca-a50a-acae2b196f6e" />
 
 ## 🛠️ Build with 🛠️
 
