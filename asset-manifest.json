@@ -1,0 +1,29 @@
+{
+  "files": {
+    "main.js": "/festify/static/js/main.b3b738b8.js",
+    "static/js/760.8f05d2f2.js": "/festify/static/js/760.8f05d2f2.js",
+    "static/media/MaterialCommunityIcons.ttf": "/festify/static/media/MaterialCommunityIcons.5d42b4e60858731e7b65.ttf",
+    "static/media/spring.jpg": "/festify/static/media/spring.eda74050448d5b50c4fe.jpg",
+    "static/media/winter.jpg": "/festify/static/media/winter.9ed44c475ac666fb3a1b.jpg",
+    "static/media/PacificoRegular.ttf": "/festify/static/media/PacificoRegular.c0d735fc04154e03a691.ttf",
+    "static/media/autumn.jpg": "/festify/static/media/autumn.8a1a737719f79b2e33c9.jpg",
+    "static/media/Ionicons.ttf": "/festify/static/media/Ionicons.3517aeaa34b2f8cd8eef.ttf",
+    "static/media/MaterialIcons.ttf": "/festify/static/media/MaterialIcons.120b4c7bbd155bd0a04d.ttf",
+    "static/media/summer.jpg": "/festify/static/media/summer.e0108fa1d8586b8fff32.jpg",
+    "static/media/AntDesign.ttf": "/festify/static/media/AntDesign.163adab9dbd7cb1ed12a.ttf",
+    "static/media/no_image.jpg": "/festify/static/media/no_image.98a6e781ccda6ef91543.jpg",
+    "favicon.ico": "/festify/favicon.ico",
+    "static/media/logo.png": "/festify/static/media/logo.21f24d25c2cc150d9e14.png",
+    "index.html": "/festify/index.html",
+    "favicon-32.png": "/festify/favicon-32.png",
+    "favicon-16.png": "/festify/favicon-16.png",
+    "serve.json": "/festify/serve.json",
+    "manifest.json": "/festify/manifest.json",
+    "main.b3b738b8.js.map": "/festify/static/js/main.b3b738b8.js.map",
+    "760.8f05d2f2.js.map": "/festify/static/js/760.8f05d2f2.js.map"
+  },
+  "entrypoints": [
+    "static/js/760.8f05d2f2.js",
+    "static/js/main.b3b738b8.js"
+  ]
+}
